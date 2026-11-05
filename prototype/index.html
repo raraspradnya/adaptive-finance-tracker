@@ -1,0 +1,846 @@
+<title>Adaptive Finance Tracker</title>
+<meta charset="utf-8">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: fixed left sidebar (Dashboard, Upload & review, Budget) beside one working column. Becomes a top bar on phones. Category colors are a validated categorical palette, assigned in fixed order. */
+:root {
+  --bg: #EDF0F4;
+  --surface: #FFFFFF;
+  --surface-2: #F5F7FA;
+  --line: #D8DEE6;
+  --ink: #141F2B;
+  --ink-2: #47576A;
+  --ink-3: #6F7E8F;
+  --accent: #4553C9;
+  --accent-ink: #FFFFFF;
+  --accent-soft: #E3E6F9;
+  --warn: #99580A;
+  --warn-soft: #FBEBD0;
+  --c-food: #2a78d6;
+  --c-transport: #eb6834;
+  --c-shopping: #1baf7a;
+  --c-social: #eda100;
+  --c-subs: #e87ba4;
+  --c-bills: #008300;
+  --c-x1: #6250d6;
+  --c-x2: #e34948;
+  --c-other: #7E8DA0;
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+  --font-body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E141B; --surface: #151D27; --surface-2: #1B2531; --line: #2A3745;
+    --ink: #E8EEF5; --ink-2: #A9B7C6; --ink-3: #7E8DA0;
+    --accent: #8E9BFF; --accent-ink: #0E141B; --accent-soft: #232A52;
+    --warn: #F0B35A; --warn-soft: #382811;
+    --c-food: #3987e5; --c-transport: #d95926; --c-shopping: #199e70; --c-social: #c98500;
+    --c-subs: #d55181; --c-bills: #008300; --c-x1: #9085e9; --c-x2: #e66767; --c-other: #7E8DA0;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E141B; --surface: #151D27; --surface-2: #1B2531; --line: #2A3745;
+  --ink: #E8EEF5; --ink-2: #A9B7C6; --ink-3: #7E8DA0;
+  --accent: #8E9BFF; --accent-ink: #0E141B; --accent-soft: #232A52;
+  --warn: #F0B35A; --warn-soft: #382811;
+  --c-food: #3987e5; --c-transport: #d95926; --c-shopping: #199e70; --c-social: #c98500;
+  --c-subs: #d55181; --c-bills: #008300; --c-x1: #9085e9; --c-x2: #e66767; --c-other: #7E8DA0;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 14px; line-height: 1.45; }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+h1, h2, h3, p { margin: 0; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* app shell */
+.app { display: grid; grid-template-columns: 228px minmax(0, 1fr); min-height: 100vh; }
+.side {
+  position: sticky; top: env(safe-area-inset-top, 0px); align-self: start; height: 100vh;
+  display: flex; flex-direction: column; gap: 22px;
+  background: var(--surface); border-right: 1px solid var(--line);
+  padding-block: 20px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: 14px;
+}
+.brand { font-family: var(--font-display); font-weight: 700; font-size: 18px; line-height: 1.15; letter-spacing: -0.01em; padding-inline: 8px; }
+.nav { display: flex; flex-direction: column; gap: 2px; }
+.nav button { display: flex; align-items: center; gap: 10px; width: 100%; border: 0; background: none; border-radius: 8px; padding: 8px; color: var(--ink-2); font-weight: 500; text-align: left; white-space: nowrap; }
+.nav button:hover { background: var(--surface-2); }
+.nav button[aria-current="page"] { background: var(--accent-soft); color: var(--ink); font-weight: 600; }
+.nav svg { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.nav .count { margin-left: auto; font-family: var(--font-mono); font-size: 12px; background: var(--accent); color: var(--accent-ink); border-radius: 99px; padding: 0 7px; }
+.sidefoot { margin-top: auto; color: var(--ink-3); font-size: 12px; padding-inline: 8px; }
+.main { padding-block: 24px 56px; padding-left: 24px; padding-right: max(24px, env(safe-area-inset-right, 0px)); min-width: 0; }
+.page { max-width: 1040px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+.head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; }
+.head h1 { font-family: var(--font-display); font-size: 26px; line-height: 1.1; letter-spacing: -0.01em; text-wrap: balance; }
+.sub { color: var(--ink-2); max-width: 65ch; }
+
+.btn { border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 6px 12px; font-weight: 500; }
+.btn:hover { background: var(--surface-2); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.primary:hover { filter: brightness(1.08); }
+.btn[disabled] { opacity: .45; cursor: not-allowed; }
+.btn.sm { padding: 3px 9px; font-size: 13px; }
+.link { border: 0; background: none; padding: 0; color: var(--accent); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; min-width: 0; }
+.listhead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; padding: 12px 14px; border-bottom: 1px solid var(--line); }
+.listhead h2, .cardhead h2 { font-family: var(--font-display); font-size: 16px; }
+.listhead p { color: var(--ink-2); font-size: 13px; }
+.listfoot { display: flex; justify-content: flex-end; padding: 12px 14px; border-top: 1px solid var(--line); }
+.notice { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; background: var(--accent-soft); border-radius: 10px; padding: 10px 14px; }
+
+/* dashboard */
+.strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+.strip > div { padding: 12px 14px; border-left: 1px solid var(--line); min-width: 0; }
+.strip > div:first-child { border-left: 0; }
+.strip b { font-family: var(--font-mono); font-size: 22px; font-weight: 500; display: block; font-variant-numeric: tabular-nums; }
+.strip span { color: var(--ink-2); font-size: 12px; }
+.strip .over b { color: var(--warn); }
+.monthpick { display: flex; align-items: center; gap: 6px; }
+.monthpick select { border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 6px 8px; font-weight: 500; }
+.step { width: 32px; height: 32px; padding: 0; border: 1px solid var(--line); background: var(--surface); border-radius: 8px; font-size: 16px; line-height: 1; }
+.step:hover:not([disabled]) { background: var(--surface-2); }
+.step[disabled] { opacity: .4; cursor: not-allowed; }
+.ykey { display: flex; align-items: center; gap: 14px; color: var(--ink-2); font-size: 12.5px; }
+.ykey span { display: inline-flex; align-items: center; gap: 6px; }
+.ykey i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; background: var(--accent); }
+.ykey i.t { height: 2px; width: 14px; border-radius: 0; background: var(--ink); }
+.yplot { --h: 150px; position: relative; height: var(--h); margin: 30px 14px 38px 56px; }
+.ygrid { position: absolute; left: 0; right: 0; border-top: 1px solid var(--line); }
+.ygrid span { position: absolute; right: 100%; top: -9px; padding-right: 8px; color: var(--ink-3); font-size: 11.5px; font-family: var(--font-mono); white-space: nowrap; }
+.ybars { position: absolute; inset: 0 0 auto; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); }
+.ymo { position: relative; height: calc(var(--h) + 30px); border: 0; padding: 0; background: none; border-radius: 6px; }
+.ymo:hover { background: color-mix(in srgb, var(--accent) 7%, transparent); }
+.ymo[aria-pressed="true"] { background: var(--accent-soft); }
+.ybar { position: absolute; left: 50%; transform: translateX(-50%); bottom: 30px; width: min(58%, 32px); height: calc(var(--p) * var(--h) / 100); border-radius: 4px 4px 0 0; background: color-mix(in srgb, var(--accent) 38%, var(--surface)); }
+.ymo[aria-pressed="true"] .ybar { background: var(--accent); }
+.ytick { position: absolute; left: 50%; transform: translateX(-50%); bottom: calc(30px + var(--q) * var(--h) / 100 - 1px); width: min(82%, 44px); height: 2px; background: var(--ink); box-shadow: 0 0 0 1px var(--surface); }
+.yval { position: absolute; left: 50%; transform: translateX(-50%); bottom: calc(36px + var(--top) * var(--h) / 100); font-family: var(--font-mono); font-size: 12px; font-weight: 500; white-space: nowrap; color: var(--ink); }
+.ylab { position: absolute; left: 0; right: 0; bottom: 7px; text-align: center; font-size: 12px; color: var(--ink-2); }
+.ymo[aria-pressed="true"] .ylab { color: var(--ink); font-weight: 600; }
+.dash { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 16px; align-items: start; }
+.cardhead { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; padding: 12px 14px 0; }
+.piebox { padding: 12px 14px 14px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.pie { width: 100%; max-width: 230px; height: auto; display: block; }
+.slice { stroke: var(--surface); stroke-width: 2; transition: opacity .12s; }
+.pie:hover .slice:not(:hover) { opacity: .5; }
+.slice:focus-visible { outline: none; stroke: var(--ink); }
+.pie text { fill: var(--ink); text-anchor: middle; }
+.pie .cap { fill: var(--ink-2); font-size: 11px; font-family: var(--font-body); }
+.pie .tot { font-size: 21px; font-family: var(--font-mono); font-weight: 500; }
+.legend { list-style: none; margin: 0; padding: 0; width: 100%; display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 4px 16px; }
+.legend li { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.legend .swatch { width: 10px; height: 10px; border-radius: 3px; background: var(--c); flex: none; }
+.legend .nm { overflow-wrap: anywhere; min-width: 0; }
+.legend .pc { margin-left: auto; color: var(--ink-2); font-family: var(--font-mono); font-size: 13px; }
+.brow { padding: 11px 14px; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 6px; }
+.brow:first-of-type { border-top: 0; }
+.bline { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2px 10px; }
+.bar { height: 8px; border-radius: 99px; background: var(--surface-2); border: 1px solid var(--line); overflow: hidden; }
+.bar > div { height: 100%; background: var(--c-bar, var(--accent)); }
+.bar.over > div { background: var(--warn); }
+.state { font-size: 13px; color: var(--ink-2); }
+.state.over { color: var(--warn); font-weight: 600; }
+.pastnote { padding: 10px 14px; border-top: 1px solid var(--line); color: var(--ink-3); font-size: 12.5px; }
+.empty { padding: 28px 16px; color: var(--ink-2); text-align: center; }
+
+/* chips */
+.chip { --c: var(--ink-3); display: inline-flex; align-items: center; gap: 6px; padding: 2px 10px; border-radius: 99px; font-weight: 600; font-size: 13px; color: var(--ink); background: color-mix(in srgb, var(--c) 12%, var(--surface)); border: 1px solid color-mix(in srgb, var(--c) 45%, var(--surface)); overflow-wrap: anywhere; }
+.chip i { width: 8px; height: 8px; border-radius: 50%; background: var(--c); display: inline-block; flex: none; }
+button.chip:hover { background: color-mix(in srgb, var(--c) 24%, var(--surface)); }
+.tag { font-size: 12px; color: var(--ink-3); }
+.tag.warn { color: var(--warn); font-weight: 600; }
+.tag.you { color: var(--ink-2); font-weight: 600; }
+.tag.new { color: var(--accent); font-weight: 600; }
+
+/* upload and review */
+.drop { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; padding: 36px 16px; border: 1.5px dashed var(--line); border-radius: 10px; background: var(--surface); }
+.drop h2 { font-family: var(--font-display); font-size: 18px; }
+.drop p { color: var(--ink-2); max-width: 46ch; }
+.drop .btn { margin-top: 6px; }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) 90px 250px; grid-template-areas: "merch amt cat"; gap: 8px 14px; align-items: center; padding: 10px 14px; border-top: 1px solid var(--line); }
+.listhead + .row { border-top: 0; }
+.row.flash { background: var(--accent-soft); }
+.merch { min-width: 0; grid-area: merch; }
+.merch b { font-weight: 600; display: block; }
+.merch .raw { color: var(--ink-3); font-family: var(--font-mono); font-size: 12px; overflow-wrap: anywhere; }
+.amt { grid-area: amt; text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.catcell { grid-area: cat; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-width: 0; }
+.fileline { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2px 12px; padding: 9px 14px; border-top: 1px solid var(--line); }
+.listhead + .fileline { border-top: 0; }
+.fileline b { font-family: var(--font-mono); font-weight: 500; font-size: 13px; overflow-wrap: anywhere; }
+
+/* budget */
+.seg { display: flex; gap: 4px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 4px; }
+.seg button { flex: 1; border: 0; background: none; border-radius: 7px; padding: 8px 12px; color: var(--ink-2); text-align: left; min-width: 0; }
+.seg button span { display: block; font-size: 12px; }
+.seg button b { font-family: var(--font-display); font-size: 16px; font-weight: 600; }
+.seg button[aria-selected="true"] { background: var(--accent-soft); color: var(--ink); }
+.seg button:hover:not([aria-selected="true"]) { background: var(--surface-2); }
+.setrow { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 4fr) 150px; gap: 8px 18px; align-items: center; padding: 12px 14px; border-top: 1px solid var(--line); }
+.listhead + .setrow { border-top: 0; }
+.setname { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+.why { color: var(--ink-3); font-size: 12.5px; }
+.setprog { min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+.setamt { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+.money { display: inline-flex; align-items: center; gap: 4px; }
+.money input { width: 92px; border: 1px solid var(--line); background: var(--surface); border-radius: 6px; padding: 4px 8px; font-family: var(--font-mono); text-align: right; }
+.setstat { min-height: 18px; font-size: 12px; color: var(--ink-3); text-align: right; }
+.addrow { padding: 12px 14px; border-top: 1px solid var(--line); }
+
+/* add category form */
+.newcat { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; width: 100%; }
+.newcat input { flex: 1 1 170px; min-width: 0; border: 1px solid var(--line); background: var(--surface); border-radius: 6px; padding: 4px 8px; }
+.newcat .err { width: 100%; color: var(--warn); font-size: 12.5px; font-weight: 600; }
+.chip.add { --c: var(--ink-3); border-style: dashed; background: transparent; }
+
+/* modal */
+.overlay { position: fixed; inset: 0; background: rgba(8, 12, 18, .55); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 20; }
+.modal { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; width: 100%; max-width: 540px; max-height: 92vh; overflow: auto; padding: 18px; display: flex; flex-direction: column; gap: 14px; }
+.modal h3 { font-family: var(--font-display); font-size: 18px; }
+.modal h4 { margin: 0 0 6px; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-3); }
+.catpick { display: flex; flex-wrap: wrap; gap: 6px; }
+.catpick .chip { padding: 4px 12px; cursor: pointer; }
+.catpick .chip[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--ink); background: color-mix(in srgb, var(--c) 30%, var(--surface)); }
+.scope { display: flex; flex-direction: column; gap: 6px; }
+.scope label { display: flex; gap: 10px; align-items: flex-start; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; cursor: pointer; }
+.scope label:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+.scope small { display: block; color: var(--ink-2); }
+.scope .rec { font-size: 11px; font-weight: 600; color: var(--accent); margin-left: 6px; }
+.scope .risk { font-size: 11px; font-weight: 600; color: var(--warn); margin-left: 6px; }
+.preview { background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: 13px; }
+.preview.warn { background: var(--warn-soft); border-color: transparent; }
+.preview ul { list-style: none; padding: 0; margin: 6px 0 0; display: flex; flex-direction: column; gap: 4px; }
+.preview li { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.preview .note { color: var(--ink-2); margin-top: 6px; }
+.mfoot { display: flex; justify-content: flex-end; gap: 8px; }
+
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 10px; z-index: 30; max-width: min(92vw, 520px); box-shadow: 0 6px 20px rgba(0,0,0,.25); }
+.tip { position: fixed; z-index: 25; pointer-events: none; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; box-shadow: 0 4px 14px rgba(0,0,0,.18); font-size: 13px; }
+.tip b { display: block; font-family: var(--font-mono); font-weight: 500; font-size: 15px; }
+.tip span { color: var(--ink-2); }
+
+@media (max-width: 980px) { .dash { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 760px) {
+  .app { grid-template-columns: minmax(0, 1fr); }
+  .side {
+    position: static; height: auto; gap: 8px; flex-direction: column;
+    border-right: 0; border-bottom: 1px solid var(--line);
+    padding-block: 12px 8px; padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  .nav { flex-direction: row; overflow-x: auto; gap: 4px; }
+  .nav button { width: auto; padding: 6px 8px; font-size: 13px; }
+  .nav svg { display: none; }
+  .nav .count { margin-left: 2px; }
+  .sidefoot { display: none; }
+  .main { padding-block: 16px 48px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .row { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "merch amt" "cat cat"; }
+  .setrow { grid-template-columns: minmax(0, 1fr); }
+  .setamt { flex-direction: row; align-items: center; justify-content: space-between; }
+  .strip b { font-size: 17px; }
+  .yplot { margin-left: 46px; margin-right: 10px; }
+  .ylab { font-size: 11px; }
+  .ybar { width: 66%; }
+  .strip > div { padding: 10px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<div class="app">
+  <aside class="side">
+    <div class="brand">Adaptive Finance Tracker</div>
+    <nav class="nav" id="nav" aria-label="Main"></nav>
+    <p class="sidefoot">Sample data. Nothing is saved or sent.</p>
+  </aside>
+  <main class="main"><div class="page" id="view"></div></main>
+</div>
+
+<div id="modalRoot"></div>
+<div id="tip" class="tip" hidden></div>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+<script>
+const CATS = { food: "Food", transport: "Transport", shopping: "Shopping", social: "Social", subs: "Subscriptions", bills: "Bills" };
+const CAT_KEYS = Object.keys(CATS);
+const SLOT = {};       // category key -> color slot, for categories the user adds
+let customCount = 0;
+
+const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", "January 2027"];
+const monthName = i => i < 0 ? "December" : MONTHS[i];
+
+const MER = {
+  trader:  { name: "Trader Joe’s",     tags: ["grocery"] },
+  safeway: { name: "Safeway",          tags: ["grocery"] },
+  ramen:   { name: "Joe’s Ramen",      tags: ["restaurant"] },
+  chipotle:{ name: "Chipotle",         tags: ["restaurant"] },
+  anchor:  { name: "The Anchor Brewing", tags: ["restaurant", "bar"] },
+  bluebot: { name: "Blue Bottle Coffee", tags: ["cafe"] },
+  peets:   { name: "Peet’s Coffee",    tags: ["cafe"] },
+  clipper: { name: "Clipper (BART)",   tags: ["transit"] },
+  uber:    { name: "Uber",             tags: ["rideshare"] },
+  lyft:    { name: "Lyft",             tags: ["rideshare"] },
+  netflix: { name: "Netflix",          tags: ["streaming"] },
+  spotify: { name: "Spotify",          tags: ["streaming"] },
+  amazon:  { name: "Amazon",           tags: ["online"] },
+  uniqlo:  { name: "Uniqlo",           tags: ["clothing"] },
+  pge:     { name: "PG&E",             tags: ["utility"] },
+  amc:     { name: "AMC Metreon",      tags: ["movies"] }
+};
+
+const toRows = (m, rows) => rows.map(a => ({ m, date: a[0], raw: a[1], merchant: a[2], amt: a[3], base: a[4], conf: a[5] }));
+
+// Sample totals for months already reviewed, January to October 2026.
+const SPEND = {
+  food:      [228, 241, 262, 235, 247, 240, 225, 250, 226.25, 218.40],
+  transport: [42, 38, 61, 35, 44, 40, 30, 35, 34.60, 38.75],
+  shopping:  [88, 52, 143, 61, 70, 60, 55, 65, 65.55, 89.89],
+  social:    [34, 48, 72, 29, 55, 30, 25, 40, 31, 38],
+  subs:      [27.48, 27.48, 27.48, 27.48, 27.48, 27.48, 27.48, 27.48, 27.48, 27.48],
+  bills:     [96, 91, 84, 76, 72, 72, 68, 70, 70.85, 72.40]
+};
+const SEEDED = 10;
+
+// day label, raw bank string, merchant key, amount, base category, base confidence
+const NOV = toRows(10, [
+  ["Nov 01", "JOE'S RAMEN SF CA", "ramen", 26.00, "food", .81],
+  ["Nov 02", "TRADER JOE'S #135 BERKELEY CA", "trader", 52.30, "food", .94],
+  ["Nov 03", "CLIPPER SVC BART", "clipper", 20.00, "transport", .97],
+  ["Nov 04", "NETFLIX.COM 866-579-7172", "netflix", 15.49, "subs", .99],
+  ["Nov 05", "THE ANCHOR BREWING SF", "anchor", 41.00, "food", .45],
+  ["Nov 06", "SAFEWAY #2741 OAKLAND CA", "safeway", 58.77, "food", .95],
+  ["Nov 07", "LYFT *RIDE 11-07", "lyft", 16.40, "transport", .92],
+  ["Nov 08", "CHIPOTLE 2297 BERKELEY", "chipotle", 13.80, "food", .90],
+  ["Nov 10", "PG&E WEB ONLINE", "pge", 74.10, "bills", .98],
+  ["Nov 11", "SPOTIFY USA", "spotify", 11.99, "subs", .99],
+  ["Nov 13", "JOE'S RAMEN SF CA", "ramen", 23.50, "food", .81],
+  ["Nov 15", "AMZN MKTP US*9B1ZX4", "amazon", 29.99, "shopping", .72],
+  ["Nov 18", "TRADER JOE'S #135 BERKELEY CA", "trader", 47.65, "food", .94],
+  ["Nov 20", "PEET'S COFFEE #8812", "peets", 6.25, "food", .87],
+  ["Nov 22", "UBER *TRIP HELP.UBER.COM", "uber", 21.30, "transport", .93]
+]);
+
+const DEC = toRows(11, [
+  ["Dec 01", "TRADER JOE'S #135 BERKELEY CA", "trader", 49.85, "food", .94],
+  ["Dec 02", "CLIPPER SVC BART", "clipper", 20.00, "transport", .97],
+  ["Dec 03", "JOE'S RAMEN SF CA", "ramen", 24.00, "food", .81],
+  ["Dec 04", "NETFLIX.COM 866-579-7172", "netflix", 15.49, "subs", .99],
+  ["Dec 06", "THE ANCHOR BREWING SF", "anchor", 36.50, "food", .45],
+  ["Dec 07", "AMZN MKTP US*4F6WD2", "amazon", 62.40, "shopping", .72],
+  ["Dec 09", "SAFEWAY #2741 OAKLAND CA", "safeway", 64.15, "food", .95],
+  ["Dec 10", "PG&E WEB ONLINE", "pge", 88.30, "bills", .98],
+  ["Dec 11", "SPOTIFY USA", "spotify", 11.99, "subs", .99],
+  ["Dec 13", "AMC METREON 16 SF", "amc", 28.00, "social", .84],
+  ["Dec 15", "JOE'S RAMEN SF CA", "ramen", 27.25, "food", .81],
+  ["Dec 17", "UBER *TRIP HELP.UBER.COM", "uber", 19.60, "transport", .93],
+  ["Dec 18", "UNIQLO SF 0417", "uniqlo", 71.90, "shopping", .91],
+  ["Dec 20", "BLUE BOTTLE COFFEE 0042", "bluebot", 7.25, "food", .88]
+]);
+
+const FILES = [
+  ...[15, 14, 18, 15, 16, 14, 13, 15, 15, 16].map((n, m) => ({ file: `chase_${MONTHS[m].slice(0, 3).toLowerCase()}_2026.csv`, m, n })),
+  { file: "chase_nov_2026.csv", m: 10, n: NOV.length, rows: NOV },
+  { file: "chase_dec_2026.csv", m: 11, n: DEC.length, rows: DEC }
+];
+
+// Spending in the last three months of 2025, so January's budget has something to work from.
+const HIST = { food: [235, 230, 270], transport: [40, 38, 55], shopping: [70, 95, 130], social: [35, 40, 60], subs: [27.48, 27.48, 27.48], bills: [78, 88, 98] };
+
+let nextId = 1;
+const txns = [];
+let rules = [];        // what the tracker learned from edits, newest first. Runs in the background and is never shown.
+let ruleId = 1;
+const overrides = {};  // month index -> { category: amount the user set }
+const state = {
+  view: "dashboard",
+  month: SEEDED - 1,   // month shown on the dashboard
+  reviewed: SEEDED,    // months reviewed so far; the latest one is "this month"
+  uploaded: SEEDED,    // files uploaded so far
+  budgetTab: "this",
+  addCat: null,        // add-category form on the budget page
+  modal: null
+};
+
+function addTxn(o) { txns.push({ id: nextId++, ...o, cat: o.base, status: "pending", src: "auto", edited: false, changed: false }); }
+
+const money = n => "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const whole = n => Number.isInteger(n) ? "$" + n.toLocaleString("en-US") : money(n);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const cv = k => `var(--c-${SLOT[k] || k})`;
+const chip = k => `<span class="chip" style="--c:${cv(k)}"><i></i>${esc(CATS[k])}</span>`;
+const ceil5 = n => n <= 0 ? 0 : Math.ceil(n / 5 - 1e-9) * 5;
+const $ = s => document.querySelector(s);
+const curMonth = () => state.reviewed - 1;
+const pending = () => txns.filter(t => t.status === "pending");
+const plural = (n, word) => `${n} ${word}${n === 1 ? "" : "s"}`;
+
+/* ---------- the "learning" logic (stand-in for the real continual learning system) ---------- */
+function ruleMatches(r, t) {
+  if (r.kind === "merchant") return r.key === t.merchant;
+  if (r.kind === "tag") return MER[t.merchant].tags.includes(r.key);
+  return false;
+}
+function predictWith(t, list) {
+  for (const r of list) if (ruleMatches(r, t)) return { cat: r.cat, src: "learned" };
+  return { cat: t.base, src: "auto" };
+}
+function recompute() {
+  const changed = [];
+  for (const t of pending()) {
+    if (t.edited) continue;
+    const p = predictWith(t, rules);
+    if (p.cat !== t.cat) { changed.push(t); t.changed = true; }
+    t.cat = p.cat; t.src = p.src;
+  }
+  return changed;
+}
+function ruleFor(t, cat, scope) {
+  const kind = scope === "merchant" ? "merchant" : "tag";
+  const key = kind === "merchant" ? t.merchant : MER[t.merchant].tags[0];
+  return { kind, key, cat };
+}
+function affected(t, cat, scope) {
+  if (scope === "one") return [];
+  const r = ruleFor(t, cat, scope);
+  const list = [r, ...rules.filter(x => !(x.kind === r.kind && x.key === r.key))];
+  return pending().filter(x => x.id !== t.id && !x.edited)
+    .map(x => ({ x, to: predictWith(x, list).cat }))
+    .filter(o => o.to !== o.x.cat);
+}
+function clearFlags() { txns.forEach(t => t.changed = false); }
+
+/* ---------- spending and budgets ---------- */
+function spentBy(m) {
+  const s = Object.fromEntries(CAT_KEYS.map(k => [k, m < SEEDED && SPEND[k] ? SPEND[k][m] : 0]));
+  txns.filter(t => t.m === m && t.status === "reviewed").forEach(t => s[t.cat] += t.amt);
+  return s;
+}
+// A month's proposal uses only earlier months, so it stays put while that month is under way.
+function proposal(m, k) {
+  const series = [...(HIST[k] || [])];
+  for (let i = Math.max(0, m - 3); i < m; i++) series.push(spentBy(i)[k]);
+  const recent = series.slice(-3);
+  if (!recent.length) return { rec: 0, why: "No spending history yet." };
+  const avg = recent.reduce((a, b) => a + b, 0) / recent.length;
+  const last = recent[recent.length - 1];
+  let own = null, ownMonth = null;
+  for (let i = m - 1; i >= 0; i--) {
+    if (overrides[i] && overrides[i][k] != null) { own = overrides[i][k]; ownMonth = i; break; }
+  }
+  const rec = ceil5(own != null ? 0.4 * avg + 0.3 * last + 0.3 * own : 0.5 * avg + 0.5 * last);
+  if (!avg) return { rec, why: own != null ? `Based on the ${whole(own)} you set for ${monthName(ownMonth)}.` : "No spending history yet." };
+  const why = `3-month average ${whole(Math.round(avg))}, ${whole(Math.round(last))} spent in ${monthName(m - 1)}` + (own != null ? `, and the ${whole(own)} you set for ${monthName(ownMonth)}.` : ".");
+  return { rec, why };
+}
+function budgetOf(m, k) {
+  const o = overrides[m] && overrides[m][k];
+  return o != null ? o : proposal(m, k).rec;
+}
+function addCategory(raw) {
+  const name = raw.trim();
+  if (!name) return { err: "Enter a category name." };
+  if (CAT_KEYS.some(k => CATS[k].toLowerCase() === name.toLowerCase())) return { err: `You already have a category called ${name}.` };
+  const n = ++customCount, k = "new" + n;
+  CATS[k] = name;
+  CAT_KEYS.push(k);
+  SLOT[k] = n <= 2 ? "x" + n : "other";   // the palette has eight validated hues; later categories share a neutral
+  return { k };
+}
+function catForm(draft, err, addAct, cancelAct) {
+  return `<div class="newcat">
+    <input id="newCatName" type="text" maxlength="24" placeholder="Category name" aria-label="New category name" value="${esc(draft)}">
+    <button class="btn sm primary" data-act="${addAct}">Add</button>
+    <button class="btn sm" data-act="${cancelAct}">Cancel</button>
+    ${err ? `<div class="err" role="alert">${esc(err)}</div>` : ""}
+  </div>`;
+}
+
+/* ---------- rendering ---------- */
+const ICONS = {
+  dashboard: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5V12l6 6"/></svg>',
+  review: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V4M7.5 8.5 12 4l4.5 4.5M4.5 15v4a1.5 1.5 0 0 0 1.5 1.5h12a1.5 1.5 0 0 0 1.5-1.5v-4"/></svg>',
+  budget: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>'
+};
+function render() {
+  hideTip();
+  const n = pending().length;
+  $("#nav").innerHTML = [["dashboard", "Dashboard"], ["review", "Upload & review"], ["budget", "Budget settings"]].map(([k, l]) =>
+    `<button data-act="nav" data-v="${k}" ${state.view === k ? 'aria-current="page"' : ""}>${ICONS[k]}<span>${l}</span>${k === "review" && n ? `<span class="count" aria-label="${n} to review">${n}</span>` : ""}</button>`).join("");
+  $("#view").innerHTML = state.view === "dashboard" ? viewDashboard() : state.view === "review" ? viewReview() : viewBudget();
+  renderModal();
+}
+
+function pieSvg(parts, total) {
+  const cx = 100, cy = 100, R = 96, r = 62;
+  const pt = (rad, a) => `${(cx + rad * Math.sin(a)).toFixed(2)} ${(cy - rad * Math.cos(a)).toFixed(2)}`;
+  let a = 0;
+  const paths = parts.map(p => {
+    const sweep = Math.min(p.amt / total, 0.9999) * 2 * Math.PI;
+    const b = a + sweep, large = sweep > Math.PI ? 1 : 0;
+    const d = `M ${pt(R, a)} A ${R} ${R} 0 ${large} 1 ${pt(R, b)} L ${pt(r, b)} A ${r} ${r} 0 ${large} 0 ${pt(r, a)} Z`;
+    a = b;
+    return `<path class="slice" d="${d}" fill="${cv(p.k)}" tabindex="0" data-slice="${p.k}" data-amt="${p.amt}" data-pct="${Math.round(p.amt / total * 100)}" aria-label="${esc(CATS[p.k])}: ${money(p.amt)}"></path>`;
+  }).join("");
+  return `<svg class="pie" viewBox="0 0 200 200" role="group" aria-label="Spending by category">${paths}
+    <text class="tot" x="100" y="105">${money(total)}</text>
+    <text class="cap" x="100" y="122">total spent</text></svg>`;
+}
+
+function monthTotals(m) {
+  const spent = spentBy(m);
+  const keys = CAT_KEYS.filter(k => spent[k] > 0 || budgetOf(m, k) > 0);
+  return { spent: keys.reduce((a, k) => a + spent[k], 0), budget: keys.reduce((a, k) => a + budgetOf(m, k), 0) };
+}
+// One bar per reviewed month. Each bar is also a button that opens that month.
+function yearChart() {
+  const m = state.month, n = state.reviewed;
+  const all = MONTHS.slice(0, n).map((name, i) => ({ i, name, ...monthTotals(i) }));
+  const top = Math.max(...all.flatMap(x => [x.spent, x.budget]));
+  const step = Math.ceil(top / 3 / 50) * 50, axis = step * Math.ceil(top / step);
+  const pct = v => (v / axis * 100).toFixed(2);
+  const grid = [];
+  for (let v = 0; v <= axis; v += step) grid.push(`<div class="ygrid" style="bottom:${pct(v)}%"><span>$${v}</span></div>`);
+  const bars = all.map(x => {
+    const diff = x.spent - x.budget;
+    return `<button class="ymo" id="mo-${x.i}" data-act="month" data-m="${x.i}" data-mo="${x.i}" data-spent="${x.spent}" data-budget="${x.budget}" aria-pressed="${x.i === m}" aria-label="${x.name}: spent ${money(x.spent)}, budget ${whole(x.budget)}" style="--p:${pct(x.spent)};--q:${pct(x.budget)};--top:${pct(Math.max(x.spent, x.budget))}">
+      <i class="ybar"></i><i class="ytick"></i>${x.i === m ? `<span class="yval">${whole(Math.round(x.spent))}</span>` : ""}<span class="ylab">${x.name.slice(0, 3)}</span></button>`;
+  }).join("");
+  const avg = all.reduce((a, x) => a + x.spent, 0) / n;
+  const gap = all[m].spent - avg;
+  return `<section class="card">
+    <div class="listhead"><div><h2>2026 by month</h2>
+      <p>${money(avg)} average a month. ${MONTHS[m]} is ${money(Math.abs(gap))} ${gap > 0 ? "above" : "below"} it.</p></div>
+      <div class="ykey"><span><i></i>Spent</span><span><i class="t"></i>Budget</span></div></div>
+    <div class="yplot">${grid.join("")}<div class="ybars" style="--n:${n}">${bars}</div></div>
+  </section>`;
+}
+
+function viewDashboard() {
+  const m = state.month, name = MONTHS[m];
+  const spent = spentBy(m);
+  const keys = CAT_KEYS.filter(k => spent[k] > 0 || budgetOf(m, k) > 0);
+  const total = keys.reduce((a, k) => a + spent[k], 0);
+  const budget = keys.reduce((a, k) => a + budgetOf(m, k), 0);
+  const left = budget - total, over = left < 0;
+  const parts = keys.filter(k => spent[k] > 0).map(k => ({ k, amt: spent[k] }));
+  const n = pending().length;
+
+  const picker = `<div class="monthpick">
+    <button class="step" id="prevMonth" data-act="month" data-m="${m - 1}" aria-label="Previous month" ${m === 0 ? "disabled" : ""}>‹</button>
+    <select id="monthPick" aria-label="Month">${MONTHS.slice(0, state.reviewed).map((l, i) => `<option value="${i}" ${i === m ? "selected" : ""}>${l} 2026</option>`).join("")}</select>
+    <button class="step" id="nextMonth" data-act="month" data-m="${m + 1}" aria-label="Next month" ${m === state.reviewed - 1 ? "disabled" : ""}>›</button>
+  </div>`;
+  const notice = n ? `<div class="notice"><span>${plural(n, "transaction")} from ${esc(FILES[state.uploaded - 1].file)} ${n === 1 ? "is" : "are"} waiting for review and not counted yet.</span><button class="btn sm primary" data-act="nav" data-v="review">Review</button></div>` : "";
+
+  const legend = parts.map(p => `<li style="--c:${cv(p.k)}"><span class="swatch"></span><span class="nm">${esc(CATS[p.k])}</span><span class="pc">${Math.round(p.amt / total * 100)}%</span></li>`).join("");
+
+  const rows = keys.map(k => {
+    const b = budgetOf(m, k), s = spent[k], isOver = s > b;
+    const pct = b ? Math.min(100, s / b * 100) : (s ? 100 : 0);
+    const st = !b ? `<span class="state">No budget yet</span>`
+      : isOver ? `<span class="state over">▲ ${money(s - b)} over</span>`
+      : `<span class="state">${money(b - s)} left</span>`;
+    return `<div class="brow">
+      <div class="bline">${chip(k)}<span class="mono">${money(s)} <span class="tag">of ${whole(b)}</span></span></div>
+      <div class="bar${b && isOver ? " over" : ""}" style="--c-bar:${cv(k)}"><div style="width:${pct}%"></div></div>
+      <div>${st}</div></div>`;
+  }).join("");
+
+  const canAdjust = m === curMonth();
+  return `<div class="head"><h1>${name} summary</h1>${picker}</div>
+    ${notice}
+    ${yearChart()}
+    <section class="strip" aria-label="${name} totals">
+      <div><b>${money(total)}</b><span>Spent</span></div>
+      <div><b>${whole(budget)}</b><span>Budget</span></div>
+      <div class="${over ? "over" : ""}"><b>${over ? "▲ " : ""}${money(Math.abs(left))}</b><span>${over ? "Over budget" : "Left to spend"}</span></div>
+    </section>
+    <div class="dash">
+      <section class="card">
+        <div class="cardhead"><h2>Where it went</h2></div>
+        <div class="piebox">${parts.length ? pieSvg(parts, total) + `<ul class="legend">${legend}</ul>` : `<div class="empty">No spending in ${name}.</div>`}</div>
+      </section>
+      <section class="card">
+        <div class="listhead"><h2>Spending vs budget</h2>${canAdjust ? `<button class="btn sm" data-act="adjust">Adjust budget</button>` : ""}</div>
+        ${rows}
+        ${canAdjust ? "" : `<p class="pastnote">${name} is a past month, so its budget can no longer be changed.</p>`}
+      </section>
+    </div>`;
+}
+
+function viewReview() {
+  const list = pending();
+  if (list.length) {
+    const f = FILES[state.uploaded - 1];
+    const total = list.reduce((a, t) => a + t.amt, 0);
+    const toCheck = list.filter(needsCheck).length;
+    const accept = `<button class="btn primary" data-act="accept-all">Accept all ${list.length}</button>`;
+    const rows = list.map(t => {
+      let tag = "";
+      if (t.edited) tag = `<span class="tag you">Edited</span>`;
+      else if (t.changed) tag = `<span class="tag new">Updated</span>`;
+      else if (needsCheck(t)) tag = `<span class="tag warn">Check this</span>`;
+      return `<div class="row${t.changed ? " flash" : ""}">
+        <div class="merch"><b>${esc(MER[t.merchant].name)}</b><span class="raw">${t.date} · ${esc(t.raw)}</span></div>
+        <div class="amt">${money(t.amt)}</div>
+        <div class="catcell"><button class="chip" style="--c:${cv(t.cat)}" data-act="edit" data-id="${t.id}" aria-label="Change category, currently ${esc(CATS[t.cat])}"><i></i>${esc(CATS[t.cat])} <span aria-hidden="true">▾</span></button>${tag}</div></div>`;
+    }).join("");
+    return `<div class="head"><h1>Upload &amp; review</h1></div>
+      <p class="sub">Click a category to change it, then accept the file to add it to your dashboard.</p>
+      <section class="card">
+        <div class="listhead"><div><h2 class="mono">${esc(f.file)}</h2>
+          <p>${plural(list.length, "transaction")} · ${money(total)}${toCheck ? ` · ${toCheck} to check` : ""}</p></div>${accept}</div>
+        ${rows}
+        <div class="listfoot">${accept}</div>
+      </section>`;
+  }
+  const next = FILES[state.uploaded];
+  const done = FILES.slice(Math.max(0, state.uploaded - 5), state.uploaded).reverse().map(f =>
+    `<div class="fileline"><b>${esc(f.file)}</b><span class="tag">${MONTHS[f.m]} · ${f.n} transactions · Reviewed</span></div>`).join("");
+  return `<div class="head"><h1>Upload &amp; review</h1></div>
+    <section class="drop">
+      ${next ? `<h2>Upload your bank statement</h2>
+        <p>The tracker sorts each transaction into a category. You check them before they reach your dashboard.</p>
+        <button class="btn primary" data-act="upload">Upload ${esc(next.file)}</button>
+        <span class="tag">Sample file, for this prototype</span>`
+      : `<h2>You’re all caught up</h2><p>All the sample statements are uploaded and reviewed.</p>`}
+    </section>
+    <section class="card"><div class="listhead"><h2>Past uploads</h2></div>${done}</section>`;
+}
+const needsCheck = t => t.src === "auto" && !t.edited && t.conf < 0.6;
+
+function budgetMonth() { return state.budgetTab === "this" ? curMonth() : curMonth() + 1; }
+function setProg(m, k) {
+  const b = budgetOf(m, k);
+  if (m > curMonth()) {
+    const last = spentBy(curMonth())[k];
+    return `<span class="state">Spent ${money(last)} in ${MONTHS[curMonth()]}</span>`;
+  }
+  const s = spentBy(m)[k], isOver = s > b;
+  const pct = b ? Math.min(100, s / b * 100) : (s ? 100 : 0);
+  return `<div class="bar${b && isOver ? " over" : ""}" style="--c-bar:${cv(k)}"><div style="width:${pct}%"></div></div>
+    <span class="state${b && isOver ? " over" : ""}">${!b ? `${money(s)} spent, no budget yet` : isOver ? `▲ ${money(s)} spent, ${money(s - b)} over` : `${money(s)} spent, ${money(b - s)} left`}</span>`;
+}
+function setStat(m, k) {
+  const { rec } = proposal(m, k);
+  const edited = overrides[m] && overrides[m][k] != null;
+  return edited ? `Changed · <button class="link" data-act="bud-reset" data-cat="${k}">Reset to ${whole(rec)}</button>` : "Proposed by the tracker";
+}
+const budgetTotal = m => CAT_KEYS.reduce((a, k) => a + budgetOf(m, k), 0);
+
+function viewBudget() {
+  const cur = curMonth(), next = cur + 1, m = budgetMonth();
+  const tab = (id, label, i) => `<button role="tab" data-act="bud-tab" data-t="${id}" aria-selected="${state.budgetTab === id}"><span>${label}</span><b>${MONTHS[i]}</b></button>`;
+  const rows = CAT_KEYS.map(k => `<div class="setrow">
+      <div class="setname">${chip(k)}<span class="why">${esc(proposal(m, k).why)}</span></div>
+      <div class="setprog" id="prog-${k}">${setProg(m, k)}</div>
+      <div class="setamt">
+        <label class="money"><span class="mono">$</span><input id="bud-${k}" type="number" min="0" step="5" value="${budgetOf(m, k)}" data-bud="${k}" aria-label="${esc(CATS[k])} budget for ${MONTHS[m]}"></label>
+        <div class="setstat" id="stat-${k}">${setStat(m, k)}</div>
+      </div></div>`).join("");
+  const add = state.addCat ? catForm(state.addCat.draft, state.addCat.err, "bud-add-save", "bud-add-cancel")
+    : `<button class="chip add" data-act="bud-add">+ Add category</button>`;
+  const note = state.budgetTab === "this"
+    ? `Changes here apply to ${MONTHS[m]} only and update your dashboard right away. The tracker also takes them into account when it proposes ${MONTHS[next]}’s budget.`
+    : `This is the budget ${MONTHS[m]} will start with. Change anything you like now, or leave it as proposed. ${MONTHS[cur]} is not affected.`;
+  return `<div class="head"><h1>Budget settings</h1></div>
+    <div class="seg" role="tablist" aria-label="Month to edit">${tab("this", "This month", cur)}${tab("next", "Next month", next)}</div>
+    <p class="sub">${note}</p>
+    <section class="card">
+      <div class="listhead"><h2>${MONTHS[m]} budget</h2><span class="mono"><span class="tag">Total</span> <span id="budTotal">${whole(budgetTotal(m))}</span></span></div>
+      ${rows}
+      <div class="addrow">${add}</div>
+    </section>`;
+}
+
+/* ---------- modal ---------- */
+function renderModal() {
+  const root = $("#modalRoot");
+  const m = state.modal;
+  if (!m) { root.innerHTML = ""; return; }
+  const t = txns.find(x => x.id === m.id);
+  const name = esc(MER[t.merchant].name);
+  const tag = MER[t.merchant].tags[0];
+  const list = affected(t, m.cat, m.scope);
+  const other = list.some(o => o.x.merchant !== t.merchant);
+  const same = m.cat === t.cat && !t.edited;
+  let prev;
+  if (m.scope === "one") prev = `<div class="preview">Only this transaction changes.</div>`;
+  else if (!list.length) prev = `<div class="preview">No other transactions in this file change.<div class="note">Future uploads will follow this.</div></div>`;
+  else prev = `<div class="preview${other ? " warn" : ""}"><b>${list.length} other ${list.length === 1 ? "transaction" : "transactions"} in this file will change${other ? ", including merchants you did not touch" : ""}:</b>
+    <ul>${list.map(o => `<li><span class="mono">${o.x.date}</span> ${esc(MER[o.x.merchant].name)} ${chip(o.x.cat)} → ${chip(o.to)}</li>`).join("")}</ul>
+    <div class="note">Rows you already edited stay as they are.</div></div>`;
+  const add = m.adding ? catForm(m.draft, m.err, "cat-save", "cat-cancel")
+    : `<button class="chip add" data-act="cat-add">+ New category</button>`;
+  root.innerHTML = `<div class="overlay" data-act="overlay"><div class="modal" role="dialog" aria-modal="true" aria-label="Change category">
+    <h3>Change category</h3>
+    <div><b>${name}</b> · <span class="mono">${money(t.amt)}</span> · <span class="mono">${t.date}</span></div>
+    <div><h4>Category</h4><div class="catpick">${CAT_KEYS.map(k => `<button class="chip" style="--c:${cv(k)}" data-act="pick-cat" data-k="${k}" aria-pressed="${m.cat === k}"><i></i>${esc(CATS[k])}</button>`).join("")}${add}</div></div>
+    <div class="scope"><h4>Apply to</h4>
+      <label><input type="radio" name="scope" value="one" ${m.scope === "one" ? "checked" : ""}><span>Just this transaction</span></label>
+      <label><input type="radio" name="scope" value="merchant" ${m.scope === "merchant" ? "checked" : ""}><span>Every ${name} transaction<span class="rec">Suggested</span></span></label>
+      <label><input type="radio" name="scope" value="tag" ${m.scope === "tag" ? "checked" : ""}><span>Similar places: all “${esc(tag)}” merchants<span class="risk">Broad</span><small>Also moves merchants you did not touch.</small></span></label>
+    </div>
+    <div aria-live="polite">${prev}</div>
+    <div class="mfoot"><button class="btn" data-act="close">Cancel</button><button class="btn primary" data-act="save-edit" ${same ? "disabled" : ""}>Save</button></div>
+  </div></div>`;
+  if (m.adding) { const i = $("#newCatName"); i.focus(); i.setSelectionRange(i.value.length, i.value.length); }
+}
+
+function toast(msg) {
+  const el = $("#toast");
+  el.textContent = msg; el.hidden = false;
+  clearTimeout(toast.t);
+  toast.t = setTimeout(() => { el.hidden = true; }, 4200);
+}
+
+/* ---------- chart tooltip ---------- */
+const tip = $("#tip");
+const TIPPED = "[data-slice],[data-mo]";
+function showTip(el, x, y) {
+  tip.textContent = "";
+  const b = document.createElement("b"); b.textContent = money(+el.dataset.amt);
+  const s = document.createElement("span");
+  if (el.dataset.mo != null) {
+    const sp = +el.dataset.spent, bu = +el.dataset.budget;
+    b.textContent = money(sp);
+    s.textContent = `${MONTHS[+el.dataset.mo]} · ${whole(bu)} budget · ${money(Math.abs(sp - bu))} ${sp > bu ? "over" : "left"}`;
+  } else s.textContent = `${CATS[el.dataset.slice]} · ${el.dataset.pct}%`;
+  tip.append(b, s);
+  tip.hidden = false;
+  const r = tip.getBoundingClientRect();
+  tip.style.left = Math.min(innerWidth - r.width - 8, x + 12) + "px";
+  tip.style.top = Math.max(8, y - r.height - 10) + "px";
+}
+function hideTip() { tip.hidden = true; }
+document.addEventListener("pointermove", e => {
+  const el = e.target.closest && e.target.closest(TIPPED);
+  if (el) showTip(el, e.clientX, e.clientY); else if (!tip.hidden && !document.activeElement.matches(`:is(${TIPPED}):focus-visible`)) hideTip();
+});
+document.addEventListener("focusin", e => {
+  if (!e.target.matches(`:is(${TIPPED}):focus-visible`)) return;
+  const r = e.target.getBoundingClientRect();
+  showTip(e.target, r.left + r.width / 2, r.top + r.height / 2);
+});
+document.addEventListener("focusout", e => { if (e.target.matches(TIPPED)) hideTip(); });
+
+/* ---------- actions ---------- */
+function saveNewCat() {
+  const m = state.modal, res = addCategory(m.draft);
+  if (res.err) { m.err = res.err; return; }
+  m.cat = res.k; m.adding = false; m.draft = ""; m.err = "";
+}
+function saveBudgetCat() {
+  const a = state.addCat, res = addCategory(a.draft);
+  if (res.err) { a.err = res.err; return null; }
+  state.addCat = null;
+  return res.k;
+}
+
+document.addEventListener("click", e => {
+  const el = e.target.closest("[data-act]");
+  if (!el) return;
+  const act = el.dataset.act;
+  if (act === "overlay") { if (e.target === el) { state.modal = null; render(); } return; }
+  let focusId = null;
+
+  if (act === "nav") { state.view = el.dataset.v; clearFlags(); }
+  else if (act === "month") {
+    state.month = +el.dataset.m;
+    focusId = el.id === "prevMonth" || el.id === "nextMonth" ? (el.id === "prevMonth" ? (state.month > 0 ? el.id : "nextMonth") : (state.month < state.reviewed - 1 ? el.id : "prevMonth")) : el.id;
+  }
+  else if (act === "adjust") { state.view = "budget"; state.budgetTab = "this"; }
+  else if (act === "upload") {
+    const f = FILES[state.uploaded];
+    f.rows.forEach(addTxn);
+    state.uploaded++;
+    recompute(); clearFlags();
+    const check = pending().filter(needsCheck).length;
+    toast(`${f.n} transactions ready to review.${check ? ` ${check} to check.` : ""}`);
+  }
+  else if (act === "accept-all") {
+    const list = pending(), m = list[0].m;
+    list.forEach(t => t.status = "reviewed");
+    clearFlags();
+    state.reviewed = m + 1; state.month = m; state.view = "dashboard"; state.budgetTab = "this";
+    toast(`${list.length} transactions added to ${MONTHS[m]}.`);
+  }
+  else if (act === "edit") { const t = txns.find(x => x.id === +el.dataset.id); state.modal = { id: t.id, cat: t.cat, scope: "merchant", adding: false, draft: "", err: "" }; }
+  else if (act === "close") state.modal = null;
+  else if (act === "pick-cat") state.modal.cat = el.dataset.k;
+  else if (act === "cat-add") state.modal.adding = true;
+  else if (act === "cat-cancel") Object.assign(state.modal, { adding: false, draft: "", err: "" });
+  else if (act === "cat-save") saveNewCat();
+  else if (act === "save-edit") saveEdit();
+  else if (act === "bud-tab") { state.budgetTab = el.dataset.t; state.addCat = null; }
+  else if (act === "bud-add") { state.addCat = { draft: "", err: "" }; focusId = "newCatName"; }
+  else if (act === "bud-add-cancel") state.addCat = null;
+  else if (act === "bud-add-save") {
+    const k = saveBudgetCat();
+    focusId = k ? "bud-" + k : "newCatName";
+    if (k) toast(`${CATS[k]} added. Set a budget for it here.`);
+  }
+  else if (act === "bud-reset") { const o = overrides[budgetMonth()]; if (o) delete o[el.dataset.cat]; }
+  render();
+  if (focusId) { const f = document.getElementById(focusId); if (f) { f.focus(); if (f.select) f.select(); } }
+});
+
+document.addEventListener("change", e => {
+  if (e.target.name === "scope" && state.modal) { state.modal.scope = e.target.value; render(); }
+  else if (e.target.id === "monthPick") { state.month = +e.target.value; render(); $("#monthPick").focus(); }
+});
+
+// Budget inputs update their own row in place so typing and tabbing keep focus.
+document.addEventListener("input", e => {
+  const t = e.target;
+  if (t.id === "newCatName") {
+    if (state.modal) state.modal.draft = t.value; else if (state.addCat) state.addCat.draft = t.value;
+    return;
+  }
+  const k = t.dataset && t.dataset.bud;
+  if (!k) return;
+  const m = budgetMonth(), v = Math.max(0, +t.value || 0);
+  overrides[m] = overrides[m] || {};
+  if (v === proposal(m, k).rec) delete overrides[m][k]; else overrides[m][k] = v;
+  $("#prog-" + k).innerHTML = setProg(m, k);
+  $("#stat-" + k).innerHTML = setStat(m, k);
+  $("#budTotal").textContent = whole(budgetTotal(m));
+});
+
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && state.modal) { state.modal = null; render(); }
+  else if (e.key === "Enter" && e.target.id === "newCatName") {
+    e.preventDefault();
+    if (state.modal) { saveNewCat(); render(); }
+    else if (state.addCat) {
+      const k = saveBudgetCat(); render();
+      const f = document.getElementById(k ? "bud-" + k : "newCatName");
+      if (f) { f.focus(); if (f.select) f.select(); }
+      if (k) toast(`${CATS[k]} added. Set a budget for it here.`);
+    }
+  }
+});
+
+function saveEdit() {
+  const m = state.modal, t = txns.find(x => x.id === m.id);
+  clearFlags();
+  if (m.scope !== "one") {
+    const r = ruleFor(t, m.cat, m.scope);
+    rules = [{ id: ruleId++, ...r }, ...rules.filter(x => !(x.kind === r.kind && x.key === r.key))];
+  }
+  t.cat = m.cat; t.edited = true;
+  state.modal = null;
+  const ch = recompute();
+  toast(ch.length ? `Saved. ${plural(ch.length, "other transaction")} updated.` : "Saved.");
+}
+
+render();
+</script>
