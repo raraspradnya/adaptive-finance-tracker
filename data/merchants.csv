@@ -1,0 +1,47 @@
+merchant_key,name,merchant_group,general_category,raw_templates,visits_per_month,first_month
+trader_joes,Trader Joe’s,grocery,Groceries,TRADER JOE'S #135 BERKELEY CA | TRADER JOE'S #198 OAKLAND CA,3,1
+safeway,Safeway,grocery,Groceries,SAFEWAY #2741 OAKLAND CA | SAFEWAY STORE 1507 BERKELEY,1.5,1
+berkeley_bowl,Berkeley Bowl,grocery,Groceries,BERKELEY BOWL WEST | BERKELEY BOWL MARKETPLACE,1.5,1
+costco,Costco,grocery,Groceries,COSTCO WHSE #{n4} RICHMOND CA,0.6,1
+monterey_market,Monterey Market,grocery,Groceries,MONTEREY MARKET,0.5,1
+chipotle,Chipotle,fast_casual,Restaurants,CHIPOTLE 2297 BERKELEY | CHIPOTLE ONLINE {n4},1.5,1
+cheese_board,Cheese Board,pizza,Restaurants,CHEESE BOARD COLLECTIVE | SQ *CHEESE BOARD PIZZA,0.8,1
+doordash,DoorDash,delivery,Restaurants,DOORDASH*THAI BASIL | DOORDASH*SUNDAY GAMES | DOORDASH*CHIPOTLE,1.2,1
+niks_kitchen,Nik’s Kitchen,fast_casual,Restaurants,TST* NIKS KITCHEN,0.7,1
+blue_door_cafe,Blue Door Cafe,cafe,Restaurants,SQ *BLUE DOOR CAFE,1,1
+joes_ramen,Joe’s Ramen,ramen,Restaurants,JOE'S RAMEN SF CA | JOES RAMEN #2 SF CA,1.2,1
+anchor_brewing,Anchor Brewing,brewery,Restaurants,THE ANCHOR BREWING SF,0.8,1
+fieldwork_brewing,Fieldwork Brewing,brewery,Restaurants,FIELDWORK BREWING BERKELEY | SQ *FIELDWORK BREWING,0.9,9
+peets,Peet’s Coffee,coffee,Restaurants,PEET'S COFFEE #8812 | PEET'S COFFEE #0731 | PEETS COFFEE & TEA {n4},3,1
+starbucks,Starbucks,coffee,Restaurants,STARBUCKS STORE {n5} | STARBUCKS #{n5} BERKELEY CA,1,1
+blue_bottle,Blue Bottle Coffee,coffee,Restaurants,BLUE BOTTLE COFFEE 0042 | BLUE BOTTLE COFFEE OAKLAND,1.5,4
+clipper,Clipper (BART),transit,Transportation,CLIPPER SVC BART,2,1
+lyft,Lyft,rideshare,Transportation,LYFT *RIDE {mm}-{dd},1,1
+uber,Uber,rideshare,Transportation,UBER *TRIP HELP.UBER.COM,1,1
+shell,Shell,gas,Transportation,SHELL OIL {n8} OAKLAND,0.5,1
+netflix,Netflix,streaming,Subscription,NETFLIX.COM 866-579-7172,monthly,1
+spotify,Spotify,streaming,Subscription,SPOTIFY USA,monthly,1
+openai,ChatGPT,software,Subscription,OPENAI *CHATGPT SUBSCR,monthly,3
+pge,PG&E,power,Utilities,PG&E WEB ONLINE,monthly,1
+comcast,Comcast,internet,Utilities,COMCAST CABLE COMM 800-COMCAST,monthly,1
+tmobile,T-Mobile,phone,Utilities,T-MOBILE AUTOPAY,monthly,1
+amazon,Amazon,online_retail,Shopping,AMZN MKTP US*{code} | AMAZON.COM*{code},2,1
+target,Target,retail,Shopping,TARGET 00012345 BERKELEY CA | TARGET T-{n4} OAKLAND,0.8,1
+uniqlo,Uniqlo,clothing,Shopping,UNIQLO SF 0417,0.8,10
+ashby_flea,Ashby Flea,market,Shopping,ASHBY FLEA,0.3,1
+cvs,CVS Pharmacy,pharmacy,Healthcare,CVS/PHARMACY #{n5},0.4,1
+walgreens,Walgreens,pharmacy,Healthcare,WALGREENS #3456 BERKELEY CA,0.4,1
+great_clips,Great Clips,salon,Personal Care,GREAT CLIPS #1234,0.3,1
+planet_fitness,Planet Fitness,gym,Personal Care,PLANET FITNESS CLUB FEES,monthly,1
+geico,GEICO,insurance,Insurance,GEICO AUTO PAY,monthly,1
+rent,Avalon Bay (rent),rent,Housing,AVALON BAY RENT PAYMENT,monthly,1
+venmo,Venmo,p2p,Transfer,VENMO PAYMENT {n10},1.5,1
+chase_autopay,Chase card payment,card_payment,Transfer,CHASE CREDIT CRD AUTOPAY PPD ID: 4760039224,monthly,1
+payroll,Payroll,payroll,Income,GUSTO PAYROLL DIR DEP,twice,1
+service_fee,Bank service fee,bank_fee,Fees,MONTHLY SERVICE FEE,0.2,1
+amc,AMC Theatres,movies,Entertainment,AMC METREON 16 SF | AMC BAY STREET 16,0.6,1
+steam,Steam,games,Entertainment,STEAM GAMES 425-889-9642,0.3,1
+cal_performances,Cal Performances,concerts,Entertainment,CAL PERFORMANCES ZELLERBACH,0.2,1
+united,United Airlines,airline,Travel,UNITED AIRLINES {n10},0.25,6
+marriott,Marriott,hotel,Travel,MARRIOTT SAN FRANCISCO UNION SQ,0.1,6
+coursera,Coursera,online_course,Education,COURSERA.ORG,monthly,2

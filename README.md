@@ -17,11 +17,35 @@ mistake every month. It does this without disturbing what it already got right.
 
 ## Try it
 
-Open `prototype/index.html` in a browser. It runs on sample data, and nothing is saved or sent.
+Set up once:
+
+```bash
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+```
+
+Start the local server, then open http://127.0.0.1:8290:
+
+```bash
+.venv/bin/python src/server.py
+```
+
+The server runs a frozen transaction classifier
+([DoDataThings/distilbert-us-transaction-classifier](https://huggingface.co/DoDataThings/distilbert-us-transaction-classifier),
+downloaded on first run) on a year of synthetic transactions in `data/transactions_2026.csv`.
+January to June start out reviewed. Each upload from July on is categorized live by the model.
+Everything runs on this computer, and nothing is saved between sessions.
 
 To see the learning:
 
-1. Go to **Upload & review** and upload the November file.
-2. Click the category on a Joe's Ramen row, pick a new one, and apply it to every Joe's Ramen transaction.
+1. Go to **Upload & review** and upload the July file.
+2. Click the category on a Peet's Coffee row, add a new category called Coffee, and apply it to every Peet's transaction.
 3. Click **Accept all**.
-4. Upload the December file. Joe's Ramen arrives in your new category.
+4. Upload the August file. Peet's arrives as Coffee. The model alone would still say Restaurants.
+
+## Project scripts
+
+- `src/generate_data.py` writes the synthetic data (same seed, same files).
+- `src/frozen_model.py` runs the frozen model on any CSV and reports accuracy:
+  `.venv/bin/python src/frozen_model.py data/transactions_2026.csv --out results/frozen_predictions_2026.csv`
+- `src/server.py` serves the prototype UI backed by the frozen model.

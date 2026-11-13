@@ -19,12 +19,15 @@
   --accent-soft: #E3E6F9;
   --warn: #99580A;
   --warn-soft: #FBEBD0;
-  --c-food: #2a78d6;
-  --c-transport: #eb6834;
-  --c-shopping: #1baf7a;
-  --c-social: #eda100;
-  --c-subs: #e87ba4;
-  --c-bills: #008300;
+  /* p1-p6, x1, x2: the validated palette. p7, p8: added for the model's larger category set, not yet validated. */
+  --c-p1: #2a78d6;
+  --c-p2: #eb6834;
+  --c-p3: #1baf7a;
+  --c-p4: #eda100;
+  --c-p5: #e87ba4;
+  --c-p6: #008300;
+  --c-p7: #8a6a3a;
+  --c-p8: #1f97ab;
   --c-x1: #6250d6;
   --c-x2: #e34948;
   --c-other: #7E8DA0;
@@ -38,8 +41,9 @@
     --ink: #E8EEF5; --ink-2: #A9B7C6; --ink-3: #7E8DA0;
     --accent: #8E9BFF; --accent-ink: #0E141B; --accent-soft: #232A52;
     --warn: #F0B35A; --warn-soft: #382811;
-    --c-food: #3987e5; --c-transport: #d95926; --c-shopping: #199e70; --c-social: #c98500;
-    --c-subs: #d55181; --c-bills: #008300; --c-x1: #9085e9; --c-x2: #e66767; --c-other: #7E8DA0;
+    --c-p1: #3987e5; --c-p2: #d95926; --c-p3: #199e70; --c-p4: #c98500;
+    --c-p5: #d55181; --c-p6: #008300; --c-p7: #b08d57; --c-p8: #34b0c4;
+    --c-x1: #9085e9; --c-x2: #e66767; --c-other: #7E8DA0;
     color-scheme: dark;
   }
 }
@@ -48,8 +52,9 @@
   --ink: #E8EEF5; --ink-2: #A9B7C6; --ink-3: #7E8DA0;
   --accent: #8E9BFF; --accent-ink: #0E141B; --accent-soft: #232A52;
   --warn: #F0B35A; --warn-soft: #382811;
-  --c-food: #3987e5; --c-transport: #d95926; --c-shopping: #199e70; --c-social: #c98500;
-  --c-subs: #d55181; --c-bills: #008300; --c-x1: #9085e9; --c-x2: #e66767; --c-other: #7E8DA0;
+  --c-p1: #3987e5; --c-p2: #d95926; --c-p3: #199e70; --c-p4: #c98500;
+  --c-p5: #d55181; --c-p6: #008300; --c-p7: #b08d57; --c-p8: #34b0c4;
+  --c-x1: #9085e9; --c-x2: #e66767; --c-other: #7E8DA0;
   color-scheme: dark;
 }
 
@@ -269,90 +274,66 @@ button.chip:hover { background: color-mix(in srgb, var(--c) 24%, var(--surface))
 <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 
 <script>
-const CATS = { food: "Food", transport: "Transport", shopping: "Shopping", social: "Social", subs: "Subscriptions", bills: "Bills" };
-const CAT_KEYS = Object.keys(CATS);
-const SLOT = {};       // category key -> color slot, for categories the user adds
+// Everything below is filled from the local server (src/server.py) when the page loads:
+// the frozen model's categories, the monthly sample statements, and the months the user
+// had already reviewed before this session.
+const CATS = {};
+const CAT_KEYS = [];
+const SLOT = {};       // category key -> color slot
 let customCount = 0;
+const NON_SPEND = new Set();   // shown in review, left out of spending and budgets (Income, Transfer)
+const spendKeys = () => CAT_KEYS.filter(k => !NON_SPEND.has(k));
+const keyOf = name => name.toLowerCase().replace(/[^a-z0-9]+/g, "_");
+// The model's most common categories get their own color; the rest share a neutral.
+const BUILTIN_SLOT = { restaurants: "p1", transportation: "p2", groceries: "p3", entertainment: "p4",
+  subscription: "p5", utilities: "p6", shopping: "p7", housing: "p8" };
 
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", "January 2027"];
 const monthName = i => i < 0 ? "December" : MONTHS[i];
 
-const MER = {
-  trader:  { name: "Trader Joe’s",     tags: ["grocery"] },
-  safeway: { name: "Safeway",          tags: ["grocery"] },
-  ramen:   { name: "Joe’s Ramen",      tags: ["restaurant"] },
-  chipotle:{ name: "Chipotle",         tags: ["restaurant"] },
-  anchor:  { name: "The Anchor Brewing", tags: ["restaurant", "bar"] },
-  bluebot: { name: "Blue Bottle Coffee", tags: ["cafe"] },
-  peets:   { name: "Peet’s Coffee",    tags: ["cafe"] },
-  clipper: { name: "Clipper (BART)",   tags: ["transit"] },
-  uber:    { name: "Uber",             tags: ["rideshare"] },
-  lyft:    { name: "Lyft",             tags: ["rideshare"] },
-  netflix: { name: "Netflix",          tags: ["streaming"] },
-  spotify: { name: "Spotify",          tags: ["streaming"] },
-  amazon:  { name: "Amazon",           tags: ["online"] },
-  uniqlo:  { name: "Uniqlo",           tags: ["clothing"] },
-  pge:     { name: "PG&E",             tags: ["utility"] },
-  amc:     { name: "AMC Metreon",      tags: ["movies"] }
-};
+const MER = {};        // merchant key -> { name, tags }
+const SPEND = {};      // category key -> totals for each month reviewed before this session
+let SEEDED = 0;        // number of months reviewed before this session
+const FILES = [];      // one sample statement per month: { m, file, n }
+const HIST = {};       // the sample data has no 2025 history
 
-const toRows = (m, rows) => rows.map(a => ({ m, date: a[0], raw: a[1], merchant: a[2], amt: a[3], base: a[4], conf: a[5] }));
+async function boot() {
+  let d;
+  try { d = await (await fetch("/api/init")).json(); }
+  catch (e) {
+    $("#view").innerHTML = `<div class="head"><h1>Start the server</h1></div>
+      <p class="sub">This prototype gets its categories from the frozen model. In the project folder, run
+      <code>.venv/bin/python src/server.py</code>, then open <code>http://127.0.0.1:8290</code>.</p>`;
+    return;
+  }
+  d.categories.forEach(name => { const k = keyOf(name); CATS[k] = name; CAT_KEYS.push(k); SLOT[k] = BUILTIN_SLOT[k] || "other"; });
+  d.nonSpending.forEach(name => NON_SPEND.add(keyOf(name)));
+  d.customCategories.forEach(name => addCategory(name));   // categories this user made before this session
+  const byName = Object.fromEntries(CAT_KEYS.map(k => [CATS[k], k]));
+  for (const [name, series] of Object.entries(d.spend)) SPEND[byName[name]] = series;
+  Object.assign(MER, d.merchants);
+  FILES.push(...d.files);
+  SEEDED = d.seeded;
+  Object.assign(state, { month: SEEDED - 1, reviewed: SEEDED, uploaded: SEEDED });
+  render();
+}
 
-// Sample totals for months already reviewed, January to October 2026.
-const SPEND = {
-  food:      [228, 241, 262, 235, 247, 240, 225, 250, 226.25, 218.40],
-  transport: [42, 38, 61, 35, 44, 40, 30, 35, 34.60, 38.75],
-  shopping:  [88, 52, 143, 61, 70, 60, 55, 65, 65.55, 89.89],
-  social:    [34, 48, 72, 29, 55, 30, 25, 40, 31, 38],
-  subs:      [27.48, 27.48, 27.48, 27.48, 27.48, 27.48, 27.48, 27.48, 27.48, 27.48],
-  bills:     [96, 91, 84, 76, 72, 72, 68, 70, 70.85, 72.40]
-};
-const SEEDED = 10;
-
-// day label, raw bank string, merchant key, amount, base category, base confidence
-const NOV = toRows(10, [
-  ["Nov 01", "JOE'S RAMEN SF CA", "ramen", 26.00, "food", .81],
-  ["Nov 02", "TRADER JOE'S #135 BERKELEY CA", "trader", 52.30, "food", .94],
-  ["Nov 03", "CLIPPER SVC BART", "clipper", 20.00, "transport", .97],
-  ["Nov 04", "NETFLIX.COM 866-579-7172", "netflix", 15.49, "subs", .99],
-  ["Nov 05", "THE ANCHOR BREWING SF", "anchor", 41.00, "food", .45],
-  ["Nov 06", "SAFEWAY #2741 OAKLAND CA", "safeway", 58.77, "food", .95],
-  ["Nov 07", "LYFT *RIDE 11-07", "lyft", 16.40, "transport", .92],
-  ["Nov 08", "CHIPOTLE 2297 BERKELEY", "chipotle", 13.80, "food", .90],
-  ["Nov 10", "PG&E WEB ONLINE", "pge", 74.10, "bills", .98],
-  ["Nov 11", "SPOTIFY USA", "spotify", 11.99, "subs", .99],
-  ["Nov 13", "JOE'S RAMEN SF CA", "ramen", 23.50, "food", .81],
-  ["Nov 15", "AMZN MKTP US*9B1ZX4", "amazon", 29.99, "shopping", .72],
-  ["Nov 18", "TRADER JOE'S #135 BERKELEY CA", "trader", 47.65, "food", .94],
-  ["Nov 20", "PEET'S COFFEE #8812", "peets", 6.25, "food", .87],
-  ["Nov 22", "UBER *TRIP HELP.UBER.COM", "uber", 21.30, "transport", .93]
-]);
-
-const DEC = toRows(11, [
-  ["Dec 01", "TRADER JOE'S #135 BERKELEY CA", "trader", 49.85, "food", .94],
-  ["Dec 02", "CLIPPER SVC BART", "clipper", 20.00, "transport", .97],
-  ["Dec 03", "JOE'S RAMEN SF CA", "ramen", 24.00, "food", .81],
-  ["Dec 04", "NETFLIX.COM 866-579-7172", "netflix", 15.49, "subs", .99],
-  ["Dec 06", "THE ANCHOR BREWING SF", "anchor", 36.50, "food", .45],
-  ["Dec 07", "AMZN MKTP US*4F6WD2", "amazon", 62.40, "shopping", .72],
-  ["Dec 09", "SAFEWAY #2741 OAKLAND CA", "safeway", 64.15, "food", .95],
-  ["Dec 10", "PG&E WEB ONLINE", "pge", 88.30, "bills", .98],
-  ["Dec 11", "SPOTIFY USA", "spotify", 11.99, "subs", .99],
-  ["Dec 13", "AMC METREON 16 SF", "amc", 28.00, "social", .84],
-  ["Dec 15", "JOE'S RAMEN SF CA", "ramen", 27.25, "food", .81],
-  ["Dec 17", "UBER *TRIP HELP.UBER.COM", "uber", 19.60, "transport", .93],
-  ["Dec 18", "UNIQLO SF 0417", "uniqlo", 71.90, "shopping", .91],
-  ["Dec 20", "BLUE BOTTLE COFFEE 0042", "bluebot", 7.25, "food", .88]
-]);
-
-const FILES = [
-  ...[15, 14, 18, 15, 16, 14, 13, 15, 15, 16].map((n, m) => ({ file: `chase_${MONTHS[m].slice(0, 3).toLowerCase()}_2026.csv`, m, n })),
-  { file: "chase_nov_2026.csv", m: 10, n: NOV.length, rows: NOV },
-  { file: "chase_dec_2026.csv", m: 11, n: DEC.length, rows: DEC }
-];
-
-// Spending in the last three months of 2025, so January's budget has something to work from.
-const HIST = { food: [235, 230, 270], transport: [40, 38, 55], shopping: [70, 95, 130], social: [35, 40, 60], subs: [27.48, 27.48, 27.48], bills: [78, 88, 98] };
+// Asks the server for the next statement. The server runs the frozen model on it live.
+async function uploadNext() {
+  const f = FILES[state.uploaded];
+  state.loading = true; render();
+  try {
+    const rows = await (await fetch(`/api/statement?month=${f.m + 1}`)).json();
+    rows.forEach(r => addTxn({ ...r, m: f.m, base: keyOf(r.base) }));
+    state.uploaded++;
+    recompute(); clearFlags();
+    const check = pending().filter(needsCheck).length;
+    toast(`${f.n} transactions ready to review.${check ? ` ${check} to check.` : ""}`);
+  } catch (e) {
+    toast("Couldn’t reach the server. Is src/server.py still running?");
+  }
+  state.loading = false; render();
+}
 
 let nextId = 1;
 const txns = [];
@@ -366,7 +347,8 @@ const state = {
   uploaded: SEEDED,    // files uploaded so far
   budgetTab: "this",
   addCat: null,        // add-category form on the budget page
-  modal: null
+  modal: null,
+  loading: false       // waiting for the server to categorize an upload
 };
 
 function addTxn(o) { txns.push({ id: nextId++, ...o, cat: o.base, status: "pending", src: "auto", edited: false, changed: false }); }
@@ -496,7 +478,7 @@ function pieSvg(parts, total) {
 
 function monthTotals(m) {
   const spent = spentBy(m);
-  const keys = CAT_KEYS.filter(k => spent[k] > 0 || budgetOf(m, k) > 0);
+  const keys = spendKeys().filter(k => spent[k] > 0 || budgetOf(m, k) > 0);
   return { spent: keys.reduce((a, k) => a + spent[k], 0), budget: keys.reduce((a, k) => a + budgetOf(m, k), 0) };
 }
 // One bar per reviewed month. Each bar is also a button that opens that month.
@@ -526,7 +508,7 @@ function yearChart() {
 function viewDashboard() {
   const m = state.month, name = MONTHS[m];
   const spent = spentBy(m);
-  const keys = CAT_KEYS.filter(k => spent[k] > 0 || budgetOf(m, k) > 0);
+  const keys = spendKeys().filter(k => spent[k] > 0 || budgetOf(m, k) > 0);
   const total = keys.reduce((a, k) => a + spent[k], 0);
   const budget = keys.reduce((a, k) => a + budgetOf(m, k), 0);
   const left = budget - total, over = left < 0;
@@ -580,7 +562,7 @@ function viewReview() {
   const list = pending();
   if (list.length) {
     const f = FILES[state.uploaded - 1];
-    const total = list.reduce((a, t) => a + t.amt, 0);
+    const total = list.filter(t => !t.credit).reduce((a, t) => a + t.amt, 0);
     const toCheck = list.filter(needsCheck).length;
     const accept = `<button class="btn primary" data-act="accept-all">Accept all ${list.length}</button>`;
     const rows = list.map(t => {
@@ -590,7 +572,7 @@ function viewReview() {
       else if (needsCheck(t)) tag = `<span class="tag warn">Check this</span>`;
       return `<div class="row${t.changed ? " flash" : ""}">
         <div class="merch"><b>${esc(MER[t.merchant].name)}</b><span class="raw">${t.date} · ${esc(t.raw)}</span></div>
-        <div class="amt">${money(t.amt)}</div>
+        <div class="amt">${t.credit ? "+" : ""}${money(t.amt)}</div>
         <div class="catcell"><button class="chip" style="--c:${cv(t.cat)}" data-act="edit" data-id="${t.id}" aria-label="Change category, currently ${esc(CATS[t.cat])}"><i></i>${esc(CATS[t.cat])} <span aria-hidden="true">▾</span></button>${tag}</div></div>`;
     }).join("");
     return `<div class="head"><h1>Upload &amp; review</h1></div>
@@ -609,8 +591,8 @@ function viewReview() {
     <section class="drop">
       ${next ? `<h2>Upload your bank statement</h2>
         <p>The tracker sorts each transaction into a category. You check them before they reach your dashboard.</p>
-        <button class="btn primary" data-act="upload">Upload ${esc(next.file)}</button>
-        <span class="tag">Sample file, for this prototype</span>`
+        <button class="btn primary" data-act="upload" ${state.loading ? "disabled" : ""}>${state.loading ? "Sorting transactions…" : `Upload ${esc(next.file)}`}</button>
+        <span class="tag">Sample file, categorized live by the frozen model</span>`
       : `<h2>You’re all caught up</h2><p>All the sample statements are uploaded and reviewed.</p>`}
     </section>
     <section class="card"><div class="listhead"><h2>Past uploads</h2></div>${done}</section>`;
@@ -634,12 +616,12 @@ function setStat(m, k) {
   const edited = overrides[m] && overrides[m][k] != null;
   return edited ? `Changed · <button class="link" data-act="bud-reset" data-cat="${k}">Reset to ${whole(rec)}</button>` : "Proposed by the tracker";
 }
-const budgetTotal = m => CAT_KEYS.reduce((a, k) => a + budgetOf(m, k), 0);
+const budgetTotal = m => spendKeys().reduce((a, k) => a + budgetOf(m, k), 0);
 
 function viewBudget() {
   const cur = curMonth(), next = cur + 1, m = budgetMonth();
   const tab = (id, label, i) => `<button role="tab" data-act="bud-tab" data-t="${id}" aria-selected="${state.budgetTab === id}"><span>${label}</span><b>${MONTHS[i]}</b></button>`;
-  const rows = CAT_KEYS.map(k => `<div class="setrow">
+  const rows = spendKeys().map(k => `<div class="setrow">
       <div class="setname">${chip(k)}<span class="why">${esc(proposal(m, k).why)}</span></div>
       <div class="setprog" id="prog-${k}">${setProg(m, k)}</div>
       <div class="setamt">
@@ -758,14 +740,7 @@ document.addEventListener("click", e => {
     focusId = el.id === "prevMonth" || el.id === "nextMonth" ? (el.id === "prevMonth" ? (state.month > 0 ? el.id : "nextMonth") : (state.month < state.reviewed - 1 ? el.id : "prevMonth")) : el.id;
   }
   else if (act === "adjust") { state.view = "budget"; state.budgetTab = "this"; }
-  else if (act === "upload") {
-    const f = FILES[state.uploaded];
-    f.rows.forEach(addTxn);
-    state.uploaded++;
-    recompute(); clearFlags();
-    const check = pending().filter(needsCheck).length;
-    toast(`${f.n} transactions ready to review.${check ? ` ${check} to check.` : ""}`);
-  }
+  else if (act === "upload") { if (!state.loading) uploadNext(); return; }
   else if (act === "accept-all") {
     const list = pending(), m = list[0].m;
     list.forEach(t => t.status = "reviewed");
@@ -842,5 +817,5 @@ function saveEdit() {
   toast(ch.length ? `Saved. ${plural(ch.length, "other transaction")} updated.` : "Saved.");
 }
 
-render();
+boot();
 </script>

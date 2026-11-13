@@ -1,0 +1,546 @@
+txn_id,month,date,raw_description,merchant_key,merchant_group,amount,direction,general_category,true_category,label_source,is_new_merchant
+1,1,2026-01-01,CHASE CREDIT CRD AUTOPAY PPD ID: 4760039224,chase_autopay,card_payment,1172.18,debit,Transfer,Transfer,general,False
+2,1,2026-01-01,COMCAST CABLE COMM 800-COMCAST,comcast,internet,79.99,debit,Utilities,Utilities,general,False
+3,1,2026-01-01,GEICO AUTO PAY,geico,insurance,112.0,debit,Insurance,Insurance,general,False
+4,1,2026-01-01,NETFLIX.COM 866-579-7172,netflix,streaming,15.49,debit,Subscription,Subscription,general,False
+5,1,2026-01-01,GUSTO PAYROLL DIR DEP,payroll,payroll,2100.0,credit,Income,Income,general,False
+6,1,2026-01-01,PG&E WEB ONLINE,pge,power,80.12,debit,Utilities,Utilities,general,False
+7,1,2026-01-01,PLANET FITNESS CLUB FEES,planet_fitness,gym,24.99,debit,Personal Care,Personal Care,general,False
+8,1,2026-01-01,AVALON BAY RENT PAYMENT,rent,rent,2450.0,debit,Housing,Housing,general,False
+9,1,2026-01-01,SPOTIFY USA,spotify,streaming,11.99,debit,Subscription,Subscription,general,False
+10,1,2026-01-01,T-MOBILE AUTOPAY,tmobile,phone,65.0,debit,Utilities,Utilities,general,False
+11,1,2026-01-02,PEET'S COFFEE #8812,peets,coffee,7.82,debit,Restaurants,Restaurants,general,False
+12,1,2026-01-04,TRADER JOE'S #135 BERKELEY CA,trader_joes,grocery,70.54,debit,Groceries,Groceries,general,False
+13,1,2026-01-05,TRADER JOE'S #135 BERKELEY CA,trader_joes,grocery,58.88,debit,Groceries,Groceries,general,False
+14,1,2026-01-06,CHIPOTLE ONLINE 9350,chipotle,fast_casual,16.45,debit,Restaurants,Restaurants,general,False
+15,1,2026-01-08,TRADER JOE'S #135 BERKELEY CA,trader_joes,grocery,59.22,debit,Groceries,Groceries,general,False
+16,1,2026-01-11,SHELL OIL 15287997 OAKLAND,shell,gas,46.92,debit,Transportation,Transportation,general,False
+17,1,2026-01-13,THE ANCHOR BREWING SF,anchor_brewing,brewery,43.39,debit,Restaurants,Social,preference,False
+18,1,2026-01-14,BERKELEY BOWL MARKETPLACE,berkeley_bowl,grocery,76.74,debit,Groceries,Groceries,general,False
+19,1,2026-01-15,GUSTO PAYROLL DIR DEP,payroll,payroll,2100.0,credit,Income,Income,general,False
+20,1,2026-01-16,AMC BAY STREET 16,amc,movies,27.99,debit,Entertainment,Entertainment,general,False
+21,1,2026-01-16,AMC BAY STREET 16,amc,movies,23.88,debit,Entertainment,Entertainment,general,False
+22,1,2026-01-16,CAL PERFORMANCES ZELLERBACH,cal_performances,concerts,73.65,debit,Entertainment,Entertainment,general,False
+23,1,2026-01-17,ASHBY FLEA,ashby_flea,market,22.86,debit,Shopping,Shopping,general,False
+24,1,2026-01-17,CLIPPER SVC BART,clipper,transit,20.0,debit,Transportation,Transportation,general,False
+25,1,2026-01-18,AMAZON.COM*LL2SL8,amazon,online_retail,32.32,debit,Shopping,Shopping,general,False
+26,1,2026-01-21,SAFEWAY STORE 1507 BERKELEY,safeway,grocery,58.6,debit,Groceries,Groceries,general,False
+27,1,2026-01-22,CHEESE BOARD COLLECTIVE,cheese_board,pizza,24.74,debit,Restaurants,Restaurants,general,False
+28,1,2026-01-24,CHIPOTLE 2297 BERKELEY,chipotle,fast_casual,15.5,debit,Restaurants,Restaurants,general,False
+29,1,2026-01-24,MONTEREY MARKET,monterey_market,grocery,23.53,debit,Groceries,Groceries,general,False
+30,1,2026-01-25,DOORDASH*SUNDAY GAMES,doordash,delivery,26.44,debit,Restaurants,Restaurants,general,False
+31,1,2026-01-25,LYFT *RIDE 01-25,lyft,rideshare,25.54,debit,Transportation,Transportation,general,False
+32,1,2026-01-26,AMZN MKTP US*KZRMD2,amazon,online_retail,56.45,debit,Shopping,Shopping,general,False
+33,1,2026-01-26,CHEESE BOARD COLLECTIVE,cheese_board,pizza,13.0,debit,Restaurants,Restaurants,general,False
+34,1,2026-01-26,CLIPPER SVC BART,clipper,transit,20.0,debit,Transportation,Transportation,general,False
+35,1,2026-01-26,PEET'S COFFEE #0731,peets,coffee,5.61,debit,Restaurants,Restaurants,general,False
+36,1,2026-01-28,BERKELEY BOWL MARKETPLACE,berkeley_bowl,grocery,53.07,debit,Groceries,Groceries,general,False
+37,1,2026-01-29,DOORDASH*SUNDAY GAMES,doordash,delivery,33.2,debit,Restaurants,Restaurants,general,False
+38,2,2026-02-01,AMC BAY STREET 16,amc,movies,30.82,debit,Entertainment,Entertainment,general,False
+39,2,2026-02-01,CHASE CREDIT CRD AUTOPAY PPD ID: 4760039224,chase_autopay,card_payment,523.62,debit,Transfer,Transfer,general,False
+40,2,2026-02-01,COMCAST CABLE COMM 800-COMCAST,comcast,internet,79.99,debit,Utilities,Utilities,general,False
+41,2,2026-02-01,COURSERA.ORG,coursera,online_course,49.0,debit,Education,Education,general,True
+42,2,2026-02-01,GEICO AUTO PAY,geico,insurance,112.0,debit,Insurance,Insurance,general,False
+43,2,2026-02-01,NETFLIX.COM 866-579-7172,netflix,streaming,15.49,debit,Subscription,Subscription,general,False
+44,2,2026-02-01,GUSTO PAYROLL DIR DEP,payroll,payroll,2100.0,credit,Income,Income,general,False
+45,2,2026-02-01,PEET'S COFFEE #8812,peets,coffee,5.59,debit,Restaurants,Restaurants,general,False
+46,2,2026-02-01,PG&E WEB ONLINE,pge,power,73.44,debit,Utilities,Utilities,general,False
+47,2,2026-02-01,PLANET FITNESS CLUB FEES,planet_fitness,gym,24.99,debit,Personal Care,Personal Care,general,False
+48,2,2026-02-01,AVALON BAY RENT PAYMENT,rent,rent,2450.0,debit,Housing,Housing,general,False
+49,2,2026-02-01,SPOTIFY USA,spotify,streaming,11.99,debit,Subscription,Subscription,general,False
+50,2,2026-02-01,T-MOBILE AUTOPAY,tmobile,phone,65.0,debit,Utilities,Utilities,general,False
+51,2,2026-02-02,COSTCO WHSE #1341 RICHMOND CA,costco,grocery,145.21,debit,Groceries,Groceries,general,False
+52,2,2026-02-03,SAFEWAY STORE 1507 BERKELEY,safeway,grocery,77.04,debit,Groceries,Groceries,general,False
+53,2,2026-02-05,CLIPPER SVC BART,clipper,transit,20.0,debit,Transportation,Transportation,general,False
+54,2,2026-02-07,AMZN MKTP US*LR4S0E,amazon,online_retail,29.89,debit,Shopping,Shopping,general,False
+55,2,2026-02-10,LYFT *RIDE 02-10,lyft,rideshare,14.59,debit,Transportation,Transportation,general,False
+56,2,2026-02-11,SHELL OIL 92880979 OAKLAND,shell,gas,38.02,debit,Transportation,Transportation,general,False
+57,2,2026-02-12,AMAZON.COM*1GB9X8,amazon,online_retail,14.92,debit,Shopping,Shopping,general,False
+58,2,2026-02-12,CVS/PHARMACY #48774,cvs,pharmacy,30.91,debit,Healthcare,Healthcare,general,False
+59,2,2026-02-14,BERKELEY BOWL MARKETPLACE,berkeley_bowl,grocery,28.2,debit,Groceries,Groceries,general,False
+60,2,2026-02-15,SQ *BLUE DOOR CAFE,blue_door_cafe,cafe,11.7,debit,Restaurants,Restaurants,general,False
+61,2,2026-02-15,LYFT *RIDE 02-15,lyft,rideshare,16.0,debit,Transportation,Transportation,general,False
+62,2,2026-02-15,GUSTO PAYROLL DIR DEP,payroll,payroll,2100.0,credit,Income,Income,general,False
+63,2,2026-02-15,TARGET 00012345 BERKELEY CA,target,retail,37.09,debit,Shopping,Shopping,general,False
+64,2,2026-02-16,SAFEWAY STORE 1507 BERKELEY,safeway,grocery,43.03,debit,Groceries,Groceries,general,False
+65,2,2026-02-18,TRADER JOE'S #198 OAKLAND CA,trader_joes,grocery,58.84,debit,Groceries,Groceries,general,False
+66,2,2026-02-20,JOE'S RAMEN SF CA,joes_ramen,ramen,22.8,debit,Restaurants,Social,preference,False
+67,2,2026-02-20,PEET'S COFFEE #0731,peets,coffee,4.11,debit,Restaurants,Restaurants,general,False
+68,2,2026-02-21,DOORDASH*THAI BASIL,doordash,delivery,29.27,debit,Restaurants,Restaurants,general,False
+69,2,2026-02-22,VENMO PAYMENT 5088210866,venmo,p2p,73.74,debit,Transfer,Transfer,general,False
+70,2,2026-02-25,SHELL OIL 80436762 OAKLAND,shell,gas,50.66,debit,Transportation,Transportation,general,False
+71,2,2026-02-27,THE ANCHOR BREWING SF,anchor_brewing,brewery,28.28,debit,Restaurants,Social,preference,False
+72,2,2026-02-27,CHIPOTLE 2297 BERKELEY,chipotle,fast_casual,15.93,debit,Restaurants,Restaurants,general,False
+73,2,2026-02-28,STARBUCKS STORE 78597,starbucks,coffee,5.65,debit,Restaurants,Restaurants,general,False
+74,3,2026-03-01,CHASE CREDIT CRD AUTOPAY PPD ID: 4760039224,chase_autopay,card_payment,419.37,debit,Transfer,Transfer,general,False
+75,3,2026-03-01,COMCAST CABLE COMM 800-COMCAST,comcast,internet,79.99,debit,Utilities,Utilities,general,False
+76,3,2026-03-01,COURSERA.ORG,coursera,online_course,49.0,debit,Education,Education,general,True
+77,3,2026-03-01,GEICO AUTO PAY,geico,insurance,112.0,debit,Insurance,Insurance,general,False
+78,3,2026-03-01,NETFLIX.COM 866-579-7172,netflix,streaming,15.49,debit,Subscription,Subscription,general,False
+79,3,2026-03-01,OPENAI *CHATGPT SUBSCR,openai,software,20.0,debit,Subscription,Subscription,general,True
+80,3,2026-03-01,GUSTO PAYROLL DIR DEP,payroll,payroll,2100.0,credit,Income,Income,general,False
+81,3,2026-03-01,PG&E WEB ONLINE,pge,power,60.61,debit,Utilities,Utilities,general,False
+82,3,2026-03-01,PLANET FITNESS CLUB FEES,planet_fitness,gym,24.99,debit,Personal Care,Personal Care,general,False
+83,3,2026-03-01,AVALON BAY RENT PAYMENT,rent,rent,2450.0,debit,Housing,Housing,general,False
+84,3,2026-03-01,SPOTIFY USA,spotify,streaming,11.99,debit,Subscription,Subscription,general,False
+85,3,2026-03-01,T-MOBILE AUTOPAY,tmobile,phone,65.0,debit,Utilities,Utilities,general,False
+86,3,2026-03-02,SQ *BLUE DOOR CAFE,blue_door_cafe,cafe,15.73,debit,Restaurants,Restaurants,general,False
+87,3,2026-03-02,VENMO PAYMENT 9979650261,venmo,p2p,28.16,debit,Transfer,Transfer,general,False
+88,3,2026-03-03,JOE'S RAMEN SF CA,joes_ramen,ramen,21.64,debit,Restaurants,Social,preference,False
+89,3,2026-03-04,BERKELEY BOWL MARKETPLACE,berkeley_bowl,grocery,39.88,debit,Groceries,Groceries,general,False
+90,3,2026-03-05,SAFEWAY STORE 1507 BERKELEY,safeway,grocery,71.3,debit,Groceries,Groceries,general,False
+91,3,2026-03-06,CAL PERFORMANCES ZELLERBACH,cal_performances,concerts,55.04,debit,Entertainment,Entertainment,general,False
+92,3,2026-03-07,LYFT *RIDE 03-07,lyft,rideshare,18.7,debit,Transportation,Transportation,general,False
+93,3,2026-03-08,TRADER JOE'S #198 OAKLAND CA,trader_joes,grocery,58.32,debit,Groceries,Groceries,general,False
+94,3,2026-03-09,TST* NIKS KITCHEN,niks_kitchen,fast_casual,23.34,debit,Restaurants,Restaurants,general,False
+95,3,2026-03-11,TARGET 00012345 BERKELEY CA,target,retail,48.18,debit,Shopping,Shopping,general,False
+96,3,2026-03-12,AMZN MKTP US*CCIPZP,amazon,online_retail,58.85,debit,Shopping,Shopping,general,False
+97,3,2026-03-12,THE ANCHOR BREWING SF,anchor_brewing,brewery,50.47,debit,Restaurants,Social,preference,False
+98,3,2026-03-12,JOES RAMEN #2 SF CA,joes_ramen,ramen,31.18,debit,Restaurants,Social,preference,False
+99,3,2026-03-12,PEET'S COFFEE #8812,peets,coffee,6.76,debit,Restaurants,Restaurants,general,False
+100,3,2026-03-13,PEET'S COFFEE #0731,peets,coffee,6.69,debit,Restaurants,Restaurants,general,False
+101,3,2026-03-13,TRADER JOE'S #198 OAKLAND CA,trader_joes,grocery,46.77,debit,Groceries,Groceries,general,False
+102,3,2026-03-14,AMAZON.COM*G8GQXP,amazon,online_retail,50.9,debit,Shopping,Shopping,general,False
+103,3,2026-03-14,DOORDASH*THAI BASIL,doordash,delivery,32.42,debit,Restaurants,Restaurants,general,False
+104,3,2026-03-14,PEET'S COFFEE #8812,peets,coffee,5.3,debit,Restaurants,Restaurants,general,False
+105,3,2026-03-15,SQ *BLUE DOOR CAFE,blue_door_cafe,cafe,12.63,debit,Restaurants,Restaurants,general,False
+106,3,2026-03-15,LYFT *RIDE 03-15,lyft,rideshare,16.45,debit,Transportation,Transportation,general,False
+107,3,2026-03-15,GUSTO PAYROLL DIR DEP,payroll,payroll,2100.0,credit,Income,Income,general,False
+108,3,2026-03-16,SQ *BLUE DOOR CAFE,blue_door_cafe,cafe,14.57,debit,Restaurants,Restaurants,general,False
+109,3,2026-03-16,COSTCO WHSE #0463 RICHMOND CA,costco,grocery,164.13,debit,Groceries,Groceries,general,False
+110,3,2026-03-16,JOE'S RAMEN SF CA,joes_ramen,ramen,21.26,debit,Restaurants,Social,preference,False
+111,3,2026-03-16,TST* NIKS KITCHEN,niks_kitchen,fast_casual,17.98,debit,Restaurants,Restaurants,general,False
+112,3,2026-03-17,TRADER JOE'S #135 BERKELEY CA,trader_joes,grocery,47.8,debit,Groceries,Groceries,general,False
+113,3,2026-03-17,VENMO PAYMENT 0429021464,venmo,p2p,64.7,debit,Transfer,Transfer,general,False
+114,3,2026-03-18,DOORDASH*SUNDAY GAMES,doordash,delivery,37.78,debit,Restaurants,Restaurants,general,False
+115,3,2026-03-18,SAFEWAY STORE 1507 BERKELEY,safeway,grocery,27.74,debit,Groceries,Groceries,general,False
+116,3,2026-03-19,AMC BAY STREET 16,amc,movies,20.57,debit,Entertainment,Entertainment,general,False
+117,3,2026-03-19,MONTEREY MARKET,monterey_market,grocery,27.09,debit,Groceries,Groceries,general,False
+118,3,2026-03-23,TST* NIKS KITCHEN,niks_kitchen,fast_casual,19.61,debit,Restaurants,Restaurants,general,False
+119,3,2026-03-24,PEET'S COFFEE #8812,peets,coffee,6.31,debit,Restaurants,Restaurants,general,False
+120,3,2026-03-26,CLIPPER SVC BART,clipper,transit,20.0,debit,Transportation,Transportation,general,False
+121,3,2026-03-27,VENMO PAYMENT 7492798661,venmo,p2p,36.06,debit,Transfer,Transfer,general,False
+122,3,2026-03-29,GREAT CLIPS #1234,great_clips,salon,22.25,debit,Personal Care,Personal Care,general,False
+123,3,2026-03-30,COSTCO WHSE #3984 RICHMOND CA,costco,grocery,161.76,debit,Groceries,Groceries,general,False
+124,3,2026-03-30,DOORDASH*SUNDAY GAMES,doordash,delivery,19.25,debit,Restaurants,Restaurants,general,False
+125,3,2026-03-30,PEET'S COFFEE #0731,peets,coffee,7.27,debit,Restaurants,Restaurants,general,False
+126,3,2026-03-31,THE ANCHOR BREWING SF,anchor_brewing,brewery,38.02,debit,Restaurants,Social,preference,False
+127,4,2026-04-01,CHASE CREDIT CRD AUTOPAY PPD ID: 4760039224,chase_autopay,card_payment,771.77,debit,Transfer,Transfer,general,False
+128,4,2026-04-01,COMCAST CABLE COMM 800-COMCAST,comcast,internet,79.99,debit,Utilities,Utilities,general,False
+129,4,2026-04-01,COURSERA.ORG,coursera,online_course,49.0,debit,Education,Education,general,True
+130,4,2026-04-01,GEICO AUTO PAY,geico,insurance,112.0,debit,Insurance,Insurance,general,False
+131,4,2026-04-01,NETFLIX.COM 866-579-7172,netflix,streaming,15.49,debit,Subscription,Subscription,general,False
+132,4,2026-04-01,OPENAI *CHATGPT SUBSCR,openai,software,20.0,debit,Subscription,Subscription,general,True
+133,4,2026-04-01,GUSTO PAYROLL DIR DEP,payroll,payroll,2100.0,credit,Income,Income,general,False
+134,4,2026-04-01,PG&E WEB ONLINE,pge,power,92.49,debit,Utilities,Utilities,general,False
+135,4,2026-04-01,PLANET FITNESS CLUB FEES,planet_fitness,gym,24.99,debit,Personal Care,Personal Care,general,False
+136,4,2026-04-01,AVALON BAY RENT PAYMENT,rent,rent,2450.0,debit,Housing,Housing,general,False
+137,4,2026-04-01,SPOTIFY USA,spotify,streaming,11.99,debit,Subscription,Subscription,general,False
+138,4,2026-04-01,T-MOBILE AUTOPAY,tmobile,phone,65.0,debit,Utilities,Utilities,general,False
+139,4,2026-04-02,DOORDASH*CHIPOTLE,doordash,delivery,32.89,debit,Restaurants,Restaurants,general,False
+140,4,2026-04-02,PEET'S COFFEE #0731,peets,coffee,6.44,debit,Restaurants,Restaurants,general,False
+141,4,2026-04-04,JOE'S RAMEN SF CA,joes_ramen,ramen,28.54,debit,Restaurants,Social,preference,False
+142,4,2026-04-06,PEET'S COFFEE #8812,peets,coffee,7.2,debit,Restaurants,Restaurants,general,False
+143,4,2026-04-07,SQ *CHEESE BOARD PIZZA,cheese_board,pizza,19.52,debit,Restaurants,Restaurants,general,False
+144,4,2026-04-08,DOORDASH*SUNDAY GAMES,doordash,delivery,41.45,debit,Restaurants,Restaurants,general,False
+145,4,2026-04-10,CHIPOTLE 2297 BERKELEY,chipotle,fast_casual,16.06,debit,Restaurants,Restaurants,general,False
+146,4,2026-04-10,CHIPOTLE 2297 BERKELEY,chipotle,fast_casual,13.86,debit,Restaurants,Restaurants,general,False
+147,4,2026-04-11,CHIPOTLE 2297 BERKELEY,chipotle,fast_casual,17.96,debit,Restaurants,Restaurants,general,False
+148,4,2026-04-11,PEETS COFFEE & TEA 2559,peets,coffee,8.07,debit,Restaurants,Restaurants,general,False
+149,4,2026-04-13,AMZN MKTP US*QUXZ7P,amazon,online_retail,12.13,debit,Shopping,Shopping,general,False
+150,4,2026-04-15,COSTCO WHSE #9293 RICHMOND CA,costco,grocery,215.42,debit,Groceries,Groceries,general,False
+151,4,2026-04-15,GUSTO PAYROLL DIR DEP,payroll,payroll,2100.0,credit,Income,Income,general,False
+152,4,2026-04-16,UBER *TRIP HELP.UBER.COM,uber,rideshare,14.97,debit,Transportation,Transportation,general,False
+153,4,2026-04-17,UBER *TRIP HELP.UBER.COM,uber,rideshare,16.61,debit,Transportation,Transportation,general,False
+154,4,2026-04-18,BLUE BOTTLE COFFEE OAKLAND,blue_bottle,coffee,7.99,debit,Restaurants,Restaurants,general,True
+155,4,2026-04-18,PEET'S COFFEE #0731,peets,coffee,8.41,debit,Restaurants,Restaurants,general,False
+156,4,2026-04-18,SHELL OIL 68072615 OAKLAND,shell,gas,53.17,debit,Transportation,Transportation,general,False
+157,4,2026-04-20,JOES RAMEN #2 SF CA,joes_ramen,ramen,25.63,debit,Restaurants,Social,preference,False
+158,4,2026-04-23,GREAT CLIPS #1234,great_clips,salon,27.12,debit,Personal Care,Personal Care,general,False
+159,4,2026-04-23,TRADER JOE'S #135 BERKELEY CA,trader_joes,grocery,52.71,debit,Groceries,Groceries,general,False
+160,4,2026-04-24,CLIPPER SVC BART,clipper,transit,20.0,debit,Transportation,Transportation,general,False
+161,4,2026-04-24,STEAM GAMES 425-889-9642,steam,games,39.6,debit,Entertainment,Entertainment,general,False
+162,4,2026-04-25,TRADER JOE'S #198 OAKLAND CA,trader_joes,grocery,56.24,debit,Groceries,Groceries,general,False
+163,4,2026-04-26,SAFEWAY STORE 1507 BERKELEY,safeway,grocery,57.11,debit,Groceries,Groceries,general,False
+164,4,2026-04-26,TRADER JOE'S #135 BERKELEY CA,trader_joes,grocery,52.7,debit,Groceries,Groceries,general,False
+165,4,2026-04-27,PEET'S COFFEE #0731,peets,coffee,7.96,debit,Restaurants,Restaurants,general,False
+166,4,2026-04-27,SAFEWAY #2741 OAKLAND CA,safeway,grocery,71.78,debit,Groceries,Groceries,general,False
+167,4,2026-04-27,STARBUCKS STORE 41777,starbucks,coffee,4.42,debit,Restaurants,Restaurants,general,False
+168,4,2026-04-30,CHEESE BOARD COLLECTIVE,cheese_board,pizza,20.37,debit,Restaurants,Restaurants,general,False
+169,5,2026-05-01,CHASE CREDIT CRD AUTOPAY PPD ID: 4760039224,chase_autopay,card_payment,1162.72,debit,Transfer,Transfer,general,False
+170,5,2026-05-01,COMCAST CABLE COMM 800-COMCAST,comcast,internet,79.99,debit,Utilities,Utilities,general,False
+171,5,2026-05-01,COURSERA.ORG,coursera,online_course,49.0,debit,Education,Education,general,True
+172,5,2026-05-01,GEICO AUTO PAY,geico,insurance,112.0,debit,Insurance,Insurance,general,False
+173,5,2026-05-01,NETFLIX.COM 866-579-7172,netflix,streaming,15.49,debit,Subscription,Subscription,general,False
+174,5,2026-05-01,OPENAI *CHATGPT SUBSCR,openai,software,20.0,debit,Subscription,Subscription,general,True
+175,5,2026-05-01,GUSTO PAYROLL DIR DEP,payroll,payroll,2100.0,credit,Income,Income,general,False
+176,5,2026-05-01,PG&E WEB ONLINE,pge,power,84.43,debit,Utilities,Utilities,general,False
+177,5,2026-05-01,PLANET FITNESS CLUB FEES,planet_fitness,gym,24.99,debit,Personal Care,Personal Care,general,False
+178,5,2026-05-01,AVALON BAY RENT PAYMENT,rent,rent,2450.0,debit,Housing,Housing,general,False
+179,5,2026-05-01,SAFEWAY #2741 OAKLAND CA,safeway,grocery,80.93,debit,Groceries,Groceries,general,False
+180,5,2026-05-01,SPOTIFY USA,spotify,streaming,11.99,debit,Subscription,Subscription,general,False
+181,5,2026-05-01,T-MOBILE AUTOPAY,tmobile,phone,65.0,debit,Utilities,Utilities,general,False
+182,5,2026-05-02,LYFT *RIDE 05-02,lyft,rideshare,12.73,debit,Transportation,Transportation,general,False
+183,5,2026-05-03,AMZN MKTP US*ZAZHQN,amazon,online_retail,64.44,debit,Shopping,Shopping,general,False
+184,5,2026-05-04,PEET'S COFFEE #0731,peets,coffee,5.23,debit,Restaurants,Restaurants,general,False
+185,5,2026-05-05,BERKELEY BOWL MARKETPLACE,berkeley_bowl,grocery,44.57,debit,Groceries,Groceries,general,False
+186,5,2026-05-06,PEETS COFFEE & TEA 1528,peets,coffee,5.25,debit,Restaurants,Restaurants,general,False
+187,5,2026-05-08,BERKELEY BOWL MARKETPLACE,berkeley_bowl,grocery,43.21,debit,Groceries,Groceries,general,False
+188,5,2026-05-09,MONTEREY MARKET,monterey_market,grocery,27.58,debit,Groceries,Groceries,general,False
+189,5,2026-05-10,CLIPPER SVC BART,clipper,transit,20.0,debit,Transportation,Transportation,general,False
+190,5,2026-05-11,CLIPPER SVC BART,clipper,transit,20.0,debit,Transportation,Transportation,general,False
+191,5,2026-05-12,PEET'S COFFEE #8812,peets,coffee,8.49,debit,Restaurants,Restaurants,general,False
+192,5,2026-05-13,ASHBY FLEA,ashby_flea,market,27.11,debit,Shopping,Shopping,general,False
+193,5,2026-05-13,BERKELEY BOWL MARKETPLACE,berkeley_bowl,grocery,74.85,debit,Groceries,Groceries,general,False
+194,5,2026-05-13,DOORDASH*CHIPOTLE,doordash,delivery,33.35,debit,Restaurants,Restaurants,general,False
+195,5,2026-05-13,STARBUCKS STORE 12321,starbucks,coffee,6.59,debit,Restaurants,Restaurants,general,False
+196,5,2026-05-13,TRADER JOE'S #198 OAKLAND CA,trader_joes,grocery,54.25,debit,Groceries,Groceries,general,False
+197,5,2026-05-13,TRADER JOE'S #135 BERKELEY CA,trader_joes,grocery,62.63,debit,Groceries,Groceries,general,False
+198,5,2026-05-15,CHEESE BOARD COLLECTIVE,cheese_board,pizza,20.75,debit,Restaurants,Restaurants,general,False
+199,5,2026-05-15,GUSTO PAYROLL DIR DEP,payroll,payroll,2100.0,credit,Income,Income,general,False
+200,5,2026-05-15,TRADER JOE'S #198 OAKLAND CA,trader_joes,grocery,71.53,debit,Groceries,Groceries,general,False
+201,5,2026-05-16,BLUE BOTTLE COFFEE 0042,blue_bottle,coffee,7.31,debit,Restaurants,Restaurants,general,True
+202,5,2026-05-16,CLIPPER SVC BART,clipper,transit,20.0,debit,Transportation,Transportation,general,False
+203,5,2026-05-19,SAFEWAY #2741 OAKLAND CA,safeway,grocery,42.32,debit,Groceries,Groceries,general,False
+204,5,2026-05-19,VENMO PAYMENT 2132012978,venmo,p2p,27.59,debit,Transfer,Transfer,general,False
+205,5,2026-05-21,UBER *TRIP HELP.UBER.COM,uber,rideshare,12.85,debit,Transportation,Transportation,general,False
+206,5,2026-05-22,VENMO PAYMENT 6132281741,venmo,p2p,11.41,debit,Transfer,Transfer,general,False
+207,5,2026-05-23,JOE'S RAMEN SF CA,joes_ramen,ramen,28.52,debit,Restaurants,Social,preference,False
+208,5,2026-05-24,BLUE BOTTLE COFFEE 0042,blue_bottle,coffee,6.2,debit,Restaurants,Restaurants,general,True
+209,5,2026-05-24,UBER *TRIP HELP.UBER.COM,uber,rideshare,11.66,debit,Transportation,Transportation,general,False
+210,5,2026-05-29,DOORDASH*THAI BASIL,doordash,delivery,42.91,debit,Restaurants,Restaurants,general,False
+211,6,2026-06-01,CHASE CREDIT CRD AUTOPAY PPD ID: 4760039224,chase_autopay,card_payment,649.09,debit,Transfer,Transfer,general,False
+212,6,2026-06-01,COMCAST CABLE COMM 800-COMCAST,comcast,internet,79.99,debit,Utilities,Utilities,general,False
+213,6,2026-06-01,COURSERA.ORG,coursera,online_course,49.0,debit,Education,Education,general,True
+214,6,2026-06-01,GEICO AUTO PAY,geico,insurance,112.0,debit,Insurance,Insurance,general,False
+215,6,2026-06-01,NETFLIX.COM 866-579-7172,netflix,streaming,15.49,debit,Subscription,Subscription,general,False
+216,6,2026-06-01,OPENAI *CHATGPT SUBSCR,openai,software,20.0,debit,Subscription,Subscription,general,True
+217,6,2026-06-01,GUSTO PAYROLL DIR DEP,payroll,payroll,2100.0,credit,Income,Income,general,False
+218,6,2026-06-01,PG&E WEB ONLINE,pge,power,90.78,debit,Utilities,Utilities,general,False
+219,6,2026-06-01,PLANET FITNESS CLUB FEES,planet_fitness,gym,24.99,debit,Personal Care,Personal Care,general,False
+220,6,2026-06-01,AVALON BAY RENT PAYMENT,rent,rent,2450.0,debit,Housing,Housing,general,False
+221,6,2026-06-01,SPOTIFY USA,spotify,streaming,11.99,debit,Subscription,Subscription,general,False
+222,6,2026-06-01,T-MOBILE AUTOPAY,tmobile,phone,65.0,debit,Utilities,Utilities,general,False
+223,6,2026-06-02,AMZN MKTP US*KOIUI1,amazon,online_retail,28.79,debit,Shopping,Shopping,general,False
+224,6,2026-06-03,BERKELEY BOWL WEST,berkeley_bowl,grocery,74.52,debit,Groceries,Groceries,general,False
+225,6,2026-06-03,VENMO PAYMENT 3302005864,venmo,p2p,46.0,debit,Transfer,Transfer,general,False
+226,6,2026-06-05,PEET'S COFFEE #0731,peets,coffee,5.53,debit,Restaurants,Restaurants,general,False
+227,6,2026-06-05,TRADER JOE'S #135 BERKELEY CA,trader_joes,grocery,41.68,debit,Groceries,Groceries,general,False
+228,6,2026-06-07,CLIPPER SVC BART,clipper,transit,20.0,debit,Transportation,Transportation,general,False
+229,6,2026-06-08,PEET'S COFFEE #8812,peets,coffee,6.31,debit,Restaurants,Restaurants,general,False
+230,6,2026-06-12,TARGET T-9377 OAKLAND,target,retail,66.83,debit,Shopping,Shopping,general,False
+231,6,2026-06-13,SQ *BLUE DOOR CAFE,blue_door_cafe,cafe,12.56,debit,Restaurants,Restaurants,general,False
+232,6,2026-06-13,PEETS COFFEE & TEA 3595,peets,coffee,5.36,debit,Restaurants,Restaurants,general,False
+233,6,2026-06-13,STEAM GAMES 425-889-9642,steam,games,36.72,debit,Entertainment,Entertainment,general,False
+234,6,2026-06-15,GUSTO PAYROLL DIR DEP,payroll,payroll,2100.0,credit,Income,Income,general,False
+235,6,2026-06-16,CHIPOTLE 2297 BERKELEY,chipotle,fast_casual,15.64,debit,Restaurants,Restaurants,general,False
+236,6,2026-06-16,SHELL OIL 94896010 OAKLAND,shell,gas,59.59,debit,Transportation,Transportation,general,False
+237,6,2026-06-16,TRADER JOE'S #198 OAKLAND CA,trader_joes,grocery,41.23,debit,Groceries,Groceries,general,False
+238,6,2026-06-17,DOORDASH*SUNDAY GAMES,doordash,delivery,30.71,debit,Restaurants,Restaurants,general,False
+239,6,2026-06-17,JOE'S RAMEN SF CA,joes_ramen,ramen,28.26,debit,Restaurants,Social,preference,False
+240,6,2026-06-19,BLUE BOTTLE COFFEE OAKLAND,blue_bottle,coffee,7.42,debit,Restaurants,Restaurants,general,True
+241,6,2026-06-20,PEETS COFFEE & TEA 2574,peets,coffee,8.24,debit,Restaurants,Restaurants,general,False
+242,6,2026-06-23,SAFEWAY STORE 1507 BERKELEY,safeway,grocery,40.03,debit,Groceries,Groceries,general,False
+243,6,2026-06-24,CLIPPER SVC BART,clipper,transit,20.0,debit,Transportation,Transportation,general,False
+244,6,2026-06-25,ASHBY FLEA,ashby_flea,market,35.71,debit,Shopping,Shopping,general,False
+245,6,2026-06-25,SQ *BLUE DOOR CAFE,blue_door_cafe,cafe,15.76,debit,Restaurants,Restaurants,general,False
+246,6,2026-06-27,PEET'S COFFEE #8812,peets,coffee,8.37,debit,Restaurants,Restaurants,general,False
+247,6,2026-06-27,SAFEWAY #2741 OAKLAND CA,safeway,grocery,41.04,debit,Groceries,Groceries,general,False
+248,6,2026-06-29,AMAZON.COM*7263AK,amazon,online_retail,41.66,debit,Shopping,Shopping,general,False
+249,6,2026-06-30,UBER *TRIP HELP.UBER.COM,uber,rideshare,25.84,debit,Transportation,Transportation,general,False
+250,7,2026-07-01,SQ *BLUE DOOR CAFE,blue_door_cafe,cafe,15.11,debit,Restaurants,Restaurants,general,False
+251,7,2026-07-01,CHASE CREDIT CRD AUTOPAY PPD ID: 4760039224,chase_autopay,card_payment,1095.59,debit,Transfer,Transfer,general,False
+252,7,2026-07-01,COMCAST CABLE COMM 800-COMCAST,comcast,internet,79.99,debit,Utilities,Utilities,general,False
+253,7,2026-07-01,COURSERA.ORG,coursera,online_course,49.0,debit,Education,Education,general,True
+254,7,2026-07-01,DOORDASH*THAI BASIL,doordash,delivery,27.31,debit,Restaurants,Restaurants,general,False
+255,7,2026-07-01,GEICO AUTO PAY,geico,insurance,112.0,debit,Insurance,Insurance,general,False
+256,7,2026-07-01,NETFLIX.COM 866-579-7172,netflix,streaming,15.49,debit,Subscription,Subscription,general,False
+257,7,2026-07-01,OPENAI *CHATGPT SUBSCR,openai,software,20.0,debit,Subscription,Subscription,general,True
+258,7,2026-07-01,GUSTO PAYROLL DIR DEP,payroll,payroll,2100.0,credit,Income,Income,general,False
+259,7,2026-07-01,PG&E WEB ONLINE,pge,power,89.3,debit,Utilities,Utilities,general,False
+260,7,2026-07-01,PLANET FITNESS CLUB FEES,planet_fitness,gym,24.99,debit,Personal Care,Personal Care,general,False
+261,7,2026-07-01,AVALON BAY RENT PAYMENT,rent,rent,2450.0,debit,Housing,Housing,general,False
+262,7,2026-07-01,SPOTIFY USA,spotify,streaming,11.99,debit,Subscription,Subscription,general,False
+263,7,2026-07-01,T-MOBILE AUTOPAY,tmobile,phone,65.0,debit,Utilities,Utilities,general,False
+264,7,2026-07-03,DOORDASH*SUNDAY GAMES,doordash,delivery,29.12,debit,Restaurants,Restaurants,general,False
+265,7,2026-07-04,PEET'S COFFEE #8812,peets,coffee,6.86,debit,Restaurants,Coffee,changed,False
+266,7,2026-07-05,BLUE BOTTLE COFFEE OAKLAND,blue_bottle,coffee,8.44,debit,Restaurants,Coffee,changed,True
+267,7,2026-07-05,CAL PERFORMANCES ZELLERBACH,cal_performances,concerts,45.65,debit,Entertainment,Entertainment,general,False
+268,7,2026-07-05,UBER *TRIP HELP.UBER.COM,uber,rideshare,10.13,debit,Transportation,Transportation,general,False
+269,7,2026-07-06,DOORDASH*THAI BASIL,doordash,delivery,38.88,debit,Restaurants,Restaurants,general,False
+270,7,2026-07-08,PEET'S COFFEE #0731,peets,coffee,6.55,debit,Restaurants,Coffee,changed,False
+271,7,2026-07-08,TRADER JOE'S #198 OAKLAND CA,trader_joes,grocery,58.24,debit,Groceries,Groceries,general,False
+272,7,2026-07-08,VENMO PAYMENT 7553096752,venmo,p2p,69.93,debit,Transfer,Transfer,general,False
+273,7,2026-07-09,BERKELEY BOWL WEST,berkeley_bowl,grocery,43.68,debit,Groceries,Groceries,general,False
+274,7,2026-07-09,UBER *TRIP HELP.UBER.COM,uber,rideshare,23.79,debit,Transportation,Transportation,general,False
+275,7,2026-07-10,CLIPPER SVC BART,clipper,transit,20.0,debit,Transportation,Transportation,general,False
+276,7,2026-07-11,SAFEWAY STORE 1507 BERKELEY,safeway,grocery,60.3,debit,Groceries,Groceries,general,False
+277,7,2026-07-12,STARBUCKS #10600 BERKELEY CA,starbucks,coffee,4.88,debit,Restaurants,Coffee,changed,False
+278,7,2026-07-14,PEETS COFFEE & TEA 3992,peets,coffee,6.2,debit,Restaurants,Coffee,changed,False
+279,7,2026-07-15,LYFT *RIDE 07-15,lyft,rideshare,23.28,debit,Transportation,Transportation,general,False
+280,7,2026-07-15,GUSTO PAYROLL DIR DEP,payroll,payroll,2100.0,credit,Income,Income,general,False
+281,7,2026-07-17,SHELL OIL 90641558 OAKLAND,shell,gas,53.48,debit,Transportation,Transportation,general,False
+282,7,2026-07-17,TRADER JOE'S #198 OAKLAND CA,trader_joes,grocery,33.6,debit,Groceries,Groceries,general,False
+283,7,2026-07-18,AMAZON.COM*OTQZVO,amazon,online_retail,20.45,debit,Shopping,Shopping,general,False
+284,7,2026-07-18,CHEESE BOARD COLLECTIVE,cheese_board,pizza,16.95,debit,Restaurants,Restaurants,general,False
+285,7,2026-07-20,BERKELEY BOWL MARKETPLACE,berkeley_bowl,grocery,28.56,debit,Groceries,Groceries,general,False
+286,7,2026-07-22,AMZN MKTP US*LFQ9HA,amazon,online_retail,48.34,debit,Shopping,Shopping,general,False
+287,7,2026-07-22,CHIPOTLE ONLINE 2051,chipotle,fast_casual,13.27,debit,Restaurants,Restaurants,general,False
+288,7,2026-07-24,TRADER JOE'S #135 BERKELEY CA,trader_joes,grocery,44.11,debit,Groceries,Groceries,general,False
+289,7,2026-07-25,CLIPPER SVC BART,clipper,transit,20.0,debit,Transportation,Transportation,general,False
+290,7,2026-07-26,CVS/PHARMACY #74524,cvs,pharmacy,33.8,debit,Healthcare,Healthcare,general,False
+291,7,2026-07-26,JOES RAMEN #2 SF CA,joes_ramen,ramen,30.16,debit,Restaurants,Social,preference,False
+292,7,2026-07-26,STEAM GAMES 425-889-9642,steam,games,53.09,debit,Entertainment,Entertainment,general,False
+293,7,2026-07-27,PEET'S COFFEE #8812,peets,coffee,6.32,debit,Restaurants,Coffee,changed,False
+294,7,2026-07-29,TRADER JOE'S #135 BERKELEY CA,trader_joes,grocery,71.15,debit,Groceries,Groceries,general,False
+295,7,2026-07-31,THE ANCHOR BREWING SF,anchor_brewing,brewery,27.89,debit,Restaurants,Social,preference,False
+296,7,2026-07-31,PEETS COFFEE & TEA 5792,peets,coffee,8.6,debit,Restaurants,Coffee,changed,False
+297,7,2026-07-31,VENMO PAYMENT 7057151826,venmo,p2p,66.02,debit,Transfer,Transfer,general,False
+298,8,2026-08-01,CHASE CREDIT CRD AUTOPAY PPD ID: 4760039224,chase_autopay,card_payment,660.52,debit,Transfer,Transfer,general,False
+299,8,2026-08-01,COMCAST CABLE COMM 800-COMCAST,comcast,internet,79.99,debit,Utilities,Utilities,general,False
+300,8,2026-08-01,COURSERA.ORG,coursera,online_course,49.0,debit,Education,Education,general,True
+301,8,2026-08-01,GEICO AUTO PAY,geico,insurance,112.0,debit,Insurance,Insurance,general,False
+302,8,2026-08-01,NETFLIX.COM 866-579-7172,netflix,streaming,15.49,debit,Subscription,Subscription,general,False
+303,8,2026-08-01,OPENAI *CHATGPT SUBSCR,openai,software,20.0,debit,Subscription,Subscription,general,True
+304,8,2026-08-01,GUSTO PAYROLL DIR DEP,payroll,payroll,2100.0,credit,Income,Income,general,False
+305,8,2026-08-01,PG&E WEB ONLINE,pge,power,91.65,debit,Utilities,Utilities,general,False
+306,8,2026-08-01,PLANET FITNESS CLUB FEES,planet_fitness,gym,24.99,debit,Personal Care,Personal Care,general,False
+307,8,2026-08-01,AVALON BAY RENT PAYMENT,rent,rent,2450.0,debit,Housing,Housing,general,False
+308,8,2026-08-01,SPOTIFY USA,spotify,streaming,11.99,debit,Subscription,Subscription,general,False
+309,8,2026-08-01,T-MOBILE AUTOPAY,tmobile,phone,65.0,debit,Utilities,Utilities,general,False
+310,8,2026-08-02,AMAZON.COM*8N6CIL,amazon,online_retail,11.17,debit,Shopping,Shopping,general,False
+311,8,2026-08-02,MONTEREY MARKET,monterey_market,grocery,13.47,debit,Groceries,Groceries,general,False
+312,8,2026-08-03,SQ *CHEESE BOARD PIZZA,cheese_board,pizza,28.27,debit,Restaurants,Restaurants,general,False
+313,8,2026-08-03,TRADER JOE'S #198 OAKLAND CA,trader_joes,grocery,67.32,debit,Groceries,Groceries,general,False
+314,8,2026-08-05,BLUE BOTTLE COFFEE OAKLAND,blue_bottle,coffee,5.04,debit,Restaurants,Coffee,changed,True
+315,8,2026-08-05,PEETS COFFEE & TEA 8351,peets,coffee,7.28,debit,Restaurants,Coffee,changed,False
+316,8,2026-08-07,CHIPOTLE 2297 BERKELEY,chipotle,fast_casual,11.57,debit,Restaurants,Restaurants,general,False
+317,8,2026-08-11,DOORDASH*CHIPOTLE,doordash,delivery,21.42,debit,Restaurants,Restaurants,general,False
+318,8,2026-08-11,SAFEWAY STORE 1507 BERKELEY,safeway,grocery,74.42,debit,Groceries,Groceries,general,False
+319,8,2026-08-12,ASHBY FLEA,ashby_flea,market,30.97,debit,Shopping,Shopping,general,False
+320,8,2026-08-13,CVS/PHARMACY #95413,cvs,pharmacy,9.98,debit,Healthcare,Healthcare,general,False
+321,8,2026-08-14,AMZN MKTP US*5W6Y6V,amazon,online_retail,11.76,debit,Shopping,Shopping,general,False
+322,8,2026-08-15,GUSTO PAYROLL DIR DEP,payroll,payroll,2100.0,credit,Income,Income,general,False
+323,8,2026-08-16,AMAZON.COM*XCS4FF,amazon,online_retail,21.81,debit,Shopping,Shopping,general,False
+324,8,2026-08-16,SQ *BLUE DOOR CAFE,blue_door_cafe,cafe,14.5,debit,Restaurants,Restaurants,general,False
+325,8,2026-08-17,TARGET 00012345 BERKELEY CA,target,retail,21.43,debit,Shopping,Shopping,general,False
+326,8,2026-08-18,AMAZON.COM*PQ4YAV,amazon,online_retail,49.43,debit,Shopping,Shopping,general,False
+327,8,2026-08-19,TARGET T-3513 OAKLAND,target,retail,43.3,debit,Shopping,Shopping,general,False
+328,8,2026-08-19,TARGET T-0357 OAKLAND,target,retail,54.77,debit,Shopping,Shopping,general,False
+329,8,2026-08-20,THE ANCHOR BREWING SF,anchor_brewing,brewery,54.28,debit,Restaurants,Social,preference,False
+330,8,2026-08-20,CHIPOTLE 2297 BERKELEY,chipotle,fast_casual,17.49,debit,Restaurants,Restaurants,general,False
+331,8,2026-08-21,BERKELEY BOWL WEST,berkeley_bowl,grocery,75.03,debit,Groceries,Groceries,general,False
+332,8,2026-08-22,BLUE BOTTLE COFFEE OAKLAND,blue_bottle,coffee,8.08,debit,Restaurants,Coffee,changed,True
+333,8,2026-08-22,UNITED AIRLINES 3311626755,united,airline,372.03,debit,Travel,Travel,general,True
+334,8,2026-08-24,PEET'S COFFEE #8812,peets,coffee,8.57,debit,Restaurants,Coffee,changed,False
+335,8,2026-08-25,AMC METREON 16 SF,amc,movies,27.92,debit,Entertainment,Entertainment,general,False
+336,8,2026-08-25,CAL PERFORMANCES ZELLERBACH,cal_performances,concerts,43.2,debit,Entertainment,Entertainment,general,False
+337,8,2026-08-25,CHIPOTLE ONLINE 1360,chipotle,fast_casual,17.17,debit,Restaurants,Restaurants,general,False
+338,8,2026-08-25,COSTCO WHSE #2447 RICHMOND CA,costco,grocery,210.22,debit,Groceries,Groceries,general,False
+339,8,2026-08-26,TST* NIKS KITCHEN,niks_kitchen,fast_casual,15.27,debit,Restaurants,Restaurants,general,False
+340,8,2026-08-26,PEET'S COFFEE #0731,peets,coffee,4.6,debit,Restaurants,Coffee,changed,False
+341,8,2026-08-27,JOES RAMEN #2 SF CA,joes_ramen,ramen,29.64,debit,Restaurants,Social,preference,False
+342,8,2026-08-27,TARGET 00012345 BERKELEY CA,target,retail,30.27,debit,Shopping,Shopping,general,False
+343,8,2026-08-28,SQ *BLUE DOOR CAFE,blue_door_cafe,cafe,11.68,debit,Restaurants,Restaurants,general,False
+344,8,2026-08-29,VENMO PAYMENT 6013931952,venmo,p2p,25.44,debit,Transfer,Transfer,general,False
+345,8,2026-08-30,TRADER JOE'S #198 OAKLAND CA,trader_joes,grocery,56.56,debit,Groceries,Groceries,general,False
+346,9,2026-09-01,CHASE CREDIT CRD AUTOPAY PPD ID: 4760039224,chase_autopay,card_payment,638.74,debit,Transfer,Transfer,general,False
+347,9,2026-09-01,COMCAST CABLE COMM 800-COMCAST,comcast,internet,79.99,debit,Utilities,Utilities,general,False
+348,9,2026-09-01,COURSERA.ORG,coursera,online_course,49.0,debit,Education,Education,general,True
+349,9,2026-09-01,GEICO AUTO PAY,geico,insurance,112.0,debit,Insurance,Insurance,general,False
+350,9,2026-09-01,NETFLIX.COM 866-579-7172,netflix,streaming,15.49,debit,Subscription,Subscription,general,False
+351,9,2026-09-01,OPENAI *CHATGPT SUBSCR,openai,software,20.0,debit,Subscription,Subscription,general,True
+352,9,2026-09-01,GUSTO PAYROLL DIR DEP,payroll,payroll,2100.0,credit,Income,Income,general,False
+353,9,2026-09-01,PG&E WEB ONLINE,pge,power,66.91,debit,Utilities,Utilities,general,False
+354,9,2026-09-01,PLANET FITNESS CLUB FEES,planet_fitness,gym,24.99,debit,Personal Care,Personal Care,general,False
+355,9,2026-09-01,AVALON BAY RENT PAYMENT,rent,rent,2450.0,debit,Housing,Housing,general,False
+356,9,2026-09-01,SPOTIFY USA,spotify,streaming,11.99,debit,Subscription,Subscription,general,False
+357,9,2026-09-01,T-MOBILE AUTOPAY,tmobile,phone,65.0,debit,Utilities,Utilities,general,False
+358,9,2026-09-02,AMAZON.COM*XROB12,amazon,online_retail,40.86,debit,Shopping,Shopping,general,False
+359,9,2026-09-02,BLUE BOTTLE COFFEE 0042,blue_bottle,coffee,7.53,debit,Restaurants,Coffee,changed,True
+360,9,2026-09-04,THE ANCHOR BREWING SF,anchor_brewing,brewery,50.82,debit,Restaurants,Social,preference,False
+361,9,2026-09-04,TRADER JOE'S #135 BERKELEY CA,trader_joes,grocery,60.93,debit,Groceries,Groceries,general,False
+362,9,2026-09-04,VENMO PAYMENT 1694412432,venmo,p2p,14.35,debit,Transfer,Transfer,general,False
+363,9,2026-09-05,STARBUCKS STORE 92643,starbucks,coffee,6.51,debit,Restaurants,Coffee,changed,False
+364,9,2026-09-05,TRADER JOE'S #198 OAKLAND CA,trader_joes,grocery,64.82,debit,Groceries,Groceries,general,False
+365,9,2026-09-06,TST* NIKS KITCHEN,niks_kitchen,fast_casual,15.25,debit,Restaurants,Restaurants,general,False
+366,9,2026-09-06,UBER *TRIP HELP.UBER.COM,uber,rideshare,31.37,debit,Transportation,Transportation,general,False
+367,9,2026-09-06,VENMO PAYMENT 9867903728,venmo,p2p,27.8,debit,Transfer,Transfer,general,False
+368,9,2026-09-07,ASHBY FLEA,ashby_flea,market,12.03,debit,Shopping,Shopping,general,False
+369,9,2026-09-07,DOORDASH*SUNDAY GAMES,doordash,delivery,22.25,debit,Restaurants,Restaurants,general,False
+370,9,2026-09-07,SHELL OIL 96184876 OAKLAND,shell,gas,43.23,debit,Transportation,Transportation,general,False
+371,9,2026-09-08,BERKELEY BOWL WEST,berkeley_bowl,grocery,68.45,debit,Groceries,Groceries,general,False
+372,9,2026-09-09,BLUE BOTTLE COFFEE OAKLAND,blue_bottle,coffee,7.16,debit,Restaurants,Coffee,changed,True
+373,9,2026-09-09,VENMO PAYMENT 1530375254,venmo,p2p,25.0,debit,Transfer,Transfer,general,False
+374,9,2026-09-10,SQ *BLUE DOOR CAFE,blue_door_cafe,cafe,13.05,debit,Restaurants,Restaurants,general,False
+375,9,2026-09-11,CLIPPER SVC BART,clipper,transit,20.0,debit,Transportation,Transportation,general,False
+376,9,2026-09-11,TRADER JOE'S #198 OAKLAND CA,trader_joes,grocery,54.41,debit,Groceries,Groceries,general,False
+377,9,2026-09-12,SQ *BLUE DOOR CAFE,blue_door_cafe,cafe,8.12,debit,Restaurants,Restaurants,general,False
+378,9,2026-09-13,SAFEWAY STORE 1507 BERKELEY,safeway,grocery,79.42,debit,Groceries,Groceries,general,False
+379,9,2026-09-14,AMAZON.COM*RTHZ04,amazon,online_retail,33.16,debit,Shopping,Shopping,general,False
+380,9,2026-09-14,ASHBY FLEA,ashby_flea,market,22.81,debit,Shopping,Shopping,general,False
+381,9,2026-09-15,GUSTO PAYROLL DIR DEP,payroll,payroll,2100.0,credit,Income,Income,general,False
+382,9,2026-09-16,CHEESE BOARD COLLECTIVE,cheese_board,pizza,14.74,debit,Restaurants,Restaurants,general,False
+383,9,2026-09-16,TRADER JOE'S #198 OAKLAND CA,trader_joes,grocery,42.39,debit,Groceries,Groceries,general,False
+384,9,2026-09-18,SQ *CHEESE BOARD PIZZA,cheese_board,pizza,18.92,debit,Restaurants,Restaurants,general,False
+385,9,2026-09-18,TRADER JOE'S #198 OAKLAND CA,trader_joes,grocery,69.57,debit,Groceries,Groceries,general,False
+386,9,2026-09-19,CLIPPER SVC BART,clipper,transit,20.0,debit,Transportation,Transportation,general,False
+387,9,2026-09-19,CLIPPER SVC BART,clipper,transit,20.0,debit,Transportation,Transportation,general,False
+388,9,2026-09-20,COSTCO WHSE #1884 RICHMOND CA,costco,grocery,116.89,debit,Groceries,Groceries,general,False
+389,9,2026-09-20,STARBUCKS STORE 74627,starbucks,coffee,7.05,debit,Restaurants,Coffee,changed,False
+390,9,2026-09-21,CAL PERFORMANCES ZELLERBACH,cal_performances,concerts,87.39,debit,Entertainment,Entertainment,general,False
+391,9,2026-09-21,PEETS COFFEE & TEA 1311,peets,coffee,8.04,debit,Restaurants,Coffee,changed,False
+392,9,2026-09-23,PEET'S COFFEE #0731,peets,coffee,6.91,debit,Restaurants,Coffee,changed,False
+393,9,2026-09-24,UBER *TRIP HELP.UBER.COM,uber,rideshare,28.47,debit,Transportation,Transportation,general,False
+394,9,2026-09-25,COSTCO WHSE #0031 RICHMOND CA,costco,grocery,138.77,debit,Groceries,Groceries,general,False
+395,9,2026-09-25,PEET'S COFFEE #0731,peets,coffee,7.34,debit,Restaurants,Coffee,changed,False
+396,9,2026-09-25,UBER *TRIP HELP.UBER.COM,uber,rideshare,18.48,debit,Transportation,Transportation,general,False
+397,9,2026-09-26,AMZN MKTP US*AU1DOJ,amazon,online_retail,37.16,debit,Shopping,Shopping,general,False
+398,9,2026-09-26,AMAZON.COM*M0ZLNJ,amazon,online_retail,33.99,debit,Shopping,Shopping,general,False
+399,9,2026-09-26,PEETS COFFEE & TEA 1221,peets,coffee,4.98,debit,Restaurants,Coffee,changed,False
+400,9,2026-09-28,SQ *BLUE DOOR CAFE,blue_door_cafe,cafe,15.68,debit,Restaurants,Restaurants,general,False
+401,9,2026-09-28,CLIPPER SVC BART,clipper,transit,20.0,debit,Transportation,Transportation,general,False
+402,9,2026-09-29,TRADER JOE'S #198 OAKLAND CA,trader_joes,grocery,50.12,debit,Groceries,Groceries,general,False
+403,9,2026-09-30,CLIPPER SVC BART,clipper,transit,20.0,debit,Transportation,Transportation,general,False
+404,10,2026-10-01,CHASE CREDIT CRD AUTOPAY PPD ID: 4760039224,chase_autopay,card_payment,851.07,debit,Transfer,Transfer,general,False
+405,10,2026-10-01,SQ *CHEESE BOARD PIZZA,cheese_board,pizza,18.92,debit,Restaurants,Restaurants,general,False
+406,10,2026-10-01,COMCAST CABLE COMM 800-COMCAST,comcast,internet,79.99,debit,Utilities,Utilities,general,False
+407,10,2026-10-01,COSTCO WHSE #8116 RICHMOND CA,costco,grocery,143.92,debit,Groceries,Groceries,general,False
+408,10,2026-10-01,COURSERA.ORG,coursera,online_course,49.0,debit,Education,Education,general,True
+409,10,2026-10-01,GEICO AUTO PAY,geico,insurance,112.0,debit,Insurance,Insurance,general,False
+410,10,2026-10-01,NETFLIX.COM 866-579-7172,netflix,streaming,15.49,debit,Subscription,Subscription,general,False
+411,10,2026-10-01,OPENAI *CHATGPT SUBSCR,openai,software,20.0,debit,Subscription,Subscription,general,True
+412,10,2026-10-01,GUSTO PAYROLL DIR DEP,payroll,payroll,2100.0,credit,Income,Income,general,False
+413,10,2026-10-01,PG&E WEB ONLINE,pge,power,63.02,debit,Utilities,Utilities,general,False
+414,10,2026-10-01,PLANET FITNESS CLUB FEES,planet_fitness,gym,24.99,debit,Personal Care,Personal Care,general,False
+415,10,2026-10-01,AVALON BAY RENT PAYMENT,rent,rent,2450.0,debit,Housing,Housing,general,False
+416,10,2026-10-01,SAFEWAY STORE 1507 BERKELEY,safeway,grocery,55.91,debit,Groceries,Groceries,general,False
+417,10,2026-10-01,SPOTIFY USA,spotify,streaming,11.99,debit,Subscription,Subscription,general,False
+418,10,2026-10-01,T-MOBILE AUTOPAY,tmobile,phone,65.0,debit,Utilities,Utilities,general,False
+419,10,2026-10-03,AMZN MKTP US*4UCU8X,amazon,online_retail,49.75,debit,Shopping,Shopping,general,False
+420,10,2026-10-03,JOE'S RAMEN SF CA,joes_ramen,ramen,22.26,debit,Restaurants,Social,preference,False
+421,10,2026-10-03,STARBUCKS #61619 BERKELEY CA,starbucks,coffee,7.85,debit,Restaurants,Coffee,changed,False
+422,10,2026-10-03,TRADER JOE'S #135 BERKELEY CA,trader_joes,grocery,39.22,debit,Groceries,Groceries,general,False
+423,10,2026-10-05,DOORDASH*CHIPOTLE,doordash,delivery,31.81,debit,Restaurants,Restaurants,general,False
+424,10,2026-10-05,FIELDWORK BREWING BERKELEY,fieldwork_brewing,brewery,47.96,debit,Restaurants,Social,preference,True
+425,10,2026-10-05,MONTEREY MARKET,monterey_market,grocery,19.4,debit,Groceries,Groceries,general,False
+426,10,2026-10-05,PEET'S COFFEE #0731,peets,coffee,6.1,debit,Restaurants,Coffee,changed,False
+427,10,2026-10-06,CHIPOTLE 2297 BERKELEY,chipotle,fast_casual,16.45,debit,Restaurants,Restaurants,general,False
+428,10,2026-10-07,CVS/PHARMACY #72953,cvs,pharmacy,22.48,debit,Healthcare,Healthcare,general,False
+429,10,2026-10-07,STARBUCKS #68229 BERKELEY CA,starbucks,coffee,4.15,debit,Restaurants,Coffee,changed,False
+430,10,2026-10-10,SQ *BLUE DOOR CAFE,blue_door_cafe,cafe,11.21,debit,Restaurants,Restaurants,general,False
+431,10,2026-10-11,THE ANCHOR BREWING SF,anchor_brewing,brewery,36.86,debit,Restaurants,Social,preference,False
+432,10,2026-10-11,CLIPPER SVC BART,clipper,transit,20.0,debit,Transportation,Transportation,general,False
+433,10,2026-10-12,AMC METREON 16 SF,amc,movies,23.85,debit,Entertainment,Entertainment,general,False
+434,10,2026-10-13,STEAM GAMES 425-889-9642,steam,games,44.9,debit,Entertainment,Entertainment,general,False
+435,10,2026-10-14,PEET'S COFFEE #0731,peets,coffee,6.66,debit,Restaurants,Coffee,changed,False
+436,10,2026-10-14,TRADER JOE'S #135 BERKELEY CA,trader_joes,grocery,48.53,debit,Groceries,Groceries,general,False
+437,10,2026-10-15,GUSTO PAYROLL DIR DEP,payroll,payroll,2100.0,credit,Income,Income,general,False
+438,10,2026-10-16,CHIPOTLE ONLINE 1200,chipotle,fast_casual,15.17,debit,Restaurants,Restaurants,general,False
+439,10,2026-10-16,DOORDASH*CHIPOTLE,doordash,delivery,35.76,debit,Restaurants,Restaurants,general,False
+440,10,2026-10-17,CHIPOTLE ONLINE 0136,chipotle,fast_casual,17.73,debit,Restaurants,Restaurants,general,False
+441,10,2026-10-17,JOE'S RAMEN SF CA,joes_ramen,ramen,28.59,debit,Restaurants,Social,preference,False
+442,10,2026-10-18,TST* NIKS KITCHEN,niks_kitchen,fast_casual,24.98,debit,Restaurants,Restaurants,general,False
+443,10,2026-10-19,BLUE BOTTLE COFFEE 0042,blue_bottle,coffee,7.04,debit,Restaurants,Coffee,changed,True
+444,10,2026-10-19,UBER *TRIP HELP.UBER.COM,uber,rideshare,28.27,debit,Transportation,Transportation,general,False
+445,10,2026-10-19,WALGREENS #3456 BERKELEY CA,walgreens,pharmacy,18.17,debit,Healthcare,Healthcare,general,False
+446,10,2026-10-20,PEETS COFFEE & TEA 0178,peets,coffee,5.99,debit,Restaurants,Coffee,changed,False
+447,10,2026-10-21,ASHBY FLEA,ashby_flea,market,39.87,debit,Shopping,Shopping,general,False
+448,10,2026-10-21,BERKELEY BOWL MARKETPLACE,berkeley_bowl,grocery,48.23,debit,Groceries,Groceries,general,False
+449,10,2026-10-21,SQ *BLUE DOOR CAFE,blue_door_cafe,cafe,11.71,debit,Restaurants,Restaurants,general,False
+450,10,2026-10-22,SQ *BLUE DOOR CAFE,blue_door_cafe,cafe,13.95,debit,Restaurants,Restaurants,general,False
+451,10,2026-10-23,CHEESE BOARD COLLECTIVE,cheese_board,pizza,23.53,debit,Restaurants,Restaurants,general,False
+452,10,2026-10-24,TRADER JOE'S #135 BERKELEY CA,trader_joes,grocery,30.78,debit,Groceries,Groceries,general,False
+453,10,2026-10-25,PEET'S COFFEE #8812,peets,coffee,7.75,debit,Restaurants,Coffee,changed,False
+454,10,2026-10-25,TRADER JOE'S #198 OAKLAND CA,trader_joes,grocery,50.93,debit,Groceries,Groceries,general,False
+455,10,2026-10-25,TRADER JOE'S #198 OAKLAND CA,trader_joes,grocery,73.69,debit,Groceries,Groceries,general,False
+456,10,2026-10-26,CLIPPER SVC BART,clipper,transit,20.0,debit,Transportation,Transportation,general,False
+457,10,2026-10-27,SQ *BLUE DOOR CAFE,blue_door_cafe,cafe,11.08,debit,Restaurants,Restaurants,general,False
+458,10,2026-10-27,TRADER JOE'S #135 BERKELEY CA,trader_joes,grocery,73.87,debit,Groceries,Groceries,general,False
+459,10,2026-10-29,BLUE BOTTLE COFFEE OAKLAND,blue_bottle,coffee,7.48,debit,Restaurants,Coffee,changed,True
+460,10,2026-10-29,TST* NIKS KITCHEN,niks_kitchen,fast_casual,17.93,debit,Restaurants,Restaurants,general,False
+461,10,2026-10-30,CLIPPER SVC BART,clipper,transit,20.0,debit,Transportation,Transportation,general,False
+462,10,2026-10-30,JOES RAMEN #2 SF CA,joes_ramen,ramen,20.35,debit,Restaurants,Social,preference,False
+463,10,2026-10-31,STEAM GAMES 425-889-9642,steam,games,9.79,debit,Entertainment,Entertainment,general,False
+464,11,2026-11-01,CHASE CREDIT CRD AUTOPAY PPD ID: 4760039224,chase_autopay,card_payment,1120.56,debit,Transfer,Transfer,general,False
+465,11,2026-11-01,COMCAST CABLE COMM 800-COMCAST,comcast,internet,79.99,debit,Utilities,Utilities,general,False
+466,11,2026-11-01,COURSERA.ORG,coursera,online_course,49.0,debit,Education,Education,general,True
+467,11,2026-11-01,GEICO AUTO PAY,geico,insurance,112.0,debit,Insurance,Insurance,general,False
+468,11,2026-11-01,NETFLIX.COM 866-579-7172,netflix,streaming,15.49,debit,Subscription,Subscription,general,False
+469,11,2026-11-01,OPENAI *CHATGPT SUBSCR,openai,software,20.0,debit,Subscription,Subscription,general,True
+470,11,2026-11-01,GUSTO PAYROLL DIR DEP,payroll,payroll,2100.0,credit,Income,Income,general,False
+471,11,2026-11-01,PG&E WEB ONLINE,pge,power,70.97,debit,Utilities,Utilities,general,False
+472,11,2026-11-01,PLANET FITNESS CLUB FEES,planet_fitness,gym,24.99,debit,Personal Care,Personal Care,general,False
+473,11,2026-11-01,AVALON BAY RENT PAYMENT,rent,rent,2450.0,debit,Housing,Housing,general,False
+474,11,2026-11-01,SPOTIFY USA,spotify,streaming,11.99,debit,Subscription,Subscription,general,False
+475,11,2026-11-01,T-MOBILE AUTOPAY,tmobile,phone,65.0,debit,Utilities,Utilities,general,False
+476,11,2026-11-02,LYFT *RIDE 11-02,lyft,rideshare,27.1,debit,Transportation,Transportation,general,False
+477,11,2026-11-02,STEAM GAMES 425-889-9642,steam,games,27.18,debit,Entertainment,Entertainment,general,False
+478,11,2026-11-02,WALGREENS #3456 BERKELEY CA,walgreens,pharmacy,9.43,debit,Healthcare,Healthcare,general,False
+479,11,2026-11-03,AMAZON.COM*QU0LBQ,amazon,online_retail,70.03,debit,Shopping,Shopping,general,False
+480,11,2026-11-04,SQ *FIELDWORK BREWING,fieldwork_brewing,brewery,37.13,debit,Restaurants,Social,preference,True
+481,11,2026-11-05,FIELDWORK BREWING BERKELEY,fieldwork_brewing,brewery,48.13,debit,Restaurants,Social,preference,True
+482,11,2026-11-05,SAFEWAY STORE 1507 BERKELEY,safeway,grocery,59.88,debit,Groceries,Groceries,general,False
+483,11,2026-11-07,JOES RAMEN #2 SF CA,joes_ramen,ramen,22.03,debit,Restaurants,Social,preference,False
+484,11,2026-11-12,CLIPPER SVC BART,clipper,transit,20.0,debit,Transportation,Transportation,general,False
+485,11,2026-11-12,STARBUCKS STORE 46028,starbucks,coffee,7.16,debit,Restaurants,Coffee,changed,False
+486,11,2026-11-13,AMC BAY STREET 16,amc,movies,16.91,debit,Entertainment,Entertainment,general,False
+487,11,2026-11-13,PEET'S COFFEE #8812,peets,coffee,6.17,debit,Restaurants,Coffee,changed,False
+488,11,2026-11-14,SQ *BLUE DOOR CAFE,blue_door_cafe,cafe,9.41,debit,Restaurants,Restaurants,general,False
+489,11,2026-11-15,GUSTO PAYROLL DIR DEP,payroll,payroll,2100.0,credit,Income,Income,general,False
+490,11,2026-11-20,BLUE BOTTLE COFFEE OAKLAND,blue_bottle,coffee,5.9,debit,Restaurants,Coffee,changed,True
+491,11,2026-11-21,CHEESE BOARD COLLECTIVE,cheese_board,pizza,14.26,debit,Restaurants,Restaurants,general,False
+492,11,2026-11-21,LYFT *RIDE 11-21,lyft,rideshare,16.64,debit,Transportation,Transportation,general,False
+493,11,2026-11-21,TRADER JOE'S #198 OAKLAND CA,trader_joes,grocery,35.51,debit,Groceries,Groceries,general,False
+494,11,2026-11-23,FIELDWORK BREWING BERKELEY,fieldwork_brewing,brewery,24.73,debit,Restaurants,Social,preference,True
+495,11,2026-11-23,SQ *FIELDWORK BREWING,fieldwork_brewing,brewery,38.76,debit,Restaurants,Social,preference,True
+496,11,2026-11-24,DOORDASH*THAI BASIL,doordash,delivery,43.49,debit,Restaurants,Restaurants,general,False
+497,11,2026-11-24,JOE'S RAMEN SF CA,joes_ramen,ramen,24.11,debit,Restaurants,Social,preference,False
+498,11,2026-11-28,TARGET T-8537 OAKLAND,target,retail,36.03,debit,Shopping,Shopping,general,False
+499,11,2026-11-28,VENMO PAYMENT 9123941069,venmo,p2p,48.02,debit,Transfer,Transfer,general,False
+500,11,2026-11-30,AMAZON.COM*4C9QVJ,amazon,online_retail,51.78,debit,Shopping,Shopping,general,False
+501,12,2026-12-01,CHASE CREDIT CRD AUTOPAY PPD ID: 4760039224,chase_autopay,card_payment,789.67,debit,Transfer,Transfer,general,False
+502,12,2026-12-01,COMCAST CABLE COMM 800-COMCAST,comcast,internet,79.99,debit,Utilities,Utilities,general,False
+503,12,2026-12-01,COURSERA.ORG,coursera,online_course,49.0,debit,Education,Education,general,True
+504,12,2026-12-01,GEICO AUTO PAY,geico,insurance,112.0,debit,Insurance,Insurance,general,False
+505,12,2026-12-01,NETFLIX.COM 866-579-7172,netflix,streaming,15.49,debit,Subscription,Subscription,general,False
+506,12,2026-12-01,OPENAI *CHATGPT SUBSCR,openai,software,20.0,debit,Subscription,Subscription,general,True
+507,12,2026-12-01,GUSTO PAYROLL DIR DEP,payroll,payroll,2100.0,credit,Income,Income,general,False
+508,12,2026-12-01,PG&E WEB ONLINE,pge,power,73.33,debit,Utilities,Utilities,general,False
+509,12,2026-12-01,PLANET FITNESS CLUB FEES,planet_fitness,gym,24.99,debit,Personal Care,Personal Care,general,False
+510,12,2026-12-01,AVALON BAY RENT PAYMENT,rent,rent,2450.0,debit,Housing,Housing,general,False
+511,12,2026-12-01,SPOTIFY USA,spotify,streaming,11.99,debit,Subscription,Subscription,general,False
+512,12,2026-12-01,T-MOBILE AUTOPAY,tmobile,phone,65.0,debit,Utilities,Utilities,general,False
+513,12,2026-12-02,STARBUCKS STORE 19953,starbucks,coffee,4.12,debit,Restaurants,Coffee,changed,False
+514,12,2026-12-03,PEET'S COFFEE #8812,peets,coffee,8.22,debit,Restaurants,Coffee,changed,False
+515,12,2026-12-03,STARBUCKS #69040 BERKELEY CA,starbucks,coffee,4.76,debit,Restaurants,Coffee,changed,False
+516,12,2026-12-04,BLUE BOTTLE COFFEE 0042,blue_bottle,coffee,6.53,debit,Restaurants,Coffee,changed,True
+517,12,2026-12-04,TARGET 00012345 BERKELEY CA,target,retail,59.12,debit,Shopping,Shopping,general,False
+518,12,2026-12-04,TRADER JOE'S #198 OAKLAND CA,trader_joes,grocery,37.8,debit,Groceries,Groceries,general,False
+519,12,2026-12-05,LYFT *RIDE 12-05,lyft,rideshare,19.28,debit,Transportation,Transportation,general,False
+520,12,2026-12-05,STARBUCKS #10175 BERKELEY CA,starbucks,coffee,4.28,debit,Restaurants,Coffee,changed,False
+521,12,2026-12-06,THE ANCHOR BREWING SF,anchor_brewing,brewery,53.98,debit,Restaurants,Social,preference,False
+522,12,2026-12-06,LYFT *RIDE 12-06,lyft,rideshare,13.48,debit,Transportation,Transportation,general,False
+523,12,2026-12-06,PEET'S COFFEE #8812,peets,coffee,7.03,debit,Restaurants,Coffee,changed,False
+524,12,2026-12-08,CLIPPER SVC BART,clipper,transit,20.0,debit,Transportation,Transportation,general,False
+525,12,2026-12-10,CAL PERFORMANCES ZELLERBACH,cal_performances,concerts,35.21,debit,Entertainment,Entertainment,general,False
+526,12,2026-12-10,VENMO PAYMENT 5173968194,venmo,p2p,27.45,debit,Transfer,Transfer,general,False
+527,12,2026-12-11,SQ *FIELDWORK BREWING,fieldwork_brewing,brewery,40.1,debit,Restaurants,Social,preference,True
+528,12,2026-12-12,SAFEWAY STORE 1507 BERKELEY,safeway,grocery,48.75,debit,Groceries,Groceries,general,False
+529,12,2026-12-12,UNITED AIRLINES 8740982590,united,airline,380.33,debit,Travel,Travel,general,True
+530,12,2026-12-15,ASHBY FLEA,ashby_flea,market,23.54,debit,Shopping,Shopping,general,False
+531,12,2026-12-15,GUSTO PAYROLL DIR DEP,payroll,payroll,2100.0,credit,Income,Income,general,False
+532,12,2026-12-18,SHELL OIL 74034400 OAKLAND,shell,gas,36.39,debit,Transportation,Transportation,general,False
+533,12,2026-12-19,THE ANCHOR BREWING SF,anchor_brewing,brewery,28.46,debit,Restaurants,Social,preference,False
+534,12,2026-12-19,GREAT CLIPS #1234,great_clips,salon,26.24,debit,Personal Care,Personal Care,general,False
+535,12,2026-12-20,SQ *FIELDWORK BREWING,fieldwork_brewing,brewery,34.18,debit,Restaurants,Social,preference,True
+536,12,2026-12-20,UBER *TRIP HELP.UBER.COM,uber,rideshare,22.27,debit,Transportation,Transportation,general,False
+537,12,2026-12-22,SQ *BLUE DOOR CAFE,blue_door_cafe,cafe,14.69,debit,Restaurants,Restaurants,general,False
+538,12,2026-12-22,STARBUCKS STORE 08328,starbucks,coffee,5.65,debit,Restaurants,Coffee,changed,False
+539,12,2026-12-23,BERKELEY BOWL MARKETPLACE,berkeley_bowl,grocery,39.93,debit,Groceries,Groceries,general,False
+540,12,2026-12-24,BERKELEY BOWL MARKETPLACE,berkeley_bowl,grocery,78.58,debit,Groceries,Groceries,general,False
+541,12,2026-12-25,PEET'S COFFEE #8812,peets,coffee,7.6,debit,Restaurants,Coffee,changed,False
+542,12,2026-12-28,SQ *CHEESE BOARD PIZZA,cheese_board,pizza,19.66,debit,Restaurants,Restaurants,general,False
+543,12,2026-12-30,CVS/PHARMACY #18856,cvs,pharmacy,21.22,debit,Healthcare,Healthcare,general,False
+544,12,2026-12-30,STARBUCKS #24647 BERKELEY CA,starbucks,coffee,4.4,debit,Restaurants,Coffee,changed,False
+545,12,2026-12-30,TARGET 00012345 BERKELEY CA,target,retail,60.2,debit,Shopping,Shopping,general,False
