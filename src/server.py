@@ -19,7 +19,7 @@ from urllib.parse import parse_qs, urlparse
 
 import pandas as pd
 
-from frozen_model import FrozenModel
+from frozen_base import FrozenModel
 
 ROOT = Path(__file__).resolve().parent.parent
 PAGE = ROOT / "prototype" / "index.html"
@@ -28,8 +28,8 @@ SEEDED_MONTHS = 6                      # January to June start out reviewed
 NON_SPENDING = ["Income", "Transfer"]  # shown in review, left out of spending and budgets
 MONTH_ABBR = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
 
-txns = pd.read_csv(ROOT / "data" / "transactions_2026.csv")
-merchants = pd.read_csv(ROOT / "data" / "merchants.csv")
+txns = pd.read_csv(ROOT / "data" / "transactions_2026.csv", keep_default_na=False)
+txns["month"] = pd.to_datetime(txns["date"]).dt.month
 print("Loading the frozen model...")
 model = FrozenModel()
 
@@ -38,7 +38,7 @@ def init_payload():
     seeded = txns[txns["month"] <= SEEDED_MONTHS]
     seeded = seeded[~seeded["true_category"].isin(NON_SPENDING)]
     spend = {
-        cat: [round(float(group.loc[group["month"] == m, "amount"].sum()), 2) for m in range(1, SEEDED_MONTHS + 1)]
+        cat: [round(-float(group.loc[group["month"] == m, "amount"].sum()), 2) + 0.0 for m in range(1, SEEDED_MONTHS + 1)]
         for cat, group in seeded.groupby("true_category")
     }
     return {
@@ -48,25 +48,22 @@ def init_payload():
         "seeded": SEEDED_MONTHS,
         "spend": spend,
         "files": [
-            {"m": m - 1, "file": f"chase_{MONTH_ABBR[m - 1]}_2026.csv", "n": int((txns["month"] == m).sum())}
+            {"m": m - 1, "file": f"{'chase' if m < 10 else 'bofa'}_{MONTH_ABBR[m - 1]}_2026.csv", "n": int((txns["month"] == m).sum())}
             for m in range(1, 13)
         ],
-        "merchants": {
-            r.merchant_key: {"name": r.name, "tags": [r.merchant_group]} for r in merchants.itertuples()
-        },
     }
 
 
 def statement_payload(month):
     rows = txns[txns["month"] == month]
-    preds = model.predict(rows["raw_description"])  # the frozen model, run live on this upload
+    preds = model.predict(rows["description"])  # the frozen model, run live on this upload
     return [
         {
             "date": date.fromisoformat(r.date).strftime("%b %d"),
-            "raw": r.raw_description,
-            "merchant": r.merchant_key,
-            "amt": float(r.amount),
-            "credit": r.direction == "credit",
+            "raw": r.description,
+            "note": r.note,
+            "amt": abs(float(r.amount)),
+            "credit": r.amount > 0,
             "base": cat,
             "conf": conf,
         }
