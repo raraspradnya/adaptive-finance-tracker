@@ -1,10 +1,10 @@
-"""Generate one year (Jan-Dec 2026) of bank transactions for one simulated user.
+"""Generate a year of bank transactions for one simulated user.
 
 The user: a 25-year-old Berkeley student who studies and hangs out in coffee shops and
 breweries. Housing is about $1,500 a month (rent to the landlord plus her share to her roommate
 Ashley), and total spending is about $2,500 a month. She is paid twice a month.
 
-Writes data/transactions_2026.csv with only what a bank export would show, plus the answer key:
+Writes a CSV with only what a bank export would show, plus the answer key:
 
     txn_id, date, description, amount, note, true_category
 
@@ -15,7 +15,8 @@ Writes data/transactions_2026.csv with only what a bank export would show, plus 
 
 Categories are the frozen model's 16, plus three of her own: Social, Coffee, Gifts.
 
-Shifts built into the year (see the experiment plan):
+Shifts built into the dev year, 2026 (see EXPERIMENTS.md). The validation year (--val) has the
+same kinds of shift, but each one lands in a month drawn at random from its seed:
     concept    all year  ramen and breweries are "Social" (the model has no such category)
     concept    May       one $50 Trader Joe's purchase is a gift card -> "Gifts", once
     concept    Jul       coffee shops change from "Restaurants" to "Coffee"
@@ -26,74 +27,97 @@ Shifts built into the year (see the experiment plan):
     concept    Nov       Ashley moved out at the end of October: Zelle to Ashley changes from
                          $275 rent share (Housing) to small payments for drinks (Social)
 
-Run:  .venv/bin/python src/data_generator.py   (same seed -> same file)
+Run:  .venv/bin/python src/data_generator.py         -> data/transactions_2026.csv  (tune)
+      .venv/bin/python src/data_generator.py --val   -> data/transactions_val.csv   (validation)
+Each also writes <name>.events.json with the months its shifts happen in (used for chart markers).
+Same seed -> same file.
 """
 
+import argparse
+import json
 import random
 import string
+from dataclasses import asdict, dataclass
 from datetime import date
 from pathlib import Path
 
 import pandas as pd
 
-SEED = 2026
-YEAR = 2026
-OUT = Path(__file__).resolve().parent.parent / "data" / "transactions_2026.csv"
+DATA = Path(__file__).resolve().parent.parent / "data"
 
-COFFEE_SWITCH = 7     # July: coffee becomes "Coffee"
-RENT_INCREASE = 9     # September: $1,225 -> $1,300
-NEW_BREWERY = 9       # September: Ale Industries appears
-BANK_SWITCH = 10      # October: Chase -> Bank of America
-ASHLEY_MOVES_OUT = 11 # from November, Zelle to Ashley is Social
-GIFT_CARD = (5, 9)    # May 9: the one-off Trader Joe's gift card
+
+@dataclass(frozen=True)
+class Events:
+    """The month each shift happens in. Defaults are the dev year."""
+    coffee_switch: int = 7         # coffee becomes "Coffee"
+    rent_increase: int = 9         # rent $1,225 -> $1,300
+    new_brewery: int = 9           # Ale Industries appears
+    bank_switch: int = 10          # Chase -> Bank of America
+    ashley_moves_out: int = 11     # from this month, Zelle to Ashley is Social
+    gift_card: tuple = (5, 9)      # (month, day) of the one-off Trader Joe's gift card
+
+
+DEV = dict(seed=2026, year=2026, events=Events(), out=DATA / "transactions_2026.csv")
+
+
+def random_events(seed):
+    """Each shift in a random month, leaving months before and after it to learn from."""
+    r = random.Random(seed * 7 + 1)   # its own stream, so the transactions' draws don't change
+    return Events(coffee_switch=r.randint(3, 10), rent_increase=r.randint(2, 11),
+                  new_brewery=r.randint(2, 11), bank_switch=r.randint(3, 11),
+                  ashley_moves_out=r.randint(3, 11), gift_card=(r.randint(2, 10), r.randint(1, 28)))
+
+
+# Seed 2027 was used for an earlier val year that got looked at during Experiment 1, so it was
+# deleted. This one is generated only after Experiments 1-3 are settled, and run once.
+VAL = dict(seed=2028, year=2028, events=random_events(2028), out=DATA / "transactions_val.csv")
 
 LANDLORD = "BAYVIEW PROPERTY MGMT"
 ASHLEY = ("ASHLEY", "KIM")
 FRIENDS = [("SAM", "LEE"), ("PRIYA", "SHAH"), ("JESS", "NGUYEN")]
 
 
-def coffee_label(month):
-    return "Coffee" if month >= COFFEE_SWITCH else "Restaurants"
-
-
 # Card purchases: (descriptions as the merchant sends them, visits per month,
 # amount range, label for a given month, first month, last month)
-CARD = [
-    # coffee shops: she studies here most days
-    (["PEETS COFFEE #0731 BERKELEY CA", "PEET'S COFFEE #8812"], 5, (4.5, 8.5), coffee_label, 1, 12),
-    (["BLUE BOTTLE COFFEE BERKELEY"], 3, (5.0, 8.0), coffee_label, 1, 12),
-    (["CAFFE STRADA BERKELEY CA", "SQ *CAFFE STRADA"], 4, (4.0, 7.5), coffee_label, 1, 12),
-    (["PHILZ COFFEE BERKELEY"], 2, (5.5, 8.0), coffee_label, 1, 12),
-    # breweries and ramen: her "Social" spending
-    (["THE RARE BARREL BERKELEY"], 2, (18, 42), lambda m: "Social", 1, 12),
-    (["FIELDWORK BREWING BERKELEY", "SQ *FIELDWORK BREWING"], 2, (16, 40), lambda m: "Social", 1, 12),
-    (["TST* ALE INDUSTRIES OAKLAND"], 2, (18, 45), lambda m: "Social", NEW_BREWERY, 12),
-    (["IPPUDO BERKELEY", "RAMEN SHOP OAKLAND CA"], 2, (17, 30), lambda m: "Social", 1, 12),
-    # ordinary restaurants
-    (["CHIPOTLE 2297 BERKELEY", "SWEETGREEN BERKELEY", "CHEESE BOARD COLLECTIVE", "DOORDASH*TACOS EL GORDO"],
-     5, (11, 28), lambda m: "Restaurants", 1, 12),
-    # groceries
-    (["TRADER JOE'S #186 BERKELEY CA"], 3, (28, 70), lambda m: "Groceries", 1, 12),
-    (["BERKELEY BOWL WEST", "BERKELEY BOWL MARKETPLACE"], 2, (14, 45), lambda m: "Groceries", 1, 12),
-    (["SAFEWAY #0975 BERKELEY CA"], 0.5, (12, 40), lambda m: "Groceries", 1, 12),
-    # getting around
-    (["CLIPPER SVC BART"], "twice", (20, 20), lambda m: "Transportation", 1, 12),
-    (["LYFT *RIDE {mm}-{dd}"], 1, (9, 24), lambda m: "Transportation", 1, 12),
-    # bills and subscriptions
-    (["MINT MOBILE 800-683-7392"], "monthly", (30, 30), lambda m: "Utilities", 1, 12),
-    (["SPOTIFY USA"], "monthly", (5.99, 5.99), lambda m: "Subscription", 1, 12),
-    (["NETFLIX.COM 866-579-7172"], "monthly", (15.49, 15.49), lambda m: "Subscription", 1, 12),
-    (["APPLE.COM/BILL 866-712-7753"], "monthly", (2.99, 2.99), lambda m: "Subscription", 1, 12),
-    # shopping, care, the rest
-    (["AMZN MKTP US*{code}", "AMAZON.COM*{code}"], 1.5, (10, 60), lambda m: "Shopping", 1, 12),
-    (["TARGET T-2788 BERKELEY CA"], 0.7, (15, 60), lambda m: "Shopping", 1, 12),
-    (["UNIQLO BERKELEY 0417"], 0.3, (30, 80), lambda m: "Shopping", 1, 12),
-    (["SEPHORA #0412 BERKELEY"], 0.4, (20, 55), lambda m: "Personal Care", 1, 12),
-    (["SQ *SHATTUCK HAIR STUDIO"], 0.3, (45, 65), lambda m: "Personal Care", 1, 12),
-    (["CVS/PHARMACY #{n5}"], 0.3, (8, 30), lambda m: "Healthcare", 1, 12),
-    (["AMC BAY STREET 16"], 0.4, (14, 20), lambda m: "Entertainment", 1, 12),
-    (["CAL STUDENT STORE BERKELEY"], 0.3, (15, 60), lambda m: "Education", 1, 12),
-]
+def card_list(ev):
+    def coffee_label(month):
+        return "Coffee" if month >= ev.coffee_switch else "Restaurants"
+    return [
+        # coffee shops: she studies here most days
+        (["PEETS COFFEE #0731 BERKELEY CA", "PEET'S COFFEE #8812"], 5, (4.5, 8.5), coffee_label, 1, 12),
+        (["BLUE BOTTLE COFFEE BERKELEY"], 3, (5.0, 8.0), coffee_label, 1, 12),
+        (["CAFFE STRADA BERKELEY CA", "SQ *CAFFE STRADA"], 4, (4.0, 7.5), coffee_label, 1, 12),
+        (["PHILZ COFFEE BERKELEY"], 2, (5.5, 8.0), coffee_label, 1, 12),
+        # breweries and ramen: her "Social" spending
+        (["THE RARE BARREL BERKELEY"], 2, (18, 42), lambda m: "Social", 1, 12),
+        (["FIELDWORK BREWING BERKELEY", "SQ *FIELDWORK BREWING"], 2, (16, 40), lambda m: "Social", 1, 12),
+        (["TST* ALE INDUSTRIES OAKLAND"], 2, (18, 45), lambda m: "Social", ev.new_brewery, 12),
+        (["IPPUDO BERKELEY", "RAMEN SHOP OAKLAND CA"], 2, (17, 30), lambda m: "Social", 1, 12),
+        # ordinary restaurants
+        (["CHIPOTLE 2297 BERKELEY", "SWEETGREEN BERKELEY", "CHEESE BOARD COLLECTIVE", "DOORDASH*TACOS EL GORDO"],
+         5, (11, 28), lambda m: "Restaurants", 1, 12),
+        # groceries
+        (["TRADER JOE'S #186 BERKELEY CA"], 3, (28, 70), lambda m: "Groceries", 1, 12),
+        (["BERKELEY BOWL WEST", "BERKELEY BOWL MARKETPLACE"], 2, (14, 45), lambda m: "Groceries", 1, 12),
+        (["SAFEWAY #0975 BERKELEY CA"], 0.5, (12, 40), lambda m: "Groceries", 1, 12),
+        # getting around
+        (["CLIPPER SVC BART"], "twice", (20, 20), lambda m: "Transportation", 1, 12),
+        (["LYFT *RIDE {mm}-{dd}"], 1, (9, 24), lambda m: "Transportation", 1, 12),
+        # bills and subscriptions
+        (["MINT MOBILE 800-683-7392"], "monthly", (30, 30), lambda m: "Utilities", 1, 12),
+        (["SPOTIFY USA"], "monthly", (5.99, 5.99), lambda m: "Subscription", 1, 12),
+        (["NETFLIX.COM 866-579-7172"], "monthly", (15.49, 15.49), lambda m: "Subscription", 1, 12),
+        (["APPLE.COM/BILL 866-712-7753"], "monthly", (2.99, 2.99), lambda m: "Subscription", 1, 12),
+        # shopping, care, the rest
+        (["AMZN MKTP US*{code}", "AMAZON.COM*{code}"], 1.5, (10, 60), lambda m: "Shopping", 1, 12),
+        (["TARGET T-2788 BERKELEY CA"], 0.7, (15, 60), lambda m: "Shopping", 1, 12),
+        (["UNIQLO BERKELEY 0417"], 0.3, (30, 80), lambda m: "Shopping", 1, 12),
+        (["SEPHORA #0412 BERKELEY"], 0.4, (20, 55), lambda m: "Personal Care", 1, 12),
+        (["SQ *SHATTUCK HAIR STUDIO"], 0.3, (45, 65), lambda m: "Personal Care", 1, 12),
+        (["CVS/PHARMACY #{n5}"], 0.3, (8, 30), lambda m: "Healthcare", 1, 12),
+        (["AMC BAY STREET 16"], 0.4, (14, 20), lambda m: "Entertainment", 1, 12),
+        (["CAL STUDENT STORE BERKELEY"], 0.3, (15, 60), lambda m: "Education", 1, 12),
+    ]
 
 # Venmo payments to friends: (note, amount range, label)
 VENMO_NOTES = [
@@ -117,33 +141,29 @@ def code(rng, k):
     return "".join(rng.choices(string.ascii_uppercase + string.digits, k=k))
 
 
-def chase(month):
-    return month < BANK_SWITCH
-
-
-def card_text(merchant, d, rng):
-    if chase(d.month):
+def card_text(merchant, d, rng, ev):
+    if d.month < ev.bank_switch:
         return merchant
     return f"CHECKCARD {d:%m%d} {merchant} {digits(rng, 11)}"
 
 
-def zelle_text(payee, d, rng):
+def zelle_text(payee, d, rng, ev):
     """payee is (FIRST, LAST) for a person, or a plain string for a business."""
-    if chase(d.month):
+    if d.month < ev.bank_switch:
         name = " ".join(payee).title() if isinstance(payee, tuple) else payee.title()
         return f"Zelle payment to {name} JPM99{code(rng, 7)}"
     name = f"{payee[1]} {payee[0]}" if isinstance(payee, tuple) else payee   # BofA: LAST FIRST
     return f"ZELLE TO {name} CONF# {code(rng, 9).lower()}"
 
 
-def venmo_text(d, rng):
-    if chase(d.month):
+def venmo_text(d, rng, ev):
+    if d.month < ev.bank_switch:
         return f"VENMO PAYMENT {digits(rng, 10)} WEB ID: 3264681992"
     return f"VENMO DES:PAYMENT ID:{digits(rng, 10)} CO ID:3264681992 WEB"
 
 
-def payroll_text(d, rng):
-    if chase(d.month):
+def payroll_text(d, rng, ev):
+    if d.month < ev.bank_switch:
         return "UC BERKELEY PAYROLL PPD ID: 1946000123"
     return f"UC BERKELEY DES:PAYROLL ID:{digits(rng, 9)} CO ID:1946000123 PPD"
 
@@ -162,62 +182,63 @@ def visits(freq, rng):
     return count
 
 
-def generate(seed=SEED):
+def generate(seed, year, ev):
     rng = random.Random(seed)
     rows = []
+    card = card_list(ev)
 
     def add(d, description, amount, label, note=""):
         rows.append({"date": d, "description": description, "amount": round(amount, 2),
                      "note": note, "true_category": label})
 
     for month in range(1, 13):
-        last_day = pd.Period(f"{YEAR}-{month:02d}").days_in_month
-        day = lambda: date(YEAR, month, rng.randint(1, last_day))
+        last_day = pd.Period(f"{year}-{month:02d}").days_in_month
+        day = lambda: date(year, month, rng.randint(1, last_day))
 
         # income: paid on the 1st and the 15th
         for dd in (1, 15):
-            d = date(YEAR, month, dd)
-            add(d, payroll_text(d, rng), 1350.00, "Income")
+            d = date(year, month, dd)
+            add(d, payroll_text(d, rng, ev), 1350.00, "Income")
 
         # rent to the landlord, by Zelle on the 1st
-        d = date(YEAR, month, 1)
-        add(d, zelle_text(LANDLORD, d, rng), -(1300.00 if month >= RENT_INCREASE else 1225.00), "Housing")
+        d = date(year, month, 1)
+        add(d, zelle_text(LANDLORD, d, rng, ev), -(1300.00 if month >= ev.rent_increase else 1225.00), "Housing")
 
         # Ashley: rent share until she moves out, then small payments for nights out
-        if month < ASHLEY_MOVES_OUT:
-            d = date(YEAR, month, 2)
-            add(d, zelle_text(ASHLEY, d, rng), -275.00, "Housing")
+        if month < ev.ashley_moves_out:
+            d = date(year, month, 2)
+            add(d, zelle_text(ASHLEY, d, rng, ev), -275.00, "Housing")
         else:
             for _ in range(rng.randint(2, 3)):
                 d = day()
-                add(d, zelle_text(ASHLEY, d, rng), -round(rng.uniform(12, 38), 2), "Social")
+                add(d, zelle_text(ASHLEY, d, rng, ev), -round(rng.uniform(12, 38), 2), "Social")
 
         # card purchases
-        for templates, freq, (lo, hi), label, first, last in CARD:
+        for templates, freq, (lo, hi), label, first, last in card:
             if not first <= month <= last:
                 continue
             fixed = {"monthly": [3], "twice": [5, 19]}.get(freq)
             for i in range(visits(freq, rng)):
-                d = date(YEAR, month, fixed[i]) if fixed else day()
+                d = date(year, month, fixed[i]) if fixed else day()
                 merchant = rng.choice(templates).format(
                     mm=f"{d:%m}", dd=f"{d:%d}", code=code(rng, 6), n5=digits(rng, 5))
-                add(d, card_text(merchant, d, rng), -rng.uniform(lo, hi), label(month))
+                add(d, card_text(merchant, d, rng, ev), -rng.uniform(lo, hi), label(month))
 
         # Venmo to friends, with notes
         for _ in range(visits(4, rng)):
             note, (lo, hi), label = rng.choice(VENMO_NOTES)
             d = day()
-            add(d, venmo_text(d, rng), -rng.uniform(lo, hi), label, note=note)
+            add(d, venmo_text(d, rng, ev), -rng.uniform(lo, hi), label, note=note)
 
         # one-off: a Trader Joe's gift card for a friend
-        if month == GIFT_CARD[0]:
-            d = date(YEAR, *GIFT_CARD)
-            add(d, card_text("TRADER JOE'S #186 BERKELEY CA", d, rng), -50.00, "Gifts")
+        if month == ev.gift_card[0]:
+            d = date(year, *ev.gift_card)
+            add(d, card_text("TRADER JOE'S #186 BERKELEY CA", d, rng, ev), -50.00, "Gifts")
 
         # flight home for the holidays
         if month == 12:
-            d = date(YEAR, 12, 6)
-            add(d, card_text(f"UNITED AIRLINES {digits(rng, 10)}", d, rng), -rng.uniform(280, 360), "Travel")
+            d = date(year, 12, 6)
+            add(d, card_text(f"UNITED AIRLINES {digits(rng, 10)}", d, rng, ev), -rng.uniform(280, 360), "Travel")
 
     df = pd.DataFrame(rows).sort_values("date", kind="stable").reset_index(drop=True)
     df.insert(0, "txn_id", range(1, len(df) + 1))
@@ -226,13 +247,23 @@ def generate(seed=SEED):
 
 
 def main():
-    df = generate()
-    OUT.parent.mkdir(exist_ok=True)
-    df.to_csv(OUT, index=False)
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument("--val", action="store_true", help="write the validation year instead of dev")
+    args = ap.parse_args()
+    spec = VAL if args.val else DEV
+    out = spec["out"]
+
+    df = generate(spec["seed"], spec["year"], spec["events"])
+    out.parent.mkdir(exist_ok=True)
+    df.to_csv(out, index=False)
+    out.with_suffix(".events.json").write_text(json.dumps(asdict(spec["events"]), indent=2) + "\n")
 
     month = pd.to_datetime(df["date"]).dt.month
     spent = -df.loc[df["amount"] < 0, "amount"].groupby(month).sum()
-    print(f"{len(df)} transactions -> {OUT.relative_to(OUT.parent.parent)}")
+    print(f"{len(df)} transactions -> {out.relative_to(out.parent.parent)}")
+    if args.val:   # stay blind to val: no months, no per-month or per-category breakdown
+        return
+    print(f"Shift months: {asdict(spec['events'])}")
     print("\nPer month: rows, money out")
     print(pd.DataFrame({"rows": df.groupby(month).size(), "spent": spent.round(0)}).to_string())
     print("\nRows per category:")

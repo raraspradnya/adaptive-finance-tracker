@@ -1,0 +1,3 @@
+,rows,accuracy,frozen_accuracy,manual_checks,flagged,corrected,from_memory,flips,fixes,fix_rate,adaptation_errors,adaptation_rows,spread_errors,spread_rows,long_gap_rows,long_gap_accuracy,memory_size
+Frozen only,630.0,49.4,49.4,333.0,103.0,230.0,0.0,0.0,0.0,0.0,90.0,90.0,0.0,16.0,33.0,21.2,0.0
+"Combined best (Least useful + merge, K=50)",630.0,93.2,49.4,45.0,12.0,33.0,554.0,0.0,276.0,86.5,0.0,90.0,0.0,16.0,33.0,97.0,50.0

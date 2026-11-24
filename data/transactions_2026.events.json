@@ -1,0 +1,11 @@
+{
+  "coffee_switch": 7,
+  "rent_increase": 9,
+  "new_brewery": 9,
+  "bank_switch": 10,
+  "ashley_moves_out": 11,
+  "gift_card": [
+    5,
+    9
+  ]
+}

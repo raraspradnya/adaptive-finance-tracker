@@ -11,6 +11,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
 from memory import (  # noqa: E402
     ACCEPTED, ASKED, CORRECTED, Config, Decision, Memory, decide, normalize, should_store, source_of,
+    store,
 )
 from simulation import run_year  # noqa: E402
 
@@ -71,16 +72,59 @@ def test_split_vote_falls_back_to_frozen():
     assert d.path == "frozen" and abs(d.share - 0.5) < 1e-6
 
 
-def test_trust_and_freshness_shift_the_vote():
-    m = Memory()
+def _coffee_memory(config):
+    m, rng = Memory(), np.random.default_rng(0)
     for k in range(3):   # three old, left-alone Restaurants rows
-        m.add(k, date(2026, 1, 10), "Restaurants", ACCEPTED, vec(1))
-    m.add(9, date(2026, 7, 10), "Coffee", CORRECTED, vec(1))   # one recent correction
+        store(m, k, date(2026, 1, 10), "Restaurants", ACCEPTED, vec(1), config, rng)
+    store(m, 9, date(2026, 7, 10), "Coffee", CORRECTED, vec(1), config, rng)   # one recent correction
+    return m
+
+
+def test_trust_and_freshness_shift_the_vote():
     when = date(2026, 8, 1)
-    plain = decide(vec(1), when, "Restaurants", 0.99, m, Config())
-    both = decide(vec(1), when, "Restaurants", 0.99, m, Config(trust_accepted=0.5, half_life_months=1))
+    plain_cfg, both_cfg = Config(), Config(trust_accepted=0.5, half_life_months=1)
+    plain = decide(vec(1), when, "Restaurants", 0.99, _coffee_memory(plain_cfg), plain_cfg)
+    both = decide(vec(1), when, "Restaurants", 0.99, _coffee_memory(both_cfg), both_cfg)
     assert plain.label == "Restaurants"
     assert both.label == "Coffee" and both.path == "memory"
+
+
+# ---------------------------------------------------------------- forgetting (Experiment 3)
+
+def _fill(config, n=5):
+    """n rows on different days; row k has its own direction so nothing merges by accident."""
+    m, rng = Memory(), np.random.default_rng(0)
+    for k in range(n):
+        v = np.zeros(768, dtype=np.float32); v[k] = 1
+        src = CORRECTED if k == 0 else ACCEPTED
+        store(m, k, date(2026, 1 + k, 1), f"L{k}", src, v, config, rng)
+    return m
+
+
+def test_capacity_is_never_exceeded():
+    for rule in ("oldest", "random", "least_useful"):
+        m = _fill(Config(capacity=3, eviction=rule, half_life_months=1, trust_accepted=0.25))
+        assert len(m) <= 3
+
+
+def test_oldest_first_drops_the_oldest():
+    m = _fill(Config(capacity=3, eviction="oldest"))
+    assert m.txn_ids == [2, 3, 4]
+
+
+def test_least_useful_keeps_a_trusted_correction_over_a_newer_left_alone_row():
+    # row 0 is a correction (trust 1); rows 1-4 are left alone (trust 0.25), half-life 6 months
+    m = _fill(Config(capacity=3, eviction="least_useful", trust_accepted=0.25, half_life_months=6))
+    assert 0 in m.txn_ids and len(m) == 3
+
+
+def test_merging_folds_near_identical_rows_with_the_same_label():
+    cfg = Config(merge_above=0.99)
+    m, rng = Memory(), np.random.default_rng(0)
+    assert store(m, 1, date(2026, 1, 1), "Coffee", CORRECTED, vec(1), cfg, rng) == "added"
+    assert store(m, 2, date(2026, 2, 1), "Coffee", ACCEPTED, vec(1, 0.001), cfg, rng) == "merged"
+    assert store(m, 3, date(2026, 3, 1), "Restaurants", ACCEPTED, vec(1), cfg, rng) == "added"
+    assert len(m) == 2 and m.counts == [2, 1] and m.weights[0] == 2.0
 
 
 # ---------------------------------------------------------------- writing
@@ -107,7 +151,7 @@ def _toy_year():
     """The same shop in March and April. The frozen model calls it Restaurants; she says Social."""
     df = pd.DataFrame({
         "txn_id": [1, 2], "date": [date(2026, 3, 5), date(2026, 4, 5)], "month": [3, 4],
-        "description": ["RARE BARREL", "RARE BARREL"], "note": ["", ""],
+        "description": ["RARE BARREL", "RARE BARREL"], "note": ["", ""], "text": ["RARE BARREL"] * 2,
         "true_category": ["Social", "Social"],
     })
     emb = np.stack([vec(1, 0.001), vec(1, 0.002)])
@@ -127,6 +171,25 @@ def test_frozen_only_never_learns():
     log = run_year(df, labels, confs, emb, Config(storage="none"))
     assert list(log["label"]) == ["Restaurants", "Restaurants"]
     assert list(log["memory_size"]) == [0, 0]
+
+
+def test_adaptation_and_spread_come_from_the_labels():
+    from metrics import _add_flags
+    # COFFEE: Restaurants, then changes to Coffee in month 3 (first Coffee row can't be known yet).
+    # TJ: Groceries, a one-off Gifts in month 2, then Groceries again.
+    log = pd.DataFrame({
+        "month":      [1, 1, 2, 2, 3, 3, 4, 4],
+        "text":       ["COFFEE", "TJ", "COFFEE", "TJ", "COFFEE", "TJ", "COFFEE", "TJ"],
+        "true_label": ["Restaurants", "Groceries", "Restaurants", "Gifts", "Coffee", "Groceries", "Coffee", "Groceries"],
+        "label":      ["Restaurants", "Groceries", "Restaurants", "Groceries", "Restaurants", "Gifts", "Restaurants", "Groceries"],
+    })
+    for col, val in {"frozen_label": "X", "flagged": False, "source": "accepted", "path": "memory"}.items():
+        log[col] = val
+    f = _add_flags(log)
+    assert list(f["adapt_row"]) == [False, False, False, False, False, False, True, False]
+    assert list(f["adapt_error"]) == [False, False, False, False, False, False, True, False]
+    assert list(f["spread_row"]) == [False, False, False, False, False, True, False, True]
+    assert list(f["spread_error"]) == [False, False, False, False, False, True, False, False]
 
 
 def test_rows_in_the_same_month_do_not_see_each_other():

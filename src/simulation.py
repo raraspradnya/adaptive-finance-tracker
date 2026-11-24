@@ -17,7 +17,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from memory import Config, Memory, decide, should_store, source_of, system_text
+from memory import Config, Memory, decide, should_store, source_of, store, system_text
 
 ROOT = Path(__file__).resolve().parent.parent
 CACHE = ROOT / "results" / "cache"
@@ -57,6 +57,7 @@ def run_year(df: pd.DataFrame, labels: list[str], confs: np.ndarray, emb: np.nda
              config: Config) -> pd.DataFrame:
     """Replay every month in order. Returns one log row per transaction."""
     memory = Memory()
+    rng = np.random.default_rng(config.seed)
     log = []
     for month, rows in df.groupby("month", sort=True):
         decided = []
@@ -67,16 +68,19 @@ def run_year(df: pd.DataFrame, labels: list[str], confs: np.ndarray, emb: np.nda
             final = simulated_user(d.label, df.at[i, "true_category"])
             source = source_of(d, final)
             stored = should_store(source, config)
+            outcome = "not stored"
             if stored:
-                memory.add(int(df.at[i, "txn_id"]), df.at[i, "date"], final, source, emb[i])
+                outcome = store(memory, int(df.at[i, "txn_id"]), df.at[i, "date"], final, source,
+                                emb[i], config, rng)
             log.append({
                 "config": config.name, "txn_id": int(df.at[i, "txn_id"]), "date": df.at[i, "date"],
                 "month": month, "description": df.at[i, "description"], "note": df.at[i, "note"],
+                "text": df.at[i, "text"],
                 "true_label": df.at[i, "true_category"],
                 "frozen_label": labels[i], "frozen_conf": round(float(confs[i]), 3),
                 "label": d.label, "flagged": d.flagged, "path": d.path,
                 "share": round(d.share, 3), "neighbours": d.neighbours,
-                "final_label": final, "source": source, "stored": stored,
+                "final_label": final, "source": source, "stored": stored, "store_outcome": outcome,
             })
         for row in log[-len(decided):]:
             row["memory_size"] = len(memory)

@@ -1,0 +1,13 @@
+{
+  "name": "Combined best (Least useful + merge, K=50)",
+  "storage": "everything",
+  "tau": 0.93,
+  "share": 0.6,
+  "flag_below": 0.9,
+  "trust_accepted": 0.25,
+  "half_life_months": 1,
+  "capacity": 50,
+  "eviction": "least_useful",
+  "merge_above": 0.99,
+  "seed": 0
+}
