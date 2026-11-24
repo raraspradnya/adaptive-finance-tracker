@@ -47,7 +47,8 @@ Shifts built into tune:
 | Covariate | Bank switch Chase → BofA: every description changes format | Oct |
 | Concept, permanent | Ashley moves out: Zelle to Ashley changes from $275 Housing to small Social payments | Nov |
 
-Frozen model alone: 41.6% on dev overall, about 5% from October (bank switch).
+Frozen model alone: 41.6% on the raw bank text, about 5% from October (bank switch); 49.4% on the
+normalized text the experiments use (the baseline in every table below).
 
 ### What the system sees
 
