@@ -7,8 +7,11 @@ change one part of that memory and keep everything else fixed:
 | # | Question | What changes | Held fixed |
 |---|---|---|---|
 | 1 | **What to store**: which reviewed rows go into memory? | Storage policy | Reader: similarity-only kNN · no size limit |
-| 2 | **How to read**: how much does each stored row's vote count? | Vote weighting (trust, freshness) | Store everything · no size limit |
+| 2 | **How to read**: how much does each stored row's vote count? | Vote weighting (freshness) | Exp 1 winner's storage · no size limit |
 | 3 | **What to forget**: when memory is full, what goes? | Memory size and eviction rule | Winners of 1 and 2 |
+
+Each experiment builds on the one before: Experiment 2 starts from Experiment 1's winner, and
+Experiment 3 from Experiment 2's choice.
 
 
 ---
@@ -20,7 +23,7 @@ change one part of that memory and keep everything else fixed:
 | Set | What it is | Used for |
 |---|---|---|
 | **Tune**: `data/transactions_2026.csv` | 630 rows, Jan–Dec 2026, one Berkeley student (`src/data_generator.py`) | Choosing settings, debugging, the story charts (coffee, Trader Joe's, Ashley) |
-| **Val**: `data/transactions_val.csv` | **Not generated yet.** Same generator (`--val`, seed 2028); the same kinds of shift, each in a **randomly drawn month** that nobody looks at | Checking that the whole final system (all choices from Experiments 1–3) holds on a year it was never fitted to. Replayed **once** |
+| **Val**: `data/transactions_val.csv` | 659 rows, generated and run once on 2026-11-24. Same generator (`--val`, seed 2028); the same kinds of shift, each in a **randomly drawn month** that nobody looks at | Checking that the whole final system (all choices from Experiments 1–3) holds on a year it was never fitted to. Replayed **once** |
 | **Test** | A dataset made by a friend who has not seen our data, code or this plan. Ideally her own anonymized bank history, labeled by her | Final numbers, replayed **once** at the end |
 
 "Tune" is not training data: nothing is trained. It is where settings are chosen and bugs are found.
@@ -150,53 +153,43 @@ stable but slow to change; and none of the three handles Ashley, which motivates
 
 ## Experiment 2: How to read
 
-**Question:** does weighting votes by trust and freshness get both plasticity and stability?
+**Question:** once memory holds Experiment 1's winner (corrected + answered rows), does weighting
+votes by freshness help?
 
-**Storage:** everything (trust only matters when memory holds left-alone rows). No size limit.
+Each neighbour's vote is **similarity × freshness**. **Freshness**: how recent a stored row is; a
+vote halves every *N* months. **Trust** (how much a stored label is believed) drops out: every
+stored row is a user's own answer, so every row has the same trust.
 
-Each neighbour's vote is **similarity × trust × freshness**:
-
-- **Trust**: how much a stored label is believed. Rows the user changed or answered count 1.0;
-  rows the user left alone count less.
-- **Freshness**: how recent a stored row is. A vote halves every *N* months.
-
-| Condition | Vote | Settings tried on tune |
+| Condition | Vote | Role |
 |---|---|---|
-| Frozen only | No memory | none |
-| Similarity | similarity | none (same as Exp 1 "everything") |
-| + Trust | similarity × trust | Trust for left-alone rows: 0.1 / 0.25 / 0.5 / 0.75 |
-| + Freshness | similarity × freshness | Half-life: 1 / 3 / 6 months |
-| + Both | similarity × trust × freshness | 4 × 3 combinations |
-| Exp 1 winner (reference) | corrections + answered stored, similarity vote | none |
-| Exp 1 winner + Freshness | corrections + answered stored, similarity × freshness | Half-life: 1 / 3 / 6 months (trust does nothing here: no left-alone rows are stored) |
+| Frozen only | No memory | baseline |
+| Exp 1 winner | similarity | candidate |
+| Exp 1 winner + Freshness | similarity × freshness, half-life 6 / 3 / 1 months | candidates |
+| Everything + trust + freshness | store every row; left-alone rows count 0.25; votes halve every month | comparison only, not a candidate |
 
-Result on tune: "+ Both" (trust 0.25, half-life 1 month) is best: 44 manual checks, no adaptation
-or spread errors. "Exp 1 winner + Freshness" is identical to the Exp 1 winner at every half-life
-(48 checks, 4 spread errors): its memory almost never holds conflicting labels for the same text,
-so there is nothing for freshness to reweigh, and nothing to outvote the gift card. Takeaway:
-left-alone rows are useful evidence; they only hurt when counted at full weight.
+**Choice** (on tune, saved to `results/exp2/chosen.json`): fewest manual checks, then highest
+accuracy; a tie goes to the simpler setup (no freshness first, then the longest half-life).
 
-Trust 0.1 was added to the planned 0.25 / 0.5 / 0.75: the arithmetic below shows trust alone has
-to be about that low to flip the coffee case.
+**Results on tune:**
 
-The best setting per family is chosen on tune (fewest manual checks, then highest accuracy) and
-saved to `results/exp2/chosen.json`. The val run only reads that file, so it cannot re-tune.
+| Condition | Accuracy | Manual checks | Spread errors |
+|---|---|---|---|
+| Frozen only | 49.4% | 333 | 0 |
+| **Exp 1 winner** (chosen) | **92.7%** | **48** | 4 |
+| + Freshness 6 / 3 / 1 mo | 92.7% | 48 | 4 |
+| Everything + trust + freshness | 93.3% | 44 | 0 |
 
-**Predictions** (assuming ~4 coffee and ~4 Trader Joe's visits a month):
-
-| Case | Similarity | + Trust | + Freshness | + Both |
-|---|---|---|---|---|
-| Coffee in Aug | ❌ | ❌ | ⚠️ ~50/50, flagged | ✅ |
-| Trader Joe's in Jun | ✅ | ✅ | ✅ | ✅ |
-| Ashley in Dec | ❌ | ❌ | ⚠️ | ✅ likely |
-
-Expected story: trust lets corrections beat confirmations; freshness lets new evidence beat old
-evidence; together they handle both kinds of case.
-
-**Outputs:**
-1. Ablation bars: the four conditions, split into adaptation errors, spread errors, manual checks.
-2. Case timelines: coffee, Ashley, Trader Joe's month by month.
-3. Dev heatmap: trust × freshness, to show the chosen setting is not cherry-picked.
+- **Freshness changes nothing.** It only matters when stored neighbours disagree, and this memory
+  almost never holds two labels for the same text: when coffee became Coffee, the old Restaurants
+  rows had been left alone and were never stored. The tie rule picks the plain Exp 1 winner.
+- **Known limitation: the gift card spreads.** After the May gift card, memory's only Trader Joe's
+  neighbour is that Gifts correction, so all 4 June Trader Joe's rows are labeled Gifts. Corrections
+  alone can't tell a one-off from a lasting change.
+- **The comparison row** asks whether a smarter reader would rescue "store everything": counting
+  left-alone rows at low weight with fast fading. On tune it fixes exactly those 4 rows (44 vs 48)
+  and is otherwise identical. Its setting was picked from an exploratory 4 × 3 trust × freshness
+  grid on tune (`results/exp2/exploratory/`), where only that one setting beat 48, so its tune
+  number is optimistic. Val gives the fair comparison.
 
 ---
 
@@ -205,14 +198,13 @@ evidence; together they handle both kinds of case.
 **Question:** a real app can't keep every row forever. When memory is capped, which rows should
 go so the system keeps working?
 
-**Setup:** Experiment 2's chosen reader ("+ Both": store everything, left-alone rows trust 0.25,
-votes halve every month), read from `results/exp2/chosen.json`. It is also the combined best of
-Experiments 1 and 2 (Experiment 1's storage + freshness was tried and added nothing).
+**Setup:** Experiment 2's choice (store corrected + answered rows, similarity vote), read from
+`results/exp2/chosen.json`.
 
 | Factor | Values |
 |---|---|
-| Memory size *K* | 50 / 100 / 200 rows, and unlimited (tune stores up to 630 rows a year) |
-| Eviction rule | **Oldest first** · **Random** (reservoir sampling: every row seen so far has the same chance to stay; 5 seeds, averaged) · **Least useful** (lowest trust × freshness right now) · **Least useful + merge** (a new row first merges into a stored row with the same label and similarity ≥ 0.99; the merged row's weight is the sum of its members' trust, each aged, so votes are unchanged) |
+| Memory size *K* | 10 / 20 / 30 rows, and unlimited (tune stores up to 48 rows a year) |
+| Eviction rule | **Oldest first** · **Random** (reservoir sampling: every row seen so far has the same chance to stay; 5 seeds, averaged) · **Least useful** (lowest weight × freshness right now) · **Least useful + merge** (a new row first merges into a stored row with the same label and similarity ≥ 0.99; the merged row's weight is the number of rows in it) |
 
 **Rare items** are measured generically: **long-gap accuracy** = accuracy on rows whose text was
 seen before but not in the previous 3 months.
@@ -223,23 +215,27 @@ within 10% of unlimited memory.
 
 **Results on tune** (manual checks per year; accuracy):
 
-| Rule | K=50 | K=100 | K=200 | Unlimited |
+| Rule | K=10 | K=20 | K=30 | Unlimited |
 |---|---|---|---|---|
-| Oldest first | 112 · 82.9% | 68 · 89.8% | 46 · 93.0% | 44 · 93.3% |
-| Random (mean of 5) | 145 · 78.0% | 83 · 87.4% | 53 · 91.8% | 44 · 93.3% |
-| Least useful | 94 · 85.6% | 52 · 92.2% | 46 · 93.0% | 44 · 93.3% |
-| **Least useful + merge** | **45 · 93.2%** | 44 · 93.3% | 44 · 93.3% | 44 · 93.3% |
+| Oldest first | 212 · 67.5% | 171 · 74.1% | 119 · 81.9% | 48 · 92.7% |
+| Random (mean of 5) | 201 · 69.8% | 103 · 84.5% | 75 · 88.8% | 48 · 92.7% |
+| Least useful | 212 · 67.5% | 171 · 74.1% | 119 · 81.9% | 48 · 92.7% |
+| **Least useful + merge** | 173 · 73.7% | 75 · 88.7% | **48 · 92.7%** | 48 · 92.7% |
 
-- **Merging is the big win:** the year's 630 rows collapse into 67 merged rows with no loss at all,
-  so even K=50 is almost free. Chosen: least useful + merge, K=50.
-- **Rare items:** with K=50, oldest first remembers only 24% of long-gap rows; random 61%; least
-  useful 55%; least useful + merge 97%. Random beats oldest first on rare items (the classic reason
-  for reservoir sampling) but is the worst overall.
-- **Old exceptions:** at K=50, oldest first and least useful evict the old Trader Joe's Groceries
-  rows, so the gift card spreads again in June (0/4). Random keeps some old rows by luck, so the gift
-  card is contained, but it also keeps old coffee/Ashley rows and adapts slowly.
-- **Caveat:** merging works this well because the generated data repeats the same shop strings.
-  Real statements vary more, so merging will compress less; the test set will show how much.
+- **Every stored row matters here.** Each one is a correction or an answer, so forgetting any of
+  them costs checks: oldest first more than doubles the checks at K=30.
+- **Least useful = oldest first** without merging: with no freshness and every row a user's answer,
+  all rows count the same and the tie goes to the oldest.
+- **Merging is the win:** the year's 48 rows collapse into 29 with no loss (repeat corrections of
+  the same shop, e.g. Trader Joe's, Philz), so K=30 holds everything. Chosen: least useful + merge,
+  K=30. At smaller K, merged rows with many members survive and one-off rows go first.
+- **Rare items:** at K=10, oldest first gets 24% of long-gap rows right; random 49%; least useful +
+  merge 52%. Random beats oldest first, as reservoir sampling is meant to, but merging does best.
+- **Caveat:** merging works well because the generated data repeats the same shop strings. Real
+  statements vary more; the test set will show how much merging still compresses.
+
+**Combined best on tune:** 92.7% accuracy, 48 manual checks a year, 29 rows of memory (frozen
+only: 49.4%, 333).
 
 ---
 
@@ -254,6 +250,19 @@ Once all three experiments are settled on tune (every setting locked):
 
 The combined best and the test run are in `experiments/final.py`:
 `--val` and `--test FILE.csv`.
+
+### Val results (run once, 2026-11-24, no settings changed)
+
+| | Tune | Val |
+|---|---|---|
+| **Exp 1** (checks a year): frozen / corrections only / corrections + answered / everything | 333 / 139 / **48** / 123 | 311 / 147 / **55** / 94 |
+| **Exp 2**: Exp 1 winner / + freshness (any half-life) / everything + trust + freshness | 48 / 48 / 44 | 55 / 55 / 51 |
+| **Exp 3** at K=30: oldest first / random / least useful / least useful + merge | 119 / 75 / 119 / **48** | 86 / 67 / 86 / **55** |
+| **Combined best vs frozen**: accuracy, checks a year | 49.4% → 92.7%, 333 → 48 | 55.2% → 92.0%, 311 → 55 |
+
+Every ranking from tune holds on val. The comparison row beats the Exp 1 winner by 4 checks again,
+again entirely through the 4 spread errors after the gift card (0 vs 4), so the trade-off it shows
+is real but small. Outputs, including the printed tables (`console.txt`), are in `results/*/val/`.
 
 ## Fixed decisions
 
@@ -271,7 +280,7 @@ src/metrics.py                 log → metrics tables, line charts, heatmaps
 experiments/common.py          shared: tune/val files, running a list of conditions, reports
 experiments/pick_tau.py        chooses the similarity cutoff on tune
 experiments/exp1_storage.py    Experiment 1 → results/exp1/<split>/            (done on tune)
-experiments/exp2_read.py       Experiment 2 → results/exp2/<split>/, chosen.json (done on tune)
+experiments/exp2_read.py       Experiment 2 → results/exp2/<split>/, chosen.json (done on tune; old grid in exploratory/)
 experiments/exp3_forget.py     Experiment 3 → results/exp3/<split>/, chosen.json (done on tune)
-experiments/final.py           combined best vs frozen only → results/final/<split>/ (tune done; val, test at the end)
+experiments/final.py           combined best vs frozen only → results/final/<split>/ (tune, val done; test at the end)
 ```

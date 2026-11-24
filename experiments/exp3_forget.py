@@ -1,17 +1,20 @@
 """Experiment 3: what to forget. (EXPERIMENTS.md)
 
-Builds on Experiment 2's best reader ("+ Both", read from results/exp2/chosen.json): memory stores
-everything and votes count similarity x trust x freshness. Now memory can hold at most K rows.
-When it is full, an eviction rule decides which row goes:
+Builds on Experiment 2's choice (read from results/exp2/chosen.json): memory stores corrected and
+answered rows, votes count similarity. Now memory can hold at most K rows. When it is full, an
+eviction rule decides which row goes:
 
     oldest first          the row stored longest ago
     random                reservoir sampling: every row seen so far has the same chance to stay
                           (5 seeds, averaged)
-    least useful          the row whose vote counts least right now (trust x freshness)
+    least useful          the row whose vote counts least right now (weight x freshness). With no
+                          freshness and every stored row a user's answer, all rows count the same,
+                          so this falls back to oldest first
     least useful + merge  as above, and a new row first merges into a near-identical stored row
-                          with the same label (similarity >= 0.99), so repeats take no extra space
+                          with the same label (similarity >= 0.99); the merged row's weight is the
+                          number of rows in it, so rows the user confirmed again and again stay
 
-The year stores up to ~630 rows, so K = 50 / 100 / 200 are real limits.
+The year stores up to ~48 rows, so K = 10 / 20 / 30 are real limits.
 
 Choice for the combined best (made on tune, saved to results/exp3/chosen.json): the rule with the
 fewest manual checks summed over the three K, at the smallest K whose manual checks stay within
@@ -30,7 +33,7 @@ from common import ROOT, SHOWN, pick_split, report, run_conditions, slug
 from memory import Config
 from metrics import heatmap
 
-SIZES = [50, 100, 200]
+SIZES = [10, 20, 30]
 SEEDS = range(5)
 MERGE = 0.99
 RULES = ["Oldest first", "Random", "Least useful", "Least useful + merge"]
@@ -40,9 +43,8 @@ CHOSEN = ROOT / "results" / "exp3" / "chosen.json"
 def base_reader() -> Config:
     path = ROOT / "results" / "exp2" / "chosen.json"
     if not path.exists():
-        raise SystemExit("Run Experiment 2 on tune first: Experiment 3 builds on its chosen reader.")
-    both = next(c for c in json.loads(path.read_text()) if c["name"].startswith("+ Both"))
-    return Config(**both)
+        raise SystemExit("Run Experiment 2 on tune first: Experiment 3 builds on its choice.")
+    return Config(**json.loads(path.read_text()))
 
 
 def conditions(base: Config):

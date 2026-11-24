@@ -1,17 +1,17 @@
 ,accuracy,accuracy,manual_checks,manual_checks
 ,min,max,min,max
 Frozen only,49.4,49.4,333.0,333.0
-Unlimited,93.3,93.3,44.0,44.0
-Unlimited + merge,93.3,93.3,44.0,44.0
-"Oldest first, K=50",82.9,82.9,112.0,112.0
-"Random, K=50",76.2,80.5,126.0,158.0
-"Least useful, K=50",85.6,85.6,94.0,94.0
-"Least useful + merge, K=50",93.2,93.2,45.0,45.0
-"Oldest first, K=100",89.8,89.8,68.0,68.0
-"Random, K=100",86.8,87.9,80.0,89.0
-"Least useful, K=100",92.2,92.2,52.0,52.0
-"Least useful + merge, K=100",93.3,93.3,44.0,44.0
-"Oldest first, K=200",93.0,93.0,46.0,46.0
-"Random, K=200",91.1,92.5,49.0,58.0
-"Least useful, K=200",93.0,93.0,46.0,46.0
-"Least useful + merge, K=200",93.3,93.3,44.0,44.0
+Unlimited,92.7,92.7,48.0,48.0
+Unlimited + merge,92.7,92.7,48.0,48.0
+"Oldest first, K=10",67.5,67.5,212.0,212.0
+"Random, K=10",67.0,72.5,179.0,222.0
+"Least useful, K=10",67.5,67.5,212.0,212.0
+"Least useful + merge, K=10",73.7,73.7,173.0,173.0
+"Oldest first, K=20",74.1,74.1,171.0,171.0
+"Random, K=20",83.0,86.8,89.0,117.0
+"Least useful, K=20",74.1,74.1,171.0,171.0
+"Least useful + merge, K=20",88.7,88.7,75.0,75.0
+"Oldest first, K=30",81.9,81.9,119.0,119.0
+"Random, K=30",87.6,89.7,67.0,83.0
+"Least useful, K=30",81.9,81.9,119.0,119.0
+"Least useful + merge, K=30",92.7,92.7,48.0,48.0

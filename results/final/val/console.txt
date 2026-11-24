@@ -1,0 +1,22 @@
+
+=== val: transactions_val.csv ===
+
+                                            accuracy  manual_checks  flagged  corrected  from_memory  flips  adaptation_errors  adaptation_rows  spread_errors  spread_rows  memory_size
+Frozen only                                     55.2          311.0    106.0      205.0          0.0    0.0               38.0             38.0            0.0          9.0          0.0
+Combined best (Least useful + merge, K=30)      92.0           55.0     14.0       41.0        271.0    4.0                0.0             38.0            4.0          9.0         29.0
+
+Accuracy by month (%)
+
+month                                         1     2      3     4      5      6      7      8     9     10    11     12
+condition                                                                                                               
+Frozen only                                 58.5  65.0   67.3  60.0   66.0   65.3   67.8   66.0  50.7  38.9  29.7   36.8
+Combined best (Least useful + merge, K=30)  58.5  88.3  100.0  95.6  100.0  100.0  100.0  100.0  78.3  98.1  90.6  100.0
+
+Manual checks by month
+
+month                                         1     2     3     4     5     6     7     8     9     10    11    12
+condition                                                                                                         
+Frozen only                                 22.0  21.0  18.0  22.0  16.0  18.0  20.0  20.0  36.0  34.0  45.0  39.0
+Combined best (Least useful + merge, K=30)  22.0   7.0   2.0   2.0   0.0   0.0   0.0   0.0  15.0   1.0   6.0   0.0
+
+Headline (val): accuracy 55.2% -> 92.0%, manual checks 311 -> 55 a year, memory 29 rows.

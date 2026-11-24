@@ -1,0 +1,28 @@
+W1124 04:19:30.074000 38178 torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+Loading weights:   0%|          | 0/104 [00:00<?, ?it/s]Loading weights: 100%|██████████| 104/104 [00:00<00:00, 10456.60it/s]
+
+=== val: transactions_val.csv ===
+
+                        accuracy  manual_checks  flagged  corrected  from_memory  flips  adaptation_errors  adaptation_rows  spread_errors  spread_rows  memory_size
+Frozen only                 55.2          311.0    106.0      205.0          0.0    0.0               38.0             38.0            0.0          9.0          0.0
+Corrections only            80.1          147.0    106.0       41.0        179.0    4.0                0.0             38.0            4.0          9.0         41.0
+Corrections + answered      92.0           55.0     14.0       41.0        271.0    4.0                0.0             38.0            4.0          9.0         55.0
+Everything                  86.0           94.0     14.0       80.0        585.0    0.0               38.0             38.0            0.0          9.0        659.0
+
+Accuracy by month (%)
+
+month                     1     2      3     4      5      6      7      8     9     10    11     12
+condition                                                                                           
+Frozen only             58.5  65.0   67.3  60.0   66.0   65.3   67.8   66.0  50.7  38.9  29.7   36.8
+Corrections only        58.5  83.3   77.6  71.1   83.0   89.8   84.7   84.9  69.6  90.7  79.7   89.5
+Corrections + answered  58.5  88.3  100.0  95.6  100.0  100.0  100.0  100.0  78.3  98.1  90.6  100.0
+Everything              58.5  88.3  100.0  95.6  100.0  100.0  100.0  100.0  78.3  72.2  78.1   70.2
+
+Manual checks by month
+
+month                     1     2     3     4     5     6     7     8     9     10    11    12
+condition                                                                                     
+Frozen only             22.0  21.0  18.0  22.0  16.0  18.0  20.0  20.0  36.0  34.0  45.0  39.0
+Corrections only        22.0  10.0  13.0  17.0   8.0   6.0  10.0  10.0  23.0   6.0  13.0   9.0
+Corrections + answered  22.0   7.0   2.0   2.0   0.0   0.0   0.0   0.0  15.0   1.0   6.0   0.0
+Everything              22.0   7.0   2.0   2.0   0.0   0.0   0.0   0.0  15.0  15.0  14.0  17.0
