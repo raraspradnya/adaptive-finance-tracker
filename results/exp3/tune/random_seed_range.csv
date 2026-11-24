@@ -1,0 +1,17 @@
+,accuracy,accuracy,manual_checks,manual_checks
+,min,max,min,max
+Frozen only,49.4,49.4,333.0,333.0
+Unlimited,92.7,92.7,48.0,48.0
+Unlimited + merge,92.7,92.7,48.0,48.0
+"Oldest first, K=10",67.5,67.5,212.0,212.0
+"Random, K=10",67.0,72.5,179.0,222.0
+"Least useful, K=10",67.5,67.5,212.0,212.0
+"Least useful + merge, K=10",73.7,73.7,173.0,173.0
+"Oldest first, K=20",74.1,74.1,171.0,171.0
+"Random, K=20",83.0,86.8,89.0,117.0
+"Least useful, K=20",74.1,74.1,171.0,171.0
+"Least useful + merge, K=20",88.7,88.7,75.0,75.0
+"Oldest first, K=30",81.9,81.9,119.0,119.0
+"Random, K=30",87.6,89.7,67.0,83.0
+"Least useful, K=30",81.9,81.9,119.0,119.0
+"Least useful + merge, K=30",92.7,92.7,48.0,48.0

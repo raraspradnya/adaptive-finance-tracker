@@ -1,0 +1,19 @@
+case,condition,5,6,7,8,9,10,11,12
+Coffee (should be Coffee),Frozen only,,,0/14,0/13,0/18,0/22,0/13,0/25
+Coffee (should be Coffee),Exp 1 winner,,,0/14,13/13,18/18,22/22,13/13,25/25
+Coffee (should be Coffee),Exp 1 winner + Freshness 6 mo,,,0/14,13/13,18/18,22/22,13/13,25/25
+Coffee (should be Coffee),Exp 1 winner + Freshness 3 mo,,,0/14,13/13,18/18,22/22,13/13,25/25
+Coffee (should be Coffee),Exp 1 winner + Freshness 1 mo,,,0/14,13/13,18/18,22/22,13/13,25/25
+Coffee (should be Coffee),Everything + trust + freshness,,,0/14,13/13,18/18,22/22,13/13,25/25
+Trader Joe's (should be Groceries),Frozen only,2/2,4/4,2/2,2/2,2/2,3/3,2/2,1/1
+Trader Joe's (should be Groceries),Exp 1 winner,2/2,0/4,2/2,2/2,2/2,3/3,2/2,1/1
+Trader Joe's (should be Groceries),Exp 1 winner + Freshness 6 mo,2/2,0/4,2/2,2/2,2/2,3/3,2/2,1/1
+Trader Joe's (should be Groceries),Exp 1 winner + Freshness 3 mo,2/2,0/4,2/2,2/2,2/2,3/3,2/2,1/1
+Trader Joe's (should be Groceries),Exp 1 winner + Freshness 1 mo,2/2,0/4,2/2,2/2,2/2,3/3,2/2,1/1
+Trader Joe's (should be Groceries),Everything + trust + freshness,2/2,4/4,2/2,2/2,2/2,3/3,2/2,1/1
+Ashley (should be Social),Frozen only,,,,,,,0/2,0/2
+Ashley (should be Social),Exp 1 winner,,,,,,,0/2,2/2
+Ashley (should be Social),Exp 1 winner + Freshness 6 mo,,,,,,,0/2,2/2
+Ashley (should be Social),Exp 1 winner + Freshness 3 mo,,,,,,,0/2,2/2
+Ashley (should be Social),Exp 1 winner + Freshness 1 mo,,,,,,,0/2,2/2
+Ashley (should be Social),Everything + trust + freshness,,,,,,,0/2,2/2

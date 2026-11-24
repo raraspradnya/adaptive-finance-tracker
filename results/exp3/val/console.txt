@@ -1,0 +1,95 @@
+
+Base reader (Experiment 2): Exp 1 winner
+
+                            accuracy  manual_checks  adaptation_errors  spread_errors  long_gap_rows  long_gap_accuracy  memory_size
+Frozen only                     55.2          311.0               38.0            0.0           39.0               17.9          0.0
+Unlimited                       92.0           55.0                0.0            4.0           39.0              100.0         55.0
+Unlimited + merge               92.0           55.0                0.0            4.0           39.0              100.0         29.0
+Oldest first, K=10              69.7          209.0               21.0            4.0           39.0               35.9         10.0
+Random, K=10                    71.4          197.8               30.2            1.8           39.0               51.8         10.0
+Least useful, K=10              69.7          209.0               21.0            4.0           39.0               35.9         10.0
+Least useful + merge, K=10      76.5          160.0               16.0            0.0           39.0               56.4         10.0
+Oldest first, K=20              79.1          145.0               11.0            4.0           39.0               59.0         20.0
+Random, K=20                    83.9          112.0               15.6            0.0           39.0               76.4         20.0
+Least useful, K=20              79.1          145.0               11.0            4.0           39.0               59.0         20.0
+Least useful + merge, K=20      88.9           75.0                3.0            4.0           39.0               76.9         20.0
+Oldest first, K=30              87.7           86.0                3.0            4.0           39.0               82.1         30.0
+Random, K=30                    90.1           67.0                5.8            0.8           39.0               90.2         30.0
+Least useful, K=30              87.7           86.0                3.0            4.0           39.0               82.1         30.0
+Least useful + merge, K=30      92.0           55.0                0.0            4.0           39.0              100.0         29.0
+
+Random eviction across 5 seeds (min / max)
+
+                           accuracy       manual_checks       
+                                min   max           min    max
+Frozen only                    55.2  55.2         311.0  311.0
+Unlimited                      92.0  92.0          55.0   55.0
+Unlimited + merge              92.0  92.0          55.0   55.0
+Oldest first, K=10             69.7  69.7         209.0  209.0
+Random, K=10                   68.6  75.6         177.0  213.0
+Least useful, K=10             69.7  69.7         209.0  209.0
+Least useful + merge, K=10     76.5  76.5         160.0  160.0
+Oldest first, K=20             79.1  79.1         145.0  145.0
+Random, K=20                   82.4  84.7         109.0  118.0
+Least useful, K=20             79.1  79.1         145.0  145.0
+Least useful + merge, K=20     88.9  88.9          75.0   75.0
+Oldest first, K=30             87.7  87.7          86.0   86.0
+Random, K=30                   87.3  91.8          56.0   86.0
+Least useful, K=30             87.7  87.7          86.0   86.0
+Least useful + merge, K=30     92.0  92.0          55.0   55.0
+
+Manual checks per year: eviction rule x memory size
+
+                       K=10   K=20  K=30  Unlimited
+Oldest first          209.0  145.0  86.0       55.0
+Random                197.8  112.0  67.0       55.0
+Least useful          209.0  145.0  86.0       55.0
+Least useful + merge  160.0   75.0  55.0       55.0
+
+Accuracy (%): eviction rule x memory size
+
+                      K=10  K=20  K=30  Unlimited
+Oldest first          69.7  79.1  87.7       92.0
+Random                71.4  83.9  90.1       92.0
+Least useful          69.7  79.1  87.7       92.0
+Least useful + merge  76.5  88.9  92.0       92.0
+
+Long-gap accuracy (%): eviction rule x memory size
+
+                      K=10  K=20   K=30  Unlimited
+Oldest first          35.9  59.0   82.1      100.0
+Random                51.8  76.4   90.2      100.0
+Least useful          35.9  59.0   82.1      100.0
+Least useful + merge  56.4  76.9  100.0      100.0
+
+=== val: transactions_val.csv ===
+
+                            accuracy  manual_checks  flagged  corrected  from_memory  flips  adaptation_errors  adaptation_rows  spread_errors  spread_rows  memory_size
+Frozen only                     55.2          311.0    106.0      205.0          0.0    0.0               38.0             38.0            0.0          9.0          0.0
+Unlimited                       92.0           55.0     14.0       41.0        271.0    4.0                0.0             38.0            4.0          9.0         55.0
+Oldest first, K=10              69.7          209.0     71.0      138.0        115.0    4.0               21.0             38.0            4.0          9.0         10.0
+Random, K=10                    71.4          197.8     73.2      124.6        118.8    1.8               30.2             38.0            1.8          9.0         10.0
+Least useful, K=10              69.7          209.0     71.0      138.0        115.0    4.0               21.0             38.0            4.0          9.0         10.0
+Least useful + merge, K=10      76.5          160.0     62.0       98.0        151.0    0.0               16.0             38.0            0.0          9.0         10.0
+
+Accuracy by month (%)
+
+month                         1     2       3      4      5       6       7       8     9     10     11      12
+condition                                                                                                      
+Frozen only                 58.5  65.0   67.30  60.00   66.0   65.30   67.80   66.00  50.7  38.9  29.70   36.80
+Unlimited                   58.5  88.3  100.00  95.60  100.0  100.00  100.00  100.00  78.3  98.1  90.60  100.00
+Oldest first, K=10          58.5  81.7   79.60  73.30   76.6   81.60   78.00   81.10  58.0  63.0  57.80   54.40
+Random, K=10                58.5  82.0   81.22  77.78   81.3   83.68   81.36   81.12  65.5  58.9  53.12   60.68
+Least useful, K=10          58.5  81.7   79.60  73.30   76.6   81.60   78.00   81.10  58.0  63.0  57.80   54.40
+Least useful + merge, K=10  58.5  85.0   87.80  75.60   85.1   89.80   83.10   84.90  68.1  61.1  68.80   75.40
+
+Manual checks by month
+
+month                         1     2     3     4     5     6     7     8     9     10    11    12
+condition                                                                                         
+Frozen only                 22.0  21.0  18.0  22.0  16.0  18.0  20.0  20.0  36.0  34.0  45.0  39.0
+Unlimited                   22.0   7.0   2.0   2.0   0.0   0.0   0.0   0.0  15.0   1.0   6.0   0.0
+Oldest first, K=10          22.0  11.0  12.0  12.0  11.0  10.0  13.0  12.0  29.0  21.0  27.0  29.0
+Random, K=10                22.0  10.8  11.2  14.0   8.8   8.2  11.2  10.4  24.2  22.8  30.0  24.2
+Least useful, K=10          22.0  11.0  12.0  12.0  11.0  10.0  13.0  12.0  29.0  21.0  27.0  29.0
+Least useful + merge, K=10  22.0   9.0   8.0  11.0   7.0   5.0  10.0   8.0  22.0  21.0  20.0  17.0

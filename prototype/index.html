@@ -5,7 +5,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: fixed left sidebar (Dashboard, Upload & review, Budget) beside one working column. Becomes a top bar on phones. Category colors are a validated categorical palette, assigned in fixed order. */
+/* Layout: fixed left sidebar (Dashboard, Upload & review, Budget) beside one working column. Becomes a top bar on phones. Every category gets its own color: 12 hues 30 degrees apart, then the same 12 at a lighter level, so even user-made categories never share one. */
 :root {
   --bg: #EDF0F4;
   --surface: #FFFFFF;
@@ -19,15 +19,13 @@
   --accent-soft: #E3E6F9;
   --warn: #99580A;
   --warn-soft: #FBEBD0;
-  --c-food: #2a78d6;
-  --c-transport: #eb6834;
-  --c-shopping: #1baf7a;
-  --c-social: #eda100;
-  --c-subs: #e87ba4;
-  --c-bills: #008300;
-  --c-x1: #6250d6;
-  --c-x2: #e34948;
-  --c-other: #7E8DA0;
+  /* category colors: oklch(L C hue). Categories 1-12 use level 0, 13-24 use level 1 (lighter). */
+  --cat-l0: 0.60; --cat-c0: 0.16; --cat-l1: 0.80; --cat-c1: 0.11;
+  --pos: #17804A;
+  --pos-soft: #DDF3E6;
+  --attn: #C0364A;
+  --attn-soft: #FCEBEE;
+  --attn-line: #F2C2CB;
   --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
   --font-body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
@@ -38,8 +36,9 @@
     --ink: #E8EEF5; --ink-2: #A9B7C6; --ink-3: #7E8DA0;
     --accent: #8E9BFF; --accent-ink: #0E141B; --accent-soft: #232A52;
     --warn: #F0B35A; --warn-soft: #382811;
-    --c-food: #3987e5; --c-transport: #d95926; --c-shopping: #199e70; --c-social: #c98500;
-    --c-subs: #d55181; --c-bills: #008300; --c-x1: #9085e9; --c-x2: #e66767; --c-other: #7E8DA0;
+    --cat-l0: 0.70; --cat-c0: 0.15; --cat-l1: 0.87; --cat-c1: 0.09;
+    --pos: #5FD394; --pos-soft: #13301F;
+    --attn: #FF8A9B; --attn-soft: #33161C; --attn-line: #5A2530;
     color-scheme: dark;
   }
 }
@@ -48,8 +47,9 @@
   --ink: #E8EEF5; --ink-2: #A9B7C6; --ink-3: #7E8DA0;
   --accent: #8E9BFF; --accent-ink: #0E141B; --accent-soft: #232A52;
   --warn: #F0B35A; --warn-soft: #382811;
-  --c-food: #3987e5; --c-transport: #d95926; --c-shopping: #199e70; --c-social: #c98500;
-  --c-subs: #d55181; --c-bills: #008300; --c-x1: #9085e9; --c-x2: #e66767; --c-other: #7E8DA0;
+  --cat-l0: 0.70; --cat-c0: 0.15; --cat-l1: 0.87; --cat-c1: 0.09;
+  --pos: #5FD394; --pos-soft: #13301F;
+  --attn: #FF8A9B; --attn-soft: #33161C; --attn-line: #5A2530;
   color-scheme: dark;
 }
 
@@ -95,7 +95,8 @@ h1, h2, h3, p { margin: 0; }
 .listhead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; padding: 12px 14px; border-bottom: 1px solid var(--line); }
 .listhead h2, .cardhead h2 { font-family: var(--font-display); font-size: 16px; }
 .listhead p { color: var(--ink-2); font-size: 13px; }
-.listfoot { display: flex; justify-content: flex-end; padding: 12px 14px; border-top: 1px solid var(--line); }
+.listfoot { display: flex; justify-content: flex-end; align-items: center; gap: 12px; padding: 12px 14px; border-top: 1px solid var(--line); }
+.savehint { font-size: 13px; color: var(--attn); font-weight: 600; }
 .notice { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; background: var(--accent-soft); border-radius: 10px; padding: 10px 14px; }
 
 /* dashboard */
@@ -158,7 +159,20 @@ h1, h2, h3, p { margin: 0; }
 .chip i { width: 8px; height: 8px; border-radius: 50%; background: var(--c); display: inline-block; flex: none; }
 button.chip:hover { background: color-mix(in srgb, var(--c) 24%, var(--surface)); }
 .tag { font-size: 12px; color: var(--ink-3); }
-.tag.warn { color: var(--warn); font-weight: 600; }
+/* "Check this": a soft rose row with a left accent and a small pill, so the eye lands on it first */
+.flag { display: inline-flex; align-items: center; gap: 5px; padding: 2px 9px 2px 7px; border-radius: 99px;
+  font-size: 12px; font-weight: 600; color: var(--attn); background: var(--surface); border: 1px solid var(--attn-line); }
+.flag svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.row.check { background: var(--attn-soft); box-shadow: inset 3px 0 0 var(--attn); }
+/* "Check this" pill + its own ✓ / ✗ buttons, kept together on one line */
+.checkline { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.yn { display: inline-flex; gap: 4px; }
+.yn button { width: 26px; height: 26px; border-radius: 50%; display: inline-grid; place-items: center; cursor: pointer;
+  padding: 0; background: var(--surface); border: 1px solid var(--line); color: var(--ink-2); }
+.yn svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.yn .yes:hover, .yn .yes:focus-visible { color: var(--pos); border-color: var(--pos); }
+.yn .no:hover, .yn .no:focus-visible { color: var(--attn); border-color: var(--attn); }
+.checkcount { color: var(--attn); font-weight: 600; }
 .tag.you { color: var(--ink-2); font-weight: 600; }
 .tag.new { color: var(--accent); font-weight: 600; }
 
@@ -167,14 +181,27 @@ button.chip:hover { background: color-mix(in srgb, var(--c) 24%, var(--surface))
 .drop h2 { font-family: var(--font-display); font-size: 18px; }
 .drop p { color: var(--ink-2); max-width: 46ch; }
 .drop .btn { margin-top: 6px; }
-.row { display: grid; grid-template-columns: minmax(0, 1fr) 90px 250px; grid-template-areas: "merch amt cat"; gap: 8px 14px; align-items: center; padding: 10px 14px; border-top: 1px solid var(--line); }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) 140px 250px; grid-template-areas: "merch amt cat"; gap: 8px 14px; align-items: center; padding: 10px 14px; border-top: 1px solid var(--line); }
 .listhead + .row { border-top: 0; }
 .row.flash { background: var(--accent-soft); }
 .merch { min-width: 0; grid-area: merch; }
 .merch b { font-weight: 600; display: block; }
-.merch .raw { color: var(--ink-3); font-family: var(--font-mono); font-size: 12px; overflow-wrap: anywhere; }
-.amt { grid-area: amt; text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.merch b { font-family: var(--font-mono); font-size: 13px; font-weight: 500; overflow-wrap: anywhere; }
+.sub2 { color: var(--ink-3); font-size: 12px; }
+.note { color: var(--ink-2); font-style: italic; }
+.amt { grid-area: amt; display: flex; align-items: center; justify-content: flex-end; gap: 8px; white-space: nowrap; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.amt.in, .amtline.in, .inv { color: var(--pos); font-weight: 600; }
+/* direction icon: arrow into the account for money in, out of it for money out */
+.dir { flex: none; width: 20px; height: 20px; border-radius: 50%; display: inline-grid; place-items: center; background: var(--surface-2); color: var(--ink-3); }
+.dir svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.amt.in .dir { background: var(--pos-soft); color: var(--pos); }
+.mrow { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: baseline; color: var(--ink-2); }
 .catcell { grid-area: cat; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-width: 0; }
+/* on wide screens: category chip, "Check this" and ✓ / ✗ all on one line */
+@media (min-width: 1100px) {
+  .row { grid-template-columns: minmax(0, 1fr) 140px 340px; }
+  .catcell { flex-wrap: nowrap; }
+}
 .fileline { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2px 12px; padding: 9px 14px; border-top: 1px solid var(--line); }
 .listhead + .fileline { border-top: 0; }
 .fileline b { font-family: var(--font-mono); font-weight: 500; font-size: 13px; overflow-wrap: anywhere; }
@@ -211,17 +238,6 @@ button.chip:hover { background: color-mix(in srgb, var(--c) 24%, var(--surface))
 .catpick { display: flex; flex-wrap: wrap; gap: 6px; }
 .catpick .chip { padding: 4px 12px; cursor: pointer; }
 .catpick .chip[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--ink); background: color-mix(in srgb, var(--c) 30%, var(--surface)); }
-.scope { display: flex; flex-direction: column; gap: 6px; }
-.scope label { display: flex; gap: 10px; align-items: flex-start; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; cursor: pointer; }
-.scope label:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
-.scope small { display: block; color: var(--ink-2); }
-.scope .rec { font-size: 11px; font-weight: 600; color: var(--accent); margin-left: 6px; }
-.scope .risk { font-size: 11px; font-weight: 600; color: var(--warn); margin-left: 6px; }
-.preview { background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: 13px; }
-.preview.warn { background: var(--warn-soft); border-color: transparent; }
-.preview ul { list-style: none; padding: 0; margin: 6px 0 0; display: flex; flex-direction: column; gap: 4px; }
-.preview li { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
-.preview .note { color: var(--ink-2); margin-top: 6px; }
 .mfoot { display: flex; justify-content: flex-end; gap: 8px; }
 
 .toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 10px; z-index: 30; max-width: min(92vw, 520px); box-shadow: 0 6px 20px rgba(0,0,0,.25); }
@@ -269,95 +285,76 @@ button.chip:hover { background: color-mix(in srgb, var(--c) 24%, var(--surface))
 <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 
 <script>
-const CATS = { food: "Food", transport: "Transport", shopping: "Shopping", social: "Social", subs: "Subscriptions", bills: "Bills" };
-const CAT_KEYS = Object.keys(CATS);
-const SLOT = {};       // category key -> color slot, for categories the user adds
+// Everything below is filled from the local server (src/server.py) when the page loads:
+// the frozen model's categories, the monthly sample statements, and the months the user
+// had already reviewed before this session.
+const CATS = {};
+const CAT_KEYS = [];
+const COLOR_INDEX = {}; // category key -> its own color index (0, 1, 2, ...), never reused
 let customCount = 0;
+const NON_SPEND = new Set();   // shown in review, left out of spending and budgets (Income, Transfer)
+const spendKeys = () => CAT_KEYS.filter(k => !NON_SPEND.has(k));
+const keyOf = name => name.toLowerCase().replace(/[^a-z0-9]+/g, "_");
+// Slots 0-11 are the strong hues, 12-23 the lighter ones. Everyday spending categories and the
+// user's own categories take strong hues first; rarely shown ones (Income, Transfer, Fees...) take
+// the lighter level, so the categories that sit next to each other on the dashboard stay far apart.
+const EVERYDAY = new Set(["groceries", "restaurants", "housing", "shopping", "transportation",
+  "entertainment", "subscription", "personal_care"]);
+function giveColor(k, light = false) {
+  if (k in COLOR_INDEX) return;
+  const used = new Set(Object.values(COLOR_INDEX));
+  let i = light ? 12 : 0;
+  while (used.has(i)) i++;
+  COLOR_INDEX[k] = i;
+}
 
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", "January 2027"];
 const monthName = i => i < 0 ? "December" : MONTHS[i];
 
-const MER = {
-  trader:  { name: "Trader Joe’s",     tags: ["grocery"] },
-  safeway: { name: "Safeway",          tags: ["grocery"] },
-  ramen:   { name: "Joe’s Ramen",      tags: ["restaurant"] },
-  chipotle:{ name: "Chipotle",         tags: ["restaurant"] },
-  anchor:  { name: "The Anchor Brewing", tags: ["restaurant", "bar"] },
-  bluebot: { name: "Blue Bottle Coffee", tags: ["cafe"] },
-  peets:   { name: "Peet’s Coffee",    tags: ["cafe"] },
-  clipper: { name: "Clipper (BART)",   tags: ["transit"] },
-  uber:    { name: "Uber",             tags: ["rideshare"] },
-  lyft:    { name: "Lyft",             tags: ["rideshare"] },
-  netflix: { name: "Netflix",          tags: ["streaming"] },
-  spotify: { name: "Spotify",          tags: ["streaming"] },
-  amazon:  { name: "Amazon",           tags: ["online"] },
-  uniqlo:  { name: "Uniqlo",           tags: ["clothing"] },
-  pge:     { name: "PG&E",             tags: ["utility"] },
-  amc:     { name: "AMC Metreon",      tags: ["movies"] }
-};
+const SPEND = {};      // category key -> totals for each month reviewed before this session
+let SEEDED = 0;        // number of months reviewed before this session
+const FILES = [];      // one sample statement per month: { m, file, n }
+const HIST = {};       // the sample data has no 2025 history
 
-const toRows = (m, rows) => rows.map(a => ({ m, date: a[0], raw: a[1], merchant: a[2], amt: a[3], base: a[4], conf: a[5] }));
+async function boot() {
+  let d;
+  try { d = await (await fetch("/api/init")).json(); }
+  catch (e) {
+    $("#view").innerHTML = `<div class="head"><h1>Start the server</h1></div>
+      <p class="sub">This prototype gets its categories from the frozen model. In the project folder, run
+      <code>.venv/bin/python src/server.py</code>, then open <code>http://127.0.0.1:8290</code>.</p>`;
+    return;
+  }
+  d.categories.forEach(name => { const k = keyOf(name); CATS[k] = name; CAT_KEYS.push(k); giveColor(k, !EVERYDAY.has(k)); });
+  d.nonSpending.forEach(name => NON_SPEND.add(keyOf(name)));
+  d.customCategories.forEach(name => addCategory(name));   // categories this user made before this session
+  const byName = Object.fromEntries(CAT_KEYS.map(k => [CATS[k], k]));
+  for (const [name, series] of Object.entries(d.spend)) SPEND[byName[name]] = series;
+  FILES.push(...d.files);
+  SEEDED = d.seeded;
+  Object.assign(state, { month: SEEDED - 1, reviewed: SEEDED, uploaded: SEEDED });
+  render();
+}
 
-// Sample totals for months already reviewed, January to October 2026.
-const SPEND = {
-  food:      [228, 241, 262, 235, 247, 240, 225, 250, 226.25, 218.40],
-  transport: [42, 38, 61, 35, 44, 40, 30, 35, 34.60, 38.75],
-  shopping:  [88, 52, 143, 61, 70, 60, 55, 65, 65.55, 89.89],
-  social:    [34, 48, 72, 29, 55, 30, 25, 40, 31, 38],
-  subs:      [27.48, 27.48, 27.48, 27.48, 27.48, 27.48, 27.48, 27.48, 27.48, 27.48],
-  bills:     [96, 91, 84, 76, 72, 72, 68, 70, 70.85, 72.40]
-};
-const SEEDED = 10;
-
-// day label, raw bank string, merchant key, amount, base category, base confidence
-const NOV = toRows(10, [
-  ["Nov 01", "JOE'S RAMEN SF CA", "ramen", 26.00, "food", .81],
-  ["Nov 02", "TRADER JOE'S #135 BERKELEY CA", "trader", 52.30, "food", .94],
-  ["Nov 03", "CLIPPER SVC BART", "clipper", 20.00, "transport", .97],
-  ["Nov 04", "NETFLIX.COM 866-579-7172", "netflix", 15.49, "subs", .99],
-  ["Nov 05", "THE ANCHOR BREWING SF", "anchor", 41.00, "food", .45],
-  ["Nov 06", "SAFEWAY #2741 OAKLAND CA", "safeway", 58.77, "food", .95],
-  ["Nov 07", "LYFT *RIDE 11-07", "lyft", 16.40, "transport", .92],
-  ["Nov 08", "CHIPOTLE 2297 BERKELEY", "chipotle", 13.80, "food", .90],
-  ["Nov 10", "PG&E WEB ONLINE", "pge", 74.10, "bills", .98],
-  ["Nov 11", "SPOTIFY USA", "spotify", 11.99, "subs", .99],
-  ["Nov 13", "JOE'S RAMEN SF CA", "ramen", 23.50, "food", .81],
-  ["Nov 15", "AMZN MKTP US*9B1ZX4", "amazon", 29.99, "shopping", .72],
-  ["Nov 18", "TRADER JOE'S #135 BERKELEY CA", "trader", 47.65, "food", .94],
-  ["Nov 20", "PEET'S COFFEE #8812", "peets", 6.25, "food", .87],
-  ["Nov 22", "UBER *TRIP HELP.UBER.COM", "uber", 21.30, "transport", .93]
-]);
-
-const DEC = toRows(11, [
-  ["Dec 01", "TRADER JOE'S #135 BERKELEY CA", "trader", 49.85, "food", .94],
-  ["Dec 02", "CLIPPER SVC BART", "clipper", 20.00, "transport", .97],
-  ["Dec 03", "JOE'S RAMEN SF CA", "ramen", 24.00, "food", .81],
-  ["Dec 04", "NETFLIX.COM 866-579-7172", "netflix", 15.49, "subs", .99],
-  ["Dec 06", "THE ANCHOR BREWING SF", "anchor", 36.50, "food", .45],
-  ["Dec 07", "AMZN MKTP US*4F6WD2", "amazon", 62.40, "shopping", .72],
-  ["Dec 09", "SAFEWAY #2741 OAKLAND CA", "safeway", 64.15, "food", .95],
-  ["Dec 10", "PG&E WEB ONLINE", "pge", 88.30, "bills", .98],
-  ["Dec 11", "SPOTIFY USA", "spotify", 11.99, "subs", .99],
-  ["Dec 13", "AMC METREON 16 SF", "amc", 28.00, "social", .84],
-  ["Dec 15", "JOE'S RAMEN SF CA", "ramen", 27.25, "food", .81],
-  ["Dec 17", "UBER *TRIP HELP.UBER.COM", "uber", 19.60, "transport", .93],
-  ["Dec 18", "UNIQLO SF 0417", "uniqlo", 71.90, "shopping", .91],
-  ["Dec 20", "BLUE BOTTLE COFFEE 0042", "bluebot", 7.25, "food", .88]
-]);
-
-const FILES = [
-  ...[15, 14, 18, 15, 16, 14, 13, 15, 15, 16].map((n, m) => ({ file: `chase_${MONTHS[m].slice(0, 3).toLowerCase()}_2026.csv`, m, n })),
-  { file: "chase_nov_2026.csv", m: 10, n: NOV.length, rows: NOV },
-  { file: "chase_dec_2026.csv", m: 11, n: DEC.length, rows: DEC }
-];
-
-// Spending in the last three months of 2025, so January's budget has something to work from.
-const HIST = { food: [235, 230, 270], transport: [40, 38, 55], shopping: [70, 95, 130], social: [35, 40, 60], subs: [27.48, 27.48, 27.48], bills: [78, 88, 98] };
+// Asks the server for the next statement. The server runs the frozen model on it live.
+async function uploadNext() {
+  const f = FILES[state.uploaded];
+  state.loading = true; render();
+  try {
+    const rows = await (await fetch(`/api/statement?month=${f.m + 1}`)).json();
+    rows.forEach(r => addTxn({ ...r, m: f.m, base: keyOf(r.base) }));
+    state.uploaded++;
+    clearFlags();
+    const check = pending().filter(needsCheck).length;
+    toast(`${f.n} transactions ready to review.${check ? ` ${check} to check.` : ""}`);
+  } catch (e) {
+    toast("Couldn’t reach the server. Is src/server.py still running?");
+  }
+  state.loading = false; render();
+}
 
 let nextId = 1;
 const txns = [];
-let rules = [];        // what the tracker learned from edits, newest first. Runs in the background and is never shown.
-let ruleId = 1;
 const overrides = {};  // month index -> { category: amount the user set }
 const state = {
   view: "dashboard",
@@ -366,7 +363,8 @@ const state = {
   uploaded: SEEDED,    // files uploaded so far
   budgetTab: "this",
   addCat: null,        // add-category form on the budget page
-  modal: null
+  modal: null,
+  loading: false       // waiting for the server to categorize an upload
 };
 
 function addTxn(o) { txns.push({ id: nextId++, ...o, cat: o.base, status: "pending", src: "auto", edited: false, changed: false }); }
@@ -374,7 +372,14 @@ function addTxn(o) { txns.push({ id: nextId++, ...o, cat: o.base, status: "pendi
 const money = n => "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const whole = n => Number.isInteger(n) ? "$" + n.toLocaleString("en-US") : money(n);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-const cv = k => `var(--c-${SLOT[k] || k})`;
+// 12 hues, 30 degrees apart, handed out in an order that keeps consecutive categories far apart.
+// Categories 13-24 reuse those hues at a lighter level; past 24 the hues shift by 15 degrees.
+const HUE_ORDER = [0, 6, 3, 9, 1, 7, 4, 10, 2, 8, 5, 11];
+const cv = k => {
+  const i = COLOR_INDEX[k] ?? 0, round = Math.floor(i / 12);
+  const hue = (20 + 30 * HUE_ORDER[i % 12] + 15 * Math.floor(round / 2)) % 360;
+  return `oklch(var(--cat-l${round % 2}) var(--cat-c${round % 2}) ${hue})`;
+};
 const chip = k => `<span class="chip" style="--c:${cv(k)}"><i></i>${esc(CATS[k])}</span>`;
 const ceil5 = n => n <= 0 ? 0 : Math.ceil(n / 5 - 1e-9) * 5;
 const $ = s => document.querySelector(s);
@@ -382,39 +387,7 @@ const curMonth = () => state.reviewed - 1;
 const pending = () => txns.filter(t => t.status === "pending");
 const plural = (n, word) => `${n} ${word}${n === 1 ? "" : "s"}`;
 
-/* ---------- the "learning" logic (stand-in for the real continual learning system) ---------- */
-function ruleMatches(r, t) {
-  if (r.kind === "merchant") return r.key === t.merchant;
-  if (r.kind === "tag") return MER[t.merchant].tags.includes(r.key);
-  return false;
-}
-function predictWith(t, list) {
-  for (const r of list) if (ruleMatches(r, t)) return { cat: r.cat, src: "learned" };
-  return { cat: t.base, src: "auto" };
-}
-function recompute() {
-  const changed = [];
-  for (const t of pending()) {
-    if (t.edited) continue;
-    const p = predictWith(t, rules);
-    if (p.cat !== t.cat) { changed.push(t); t.changed = true; }
-    t.cat = p.cat; t.src = p.src;
-  }
-  return changed;
-}
-function ruleFor(t, cat, scope) {
-  const kind = scope === "merchant" ? "merchant" : "tag";
-  const key = kind === "merchant" ? t.merchant : MER[t.merchant].tags[0];
-  return { kind, key, cat };
-}
-function affected(t, cat, scope) {
-  if (scope === "one") return [];
-  const r = ruleFor(t, cat, scope);
-  const list = [r, ...rules.filter(x => !(x.kind === r.kind && x.key === r.key))];
-  return pending().filter(x => x.id !== t.id && !x.edited)
-    .map(x => ({ x, to: predictWith(x, list).cat }))
-    .filter(o => o.to !== o.x.cat);
-}
+/* Learning is not wired in yet: every row shows the frozen model's label until the memory exists. */
 function clearFlags() { txns.forEach(t => t.changed = false); }
 
 /* ---------- spending and budgets ---------- */
@@ -451,7 +424,7 @@ function addCategory(raw) {
   const n = ++customCount, k = "new" + n;
   CATS[k] = name;
   CAT_KEYS.push(k);
-  SLOT[k] = n <= 2 ? "x" + n : "other";   // the palette has eight validated hues; later categories share a neutral
+  giveColor(k);
   return { k };
 }
 function catForm(draft, err, addAct, cancelAct) {
@@ -487,7 +460,7 @@ function pieSvg(parts, total) {
     const b = a + sweep, large = sweep > Math.PI ? 1 : 0;
     const d = `M ${pt(R, a)} A ${R} ${R} 0 ${large} 1 ${pt(R, b)} L ${pt(r, b)} A ${r} ${r} 0 ${large} 0 ${pt(r, a)} Z`;
     a = b;
-    return `<path class="slice" d="${d}" fill="${cv(p.k)}" tabindex="0" data-slice="${p.k}" data-amt="${p.amt}" data-pct="${Math.round(p.amt / total * 100)}" aria-label="${esc(CATS[p.k])}: ${money(p.amt)}"></path>`;
+    return `<path class="slice" d="${d}" style="fill:${cv(p.k)}" tabindex="0" data-slice="${p.k}" data-amt="${p.amt}" data-pct="${Math.round(p.amt / total * 100)}" aria-label="${esc(CATS[p.k])}: ${money(p.amt)}"></path>`;
   }).join("");
   return `<svg class="pie" viewBox="0 0 200 200" role="group" aria-label="Spending by category">${paths}
     <text class="tot" x="100" y="105">${money(total)}</text>
@@ -496,7 +469,7 @@ function pieSvg(parts, total) {
 
 function monthTotals(m) {
   const spent = spentBy(m);
-  const keys = CAT_KEYS.filter(k => spent[k] > 0 || budgetOf(m, k) > 0);
+  const keys = spendKeys().filter(k => spent[k] > 0 || budgetOf(m, k) > 0);
   return { spent: keys.reduce((a, k) => a + spent[k], 0), budget: keys.reduce((a, k) => a + budgetOf(m, k), 0) };
 }
 // One bar per reviewed month. Each bar is also a button that opens that month.
@@ -526,7 +499,7 @@ function yearChart() {
 function viewDashboard() {
   const m = state.month, name = MONTHS[m];
   const spent = spentBy(m);
-  const keys = CAT_KEYS.filter(k => spent[k] > 0 || budgetOf(m, k) > 0);
+  const keys = spendKeys().filter(k => spent[k] > 0 || budgetOf(m, k) > 0);
   const total = keys.reduce((a, k) => a + spent[k], 0);
   const budget = keys.reduce((a, k) => a + budgetOf(m, k), 0);
   const left = budget - total, over = left < 0;
@@ -580,26 +553,28 @@ function viewReview() {
   const list = pending();
   if (list.length) {
     const f = FILES[state.uploaded - 1];
-    const total = list.reduce((a, t) => a + t.amt, 0);
+    const out = list.filter(t => !t.credit).reduce((a, t) => a + t.amt, 0);
+    const inn = list.filter(t => t.credit).reduce((a, t) => a + t.amt, 0);
     const toCheck = list.filter(needsCheck).length;
-    const accept = `<button class="btn primary" data-act="accept-all">Accept all ${list.length}</button>`;
+    const save = `<div class="listfoot">${toCheck ? `<span class="savehint">Check ${plural(toCheck, "row")} above to save</span>` : ""}<button class="btn primary" data-act="save-review" ${toCheck ? "disabled" : ""}>Save review</button></div>`;
     const rows = list.map(t => {
       let tag = "";
       if (t.edited) tag = `<span class="tag you">Edited</span>`;
+      else if (t.confirmed) tag = `<span class="tag you">Confirmed</span>`;
       else if (t.changed) tag = `<span class="tag new">Updated</span>`;
-      else if (needsCheck(t)) tag = `<span class="tag warn">Check this</span>`;
-      return `<div class="row${t.changed ? " flash" : ""}">
-        <div class="merch"><b>${esc(MER[t.merchant].name)}</b><span class="raw">${t.date} · ${esc(t.raw)}</span></div>
-        <div class="amt">${money(t.amt)}</div>
+      else if (needsCheck(t)) tag = `<span class="checkline"><span class="flag"><svg viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="5"/><path d="M6 3.4v3.1M6 8.6v.01"/></svg>Check this</span><span class="yn"><button class="yes" data-act="confirm" data-id="${t.id}" title="Category is right" aria-label="Keep ${esc(CATS[t.cat])}"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.3l2.3 2.3 4.7-5"/></svg></button><button class="no" data-act="edit" data-id="${t.id}" title="Wrong, pick another category" aria-label="Wrong category, choose another"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 3l6 6M9 3l-6 6"/></svg></button></span></span>`;
+      return `<div class="row${t.changed ? " flash" : ""}${!t.changed && needsCheck(t) ? " check" : ""}">
+        <div class="merch"><b>${esc(t.raw)}</b><span class="sub2">${t.date}${t.note ? ` · <span class="note">“${esc(t.note)}”</span>` : ""}</span></div>
+        ${amtCell(t)}
         <div class="catcell"><button class="chip" style="--c:${cv(t.cat)}" data-act="edit" data-id="${t.id}" aria-label="Change category, currently ${esc(CATS[t.cat])}"><i></i>${esc(CATS[t.cat])} <span aria-hidden="true">▾</span></button>${tag}</div></div>`;
     }).join("");
     return `<div class="head"><h1>Upload &amp; review</h1></div>
-      <p class="sub">Click a category to change it, then accept the file to add it to your dashboard.</p>
+      <p class="sub">Click a category to change it. Rows marked “Check this” need your answer before you can save.</p>
       <section class="card">
         <div class="listhead"><div><h2 class="mono">${esc(f.file)}</h2>
-          <p>${plural(list.length, "transaction")} · ${money(total)}${toCheck ? ` · ${toCheck} to check` : ""}</p></div>${accept}</div>
+          <p>${plural(list.length, "transaction")} · <span class="outv">${money(out)} out</span> · <span class="inv">${money(inn)} in</span>${toCheck ? ` · <span class="checkcount">${toCheck} to check</span>` : ""}</p></div></div>
         ${rows}
-        <div class="listfoot">${accept}</div>
+        ${save}
       </section>`;
   }
   const next = FILES[state.uploaded];
@@ -609,13 +584,20 @@ function viewReview() {
     <section class="drop">
       ${next ? `<h2>Upload your bank statement</h2>
         <p>The tracker sorts each transaction into a category. You check them before they reach your dashboard.</p>
-        <button class="btn primary" data-act="upload">Upload ${esc(next.file)}</button>
-        <span class="tag">Sample file, for this prototype</span>`
+        <button class="btn primary" data-act="upload" ${state.loading ? "disabled" : ""}>${state.loading ? "Sorting transactions…" : `Upload ${esc(next.file)}`}</button>
+        <span class="tag">Sample file, categorized live by the frozen model</span>`
       : `<h2>You’re all caught up</h2><p>All the sample statements are uploaded and reviewed.</p>`}
     </section>
     <section class="card"><div class="listhead"><h2>Past uploads</h2></div>${done}</section>`;
 }
-const needsCheck = t => t.src === "auto" && !t.edited && t.conf < 0.6;
+// Money in: green amount with + and an arrow into the account. Money out: plain amount with −
+// and a grey arrow out. The icon carries the direction for anyone who can't rely on color.
+const DIR_ICON = {
+  in: '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M10 2 2 10M2 4.5V10h5.5"/></svg>',
+  out: '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 10 10 2M4.5 2H10v5.5"/></svg>'
+};
+const amtCell = t => `<div class="amt ${t.credit ? "in" : "out"}" aria-label="${t.credit ? "Money in" : "Money out"} ${money(t.amt)}"><span class="dir" title="${t.credit ? "Money in" : "Money out"}">${DIR_ICON[t.credit ? "in" : "out"]}</span><span>${t.credit ? "+" : "−"}${money(t.amt)}</span></div>`;
+const needsCheck = t => t.src === "auto" && !t.edited && !t.confirmed && t.conf < 0.6;
 
 function budgetMonth() { return state.budgetTab === "this" ? curMonth() : curMonth() + 1; }
 function setProg(m, k) {
@@ -634,12 +616,12 @@ function setStat(m, k) {
   const edited = overrides[m] && overrides[m][k] != null;
   return edited ? `Changed · <button class="link" data-act="bud-reset" data-cat="${k}">Reset to ${whole(rec)}</button>` : "Proposed by the tracker";
 }
-const budgetTotal = m => CAT_KEYS.reduce((a, k) => a + budgetOf(m, k), 0);
+const budgetTotal = m => spendKeys().reduce((a, k) => a + budgetOf(m, k), 0);
 
 function viewBudget() {
   const cur = curMonth(), next = cur + 1, m = budgetMonth();
   const tab = (id, label, i) => `<button role="tab" data-act="bud-tab" data-t="${id}" aria-selected="${state.budgetTab === id}"><span>${label}</span><b>${MONTHS[i]}</b></button>`;
-  const rows = CAT_KEYS.map(k => `<div class="setrow">
+  const rows = spendKeys().map(k => `<div class="setrow">
       <div class="setname">${chip(k)}<span class="why">${esc(proposal(m, k).why)}</span></div>
       <div class="setprog" id="prog-${k}">${setProg(m, k)}</div>
       <div class="setamt">
@@ -667,29 +649,14 @@ function renderModal() {
   const m = state.modal;
   if (!m) { root.innerHTML = ""; return; }
   const t = txns.find(x => x.id === m.id);
-  const name = esc(MER[t.merchant].name);
-  const tag = MER[t.merchant].tags[0];
-  const list = affected(t, m.cat, m.scope);
-  const other = list.some(o => o.x.merchant !== t.merchant);
   const same = m.cat === t.cat && !t.edited;
-  let prev;
-  if (m.scope === "one") prev = `<div class="preview">Only this transaction changes.</div>`;
-  else if (!list.length) prev = `<div class="preview">No other transactions in this file change.<div class="note">Future uploads will follow this.</div></div>`;
-  else prev = `<div class="preview${other ? " warn" : ""}"><b>${list.length} other ${list.length === 1 ? "transaction" : "transactions"} in this file will change${other ? ", including merchants you did not touch" : ""}:</b>
-    <ul>${list.map(o => `<li><span class="mono">${o.x.date}</span> ${esc(MER[o.x.merchant].name)} ${chip(o.x.cat)} → ${chip(o.to)}</li>`).join("")}</ul>
-    <div class="note">Rows you already edited stay as they are.</div></div>`;
   const add = m.adding ? catForm(m.draft, m.err, "cat-save", "cat-cancel")
     : `<button class="chip add" data-act="cat-add">+ New category</button>`;
   root.innerHTML = `<div class="overlay" data-act="overlay"><div class="modal" role="dialog" aria-modal="true" aria-label="Change category">
     <h3>Change category</h3>
-    <div><b>${name}</b> · <span class="mono">${money(t.amt)}</span> · <span class="mono">${t.date}</span></div>
+    <div><b class="mono">${esc(t.raw)}</b></div>
+    <div class="mrow"><span class="mono amtline ${t.credit ? "in" : "out"}">${t.credit ? "+" : "−"}${money(t.amt)} · ${t.credit ? "Money in" : "Money out"}</span><span class="mono">${t.date}</span>${t.note ? `<span class="note">“${esc(t.note)}”</span>` : ""}</div>
     <div><h4>Category</h4><div class="catpick">${CAT_KEYS.map(k => `<button class="chip" style="--c:${cv(k)}" data-act="pick-cat" data-k="${k}" aria-pressed="${m.cat === k}"><i></i>${esc(CATS[k])}</button>`).join("")}${add}</div></div>
-    <div class="scope"><h4>Apply to</h4>
-      <label><input type="radio" name="scope" value="one" ${m.scope === "one" ? "checked" : ""}><span>Just this transaction</span></label>
-      <label><input type="radio" name="scope" value="merchant" ${m.scope === "merchant" ? "checked" : ""}><span>Every ${name} transaction<span class="rec">Suggested</span></span></label>
-      <label><input type="radio" name="scope" value="tag" ${m.scope === "tag" ? "checked" : ""}><span>Similar places: all “${esc(tag)}” merchants<span class="risk">Broad</span><small>Also moves merchants you did not touch.</small></span></label>
-    </div>
-    <div aria-live="polite">${prev}</div>
     <div class="mfoot"><button class="btn" data-act="close">Cancel</button><button class="btn primary" data-act="save-edit" ${same ? "disabled" : ""}>Save</button></div>
   </div></div>`;
   if (m.adding) { const i = $("#newCatName"); i.focus(); i.setSelectionRange(i.value.length, i.value.length); }
@@ -758,22 +725,17 @@ document.addEventListener("click", e => {
     focusId = el.id === "prevMonth" || el.id === "nextMonth" ? (el.id === "prevMonth" ? (state.month > 0 ? el.id : "nextMonth") : (state.month < state.reviewed - 1 ? el.id : "prevMonth")) : el.id;
   }
   else if (act === "adjust") { state.view = "budget"; state.budgetTab = "this"; }
-  else if (act === "upload") {
-    const f = FILES[state.uploaded];
-    f.rows.forEach(addTxn);
-    state.uploaded++;
-    recompute(); clearFlags();
-    const check = pending().filter(needsCheck).length;
-    toast(`${f.n} transactions ready to review.${check ? ` ${check} to check.` : ""}`);
-  }
-  else if (act === "accept-all") {
+  else if (act === "upload") { if (!state.loading) uploadNext(); return; }
+  else if (act === "confirm") { txns.find(x => x.id === +el.dataset.id).confirmed = true; }
+  else if (act === "save-review") {
     const list = pending(), m = list[0].m;
+    if (list.some(needsCheck)) return;
     list.forEach(t => t.status = "reviewed");
     clearFlags();
     state.reviewed = m + 1; state.month = m; state.view = "dashboard"; state.budgetTab = "this";
     toast(`${list.length} transactions added to ${MONTHS[m]}.`);
   }
-  else if (act === "edit") { const t = txns.find(x => x.id === +el.dataset.id); state.modal = { id: t.id, cat: t.cat, scope: "merchant", adding: false, draft: "", err: "" }; }
+  else if (act === "edit") { const t = txns.find(x => x.id === +el.dataset.id); state.modal = { id: t.id, cat: t.cat, adding: false, draft: "", err: "" }; }
   else if (act === "close") state.modal = null;
   else if (act === "pick-cat") state.modal.cat = el.dataset.k;
   else if (act === "cat-add") state.modal.adding = true;
@@ -794,8 +756,7 @@ document.addEventListener("click", e => {
 });
 
 document.addEventListener("change", e => {
-  if (e.target.name === "scope" && state.modal) { state.modal.scope = e.target.value; render(); }
-  else if (e.target.id === "monthPick") { state.month = +e.target.value; render(); $("#monthPick").focus(); }
+  if (e.target.id === "monthPick") { state.month = +e.target.value; render(); $("#monthPick").focus(); }
 });
 
 // Budget inputs update their own row in place so typing and tabbing keep focus.
@@ -831,16 +792,10 @@ document.addEventListener("keydown", e => {
 
 function saveEdit() {
   const m = state.modal, t = txns.find(x => x.id === m.id);
-  clearFlags();
-  if (m.scope !== "one") {
-    const r = ruleFor(t, m.cat, m.scope);
-    rules = [{ id: ruleId++, ...r }, ...rules.filter(x => !(x.kind === r.kind && x.key === r.key))];
-  }
   t.cat = m.cat; t.edited = true;
   state.modal = null;
-  const ch = recompute();
-  toast(ch.length ? `Saved. ${plural(ch.length, "other transaction")} updated.` : "Saved.");
+  toast("Saved.");
 }
 
-render();
+boot();
 </script>
