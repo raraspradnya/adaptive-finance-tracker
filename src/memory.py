@@ -1,300 +1,180 @@
-"""The memory system for the categorizer: shared data types, the memory store, and the functions
-each teammate fills in. Both halves of the project code against this file.
+"""The memory that lets a frozen categorizer keep learning (see EXPERIMENTS.md).
 
-    Person A (data, write side, metrics)   Person B (read side, demo)
-    - generate the year of Transactions    - extract_counterparty
-    - simulate_review                      - decide (the four-check cascade, then the learned gate)
-    - store, evict                         - the UI demo
-    - run_year and the metrics
+The frozen model never changes. Every reviewed transaction can be stored in memory as
+(vector, label, how the label was obtained, date). To label a new transaction, the reader finds
+stored rows that look similar and lets them vote.
 
-Data flow for one month:
+    normalize()      bank text -> a form that is the same across banks
+    system_text()    what the model reads: normalized description + Venmo note
+    Memory           stored rows and their vectors
+    decide()         the reader: neighbours vote, or fall back to the frozen model
+    source_of()      how the user's final label was obtained (asked / corrected / accepted)
+    should_store()   the storage policy (Experiment 1)
+    Config           one experiment condition
 
-    Transaction --FrozenModel.encode--> FrozenOutput
-    (Transaction, FrozenOutput, Memory) --decide--> Decision        [B]
-    (Transaction, Decision) --simulate_review--> Review              [A]
-    (Memory, Transaction, FrozenOutput, Decision, Review) --store--> Memory gets an Episode   [A]
-    after the month: evict(Memory, K, policy)                       [A]
-
-Rules for both sides:
-- decide() must never read Transaction.true_label or Transaction.scenario. They are ground truth
-  for the simulated user and the metrics only.
-- The frozen model is never retrained. All learning is adding, superseding and removing Episodes.
-- Change this file together, not alone: it is the contract.
-
-Status: data types, Memory, source_of and decide_frozen_only are implemented. The functions
-marked TODO raise NotImplementedError until their owner fills them in.
+decide() never sees true_category. Only the simulated user and the metrics read it.
 """
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+import re
+from dataclasses import dataclass
 from datetime import date
-from enum import Enum
 from typing import Literal
 
 import numpy as np
-import pandas as pd
 
 EMBED_DIM = 768
 
-Direction = Literal["debit", "credit"]          # debit = money out, credit = money in
-Channel = Literal["card", "transfer", "bank"]   # transfer = Zelle/Venmo; bank = autopay, payroll, fees
+# How a stored label was obtained.
+ASKED = "asked"            # row was flagged "Check this"; the user answered it (✓ or ✗ + pick)
+CORRECTED = "corrected"    # row was not flagged; the user changed it
+ACCEPTED = "accepted"      # row was not flagged; the user left it as it was
 
-
-class Scenario(str, Enum):
-    """Why a row's true label is what it is. Ground truth, used only for metrics."""
-    GENERAL = "general"          # true label = what most people would call it
-    PREFERENCE = "preference"    # this user always files it differently
-    CHANGED = "changed"          # the user changed their mind partway through the year
-    DRIFT = "drift"              # the pattern itself changed (new rent amount, new roommate, ...)
-
-
-class Source(str, Enum):
-    """How an Episode's label was obtained, most trusted first."""
-    CORRECTED = "corrected"              # shown unflagged, user changed it
-    ASKED = "asked"                      # shown as a flagged guess, user confirmed or changed it
-    MEMORY_ACCEPTED = "memory_accepted"  # memory labeled it unflagged, user kept it
-    MODEL_ACCEPTED = "model_accepted"    # frozen model labeled it unflagged, user kept it
-
-
-class Path(str, Enum):
-    """Which part of the read policy decided a row."""
-    RECURRING = "recurring"
-    SIMILAR_NOTE = "similar_note"
-    COUNTERPARTY = "counterparty"
-    PAYBACK = "payback"
-    GATE = "gate"        # the learned gate (Experiment 2)
-    ASK = "ask"          # nothing fired on a transfer: flagged guess
-    FROZEN = "frozen"    # nothing fired on a card purchase: frozen label, unflagged
-
-
-# Starting trust weights. The 0.5 is tuned on January-June (0.25 / 0.5 / 0.75), then frozen.
-SOURCE_WEIGHT = {
-    Source.CORRECTED: 1.0,
-    Source.ASKED: 1.0,
-    Source.MEMORY_ACCEPTED: 0.5,
-    Source.MODEL_ACCEPTED: 0.5,
+Storage = Literal["none", "corrections", "corrections_asked", "everything"]
+STORED_SOURCES: dict[str, set[str]] = {
+    "none": set(),                                  # frozen only: memory stays empty
+    "corrections": {CORRECTED},
+    "corrections_asked": {CORRECTED, ASKED},
+    "everything": {CORRECTED, ASKED, ACCEPTED},
 }
 
 
-# ---------------------------------------------------------------- data types
-
 @dataclass(frozen=True)
-class Transaction:
-    """One row of a bank statement. Written by the data generator."""
-    txn_id: int
-    month: int                 # 1-12
-    date: date
-    direction: Direction
-    amount: float              # always positive; direction gives the sign
-    raw_description: str       # bank text, e.g. "ZELLE TO SAM LEE" or "TRADER JOE'S #552 BERKELEY CA"
-    note: str                  # Venmo note, or "" (Zelle exports usually drop it)
-    channel: Channel           # readable from the bank text, so the system may use it
-    # ground truth: never read by decide()
-    true_label: str
-    scenario: Scenario
-
-
-@dataclass(frozen=True)
-class FrozenOutput:
-    """What the frozen model returns for one transaction, from one pass."""
-    label: str
-    confidence: float
-    embedding: np.ndarray      # shape (768,), L2-normalized
-
-
-@dataclass(frozen=True)
-class Decision:
-    """What the system shows the user for one transaction."""
-    label: str
-    flagged: bool              # True = shown as "unsure, please check"
-    path: Path
-    evidence: str = ""         # short reason for the UI, e.g. "3 similar notes said Housing"
-
-
-@dataclass(frozen=True)
-class Review:
-    """What the user did with a Decision. Written by the simulated user (or the UI)."""
-    final_label: str
-    note: str = ""             # anything the user typed while reviewing
-
-
-@dataclass
-class Episode:
-    """One reviewed transaction stored in memory."""
-    episode_id: int
-    txn_id: int
-    date: date
-    direction: Direction
-    amount: float
-    channel: Channel
-    counterparty: str
-    note: str
-    label: str
-    frozen_label: str          # what the frozen model said; model-accepted episodes vote to keep it
-    source: Source
-    weight: float
-    learned_in: int            # month stored
-    superseded_in: int | None = None   # month a newer label replaced it; kept, never overwritten
-    is_exception: bool = False         # a one-off that only matches near-identical rows
-
-
-@dataclass
 class Config:
-    """One experiment condition. Defaults are the reference config."""
-    storage: Literal["corrections_only", "all_equal", "weighted"] = "weighted"
-    read: Literal["cascade", "gate", "frozen_only"] = "cascade"
-    capacity: int | None = None        # K; None = unlimited
-    eviction: Literal["fifo", "random", "priority"] = "priority"
-    knn_k: int = 5
-    tau: float = 0.8                   # similarity threshold, tuned on January-June
-    accepted_weight: float = 0.5       # tuned on January-June
-    rubber_stamp_rate: float = 0.15    # simulated user confirms without reading
-    seed: int = 290
+    """One experiment condition. Defaults = Experiment 1's reader with everything stored."""
+    name: str = "everything"
+    storage: Storage = "everything"
+    tau: float = 0.93                 # neighbours: stored rows with cosine similarity >= tau
+                                      # (picked on dev by experiments/pick_tau.py: the closest
+                                      # different-meaning pair, two Venmo notes, is 0.92)
+    share: float = 0.6                # memory answers if the top label has >= this share of the vote
+    flag_below: float = 0.9           # no memory answer: flag "Check this" if frozen confidence < this
+    # Experiment 2 (vote = similarity x trust x freshness). Defaults switch both off.
+    trust_accepted: float = 1.0       # trust of rows the user left alone; changed/answered rows = 1.0
+    half_life_months: float | None = None   # a vote halves every this many months; None = never fades
+
+
+# ---------------------------------------------------------------- text
+
+# Bank wrappers that carry no meaning: card prefixes, reference and confirmation numbers, ACH codes.
+_NOISE = [
+    r"\bCHECKCARD \d{4}\b",     # BofA card prefix with the date (mmdd)
+    r"\bCONF#\s*\S+",           # BofA Zelle confirmation
+    r"\bJPM99\w+",              # Chase Zelle reference
+    r"\bCO ID:\s*\S+",          # ACH company id
+    r"\bID:\s*\S+",             # ACH / Venmo ids
+    r"\bDES:",                  # BofA "description:" marker
+    r"\b(PPD|WEB)\b",           # ACH entry codes
+    r"\b\d{6,}\b",              # long reference numbers
+]
+
+
+def normalize(description: str) -> str:
+    """Strip bank-specific wrappers so the same transaction reads the same at any bank.
+
+    "CHECKCARD 1004 PEETS COFFEE #0731 BERKELEY CA 12345678901" -> "PEETS COFFEE #0731 BERKELEY CA"
+    Zelle names are sorted, because banks disagree on FIRST LAST vs LAST FIRST:
+    "Zelle payment to Ashley Kim JPM99..." and "ZELLE TO KIM ASHLEY CONF# ..." -> "ZELLE TO ASHLEY KIM"
+    """
+    text = description.upper().replace("ZELLE PAYMENT TO", "ZELLE TO")
+    for pattern in _NOISE:
+        text = re.sub(pattern, " ", text)
+    text = " ".join(text.split())
+    zelle = re.match(r"ZELLE TO (.+)", text)
+    if zelle:
+        text = "ZELLE TO " + " ".join(sorted(zelle.group(1).split()))
+    return text
+
+
+def system_text(description: str, note: str = "") -> str:
+    """The one string the frozen model reads for a row."""
+    text = normalize(description)
+    return f"{text} | {note}" if note else text
 
 
 # ---------------------------------------------------------------- memory
 
 class Memory:
-    """Episodes plus an aligned embedding matrix. Cosine kNN is one matrix product."""
+    """Stored rows plus an aligned matrix of their vectors (each of length 1)."""
 
     def __init__(self):
-        self.episodes: list[Episode] = []
+        self.txn_ids: list[int] = []
+        self.labels: list[str] = []
+        self.sources: list[str] = []
+        self.days: list[int] = []          # date as a day number, for freshness
         self.embeddings = np.zeros((0, EMBED_DIM), dtype=np.float32)
-        self._next_id = 1
 
     def __len__(self):
-        return len(self.episodes)
+        return len(self.labels)
 
-    def add(self, episode_fields: dict, embedding: np.ndarray) -> Episode:
-        ep = Episode(episode_id=self._next_id, **episode_fields)
-        self._next_id += 1
-        self.episodes.append(ep)
+    def add(self, txn_id: int, when: date, label: str, source: str, embedding: np.ndarray):
+        self.txn_ids.append(txn_id)
+        self.labels.append(label)
+        self.sources.append(source)
+        self.days.append(when.toordinal())
         self.embeddings = np.vstack([self.embeddings, embedding[None, :].astype(np.float32)])
-        return ep
 
-    def supersede(self, episode_ids, month: int):
-        """Stamp episodes as replaced. They stay in memory for history but stop voting."""
-        ids = set(episode_ids)
-        for ep in self.episodes:
-            if ep.episode_id in ids and ep.superseded_in is None:
-                ep.superseded_in = month
-
-    def remove(self, episode_ids):
-        """Delete episodes outright. Only eviction (Experiment 3) does this."""
-        ids = set(episode_ids)
-        keep = [i for i, ep in enumerate(self.episodes) if ep.episode_id not in ids]
-        self.episodes = [self.episodes[i] for i in keep]
-        self.embeddings = self.embeddings[keep]
-
-    def active_mask(self) -> np.ndarray:
-        return np.array([ep.superseded_in is None for ep in self.episodes], dtype=bool)
-
-    def nearest(self, query: np.ndarray, k: int, direction: Direction | None = None):
-        """Top-k active episodes by cosine similarity: list of (Episode, similarity), best first."""
-        if not self.episodes:
-            return []
-        scores = self.embeddings @ query
-        mask = self.active_mask()
-        if direction is not None:
-            mask &= np.array([ep.direction == direction for ep in self.episodes])
-        scores = np.where(mask, scores, -np.inf)
-        top = np.argsort(scores)[::-1][:k]
-        return [(self.episodes[i], float(scores[i])) for i in top if np.isfinite(scores[i])]
-
-    def by_counterparty(self, counterparty: str, active_only: bool = True) -> list[Episode]:
-        return [ep for ep in self.episodes
-                if ep.counterparty == counterparty and (ep.superseded_in is None or not active_only)]
-
-    def to_frame(self) -> pd.DataFrame:
-        return pd.DataFrame([vars(ep) for ep in self.episodes])
+    def neighbours(self, query: np.ndarray, tau: float) -> tuple[np.ndarray, np.ndarray]:
+        """Indices and similarities of stored rows with cosine similarity >= tau."""
+        if not self.labels:
+            return np.array([], dtype=int), np.array([], dtype=np.float32)
+        sims = self.embeddings @ query
+        idx = np.flatnonzero(sims >= tau)
+        return idx, sims[idx]
 
 
-# ---------------------------------------------------------------- shared helpers (implemented)
+# ---------------------------------------------------------------- reading
 
-def source_of(decision: Decision, review: Review) -> Source:
-    """How a reviewed row's label was obtained. Deterministic, so both sides agree."""
+@dataclass(frozen=True)
+class Decision:
+    """What the system shows the user for one row."""
+    label: str
+    flagged: bool              # shown as "Check this"
+    path: str                  # "memory" or "frozen"
+    share: float = 0.0         # top label's share of the vote (0 if no neighbours)
+    neighbours: int = 0
+
+
+def vote_weights(memory: Memory, idx: np.ndarray, sims: np.ndarray, when: date, config: Config) -> np.ndarray:
+    """similarity x trust x freshness for each neighbour."""
+    weights = sims.astype(np.float64)
+    if config.trust_accepted != 1.0:
+        trust = np.array([config.trust_accepted if memory.sources[i] == ACCEPTED else 1.0 for i in idx])
+        weights = weights * trust
+    if config.half_life_months is not None:
+        age_months = (when.toordinal() - np.array([memory.days[i] for i in idx])) / 30.44
+        weights = weights * 0.5 ** (age_months / config.half_life_months)
+    return weights
+
+
+def decide(embedding: np.ndarray, when: date, frozen_label: str, frozen_conf: float,
+           memory: Memory, config: Config) -> Decision:
+    """The reader. Neighbours vote; if one label wins clearly, use it. Otherwise fall back to
+    the frozen model's label, flagged when the model is unsure."""
+    idx, sims = memory.neighbours(embedding, config.tau)
+    if len(idx):
+        weights = vote_weights(memory, idx, sims, when, config)
+        totals: dict[str, float] = {}
+        for i, w in zip(idx, weights):
+            totals[memory.labels[i]] = totals.get(memory.labels[i], 0.0) + w
+        label, top = max(totals.items(), key=lambda kv: kv[1])
+        share = top / sum(totals.values())
+        if share >= config.share:
+            return Decision(label, flagged=False, path="memory", share=share, neighbours=len(idx))
+    else:
+        share = 0.0
+    return Decision(frozen_label, flagged=frozen_conf < config.flag_below, path="frozen",
+                    share=share, neighbours=len(idx))
+
+
+# ---------------------------------------------------------------- writing
+
+def source_of(decision: Decision, final_label: str) -> str:
     if decision.flagged:
-        return Source.ASKED
-    if review.final_label != decision.label:
-        return Source.CORRECTED
-    if decision.path == Path.FROZEN:
-        return Source.MODEL_ACCEPTED
-    return Source.MEMORY_ACCEPTED
+        return ASKED
+    return CORRECTED if final_label != decision.label else ACCEPTED
 
 
-def decide_frozen_only(txn: Transaction, frozen: FrozenOutput, memory: Memory, config: Config) -> Decision:
-    """Baseline read policy: ignore memory. Also the stand-in until decide() is ready."""
-    if txn.channel == "transfer":
-        return Decision(frozen.label, flagged=True, path=Path.ASK, evidence="frozen model only")
-    return Decision(frozen.label, flagged=False, path=Path.FROZEN)
-
-
-# ---------------------------------------------------------------- read side (Person B)
-
-def extract_counterparty(raw_description: str) -> str:
-    """TODO(B): who is on the other side, using regex rules only.
-
-    Drop prefixes such as "ZELLE TO", "VENMO", "SQ *", "TST*", store numbers such as "#552",
-    and trailing city/state. "ZELLE TO SAM LEE" -> "SAM LEE"; "TRADER JOE'S #552 BERKELEY CA"
-    -> "TRADER JOE'S".
-    """
-    raise NotImplementedError
-
-
-def decide(txn: Transaction, frozen: FrozenOutput, memory: Memory, config: Config) -> Decision:
-    """TODO(B): the read policy.
-
-    config.read == "cascade": recurring -> similar note -> consistent counterparty -> payback;
-    the first check with enough evidence decides. If none fires: transfer -> flagged guess
-    (Path.ASK), card or bank -> frozen label unflagged (Path.FROZEN).
-    config.read == "gate": the learned logistic-regression gate (Experiment 2).
-    config.read == "frozen_only": return decide_frozen_only(...).
-    """
-    if config.read == "frozen_only":
-        return decide_frozen_only(txn, frozen, memory, config)
-    raise NotImplementedError
-
-
-# ---------------------------------------------------------------- write side (Person A)
-
-def simulate_review(txn: Transaction, decision: Decision, rng: np.random.Generator, config: Config) -> Review:
-    """TODO(A): the simulated user.
-
-    Flagged rows are always answered correctly. Unflagged rows are corrected to txn.true_label,
-    except that with probability config.rubber_stamp_rate the user confirms without reading.
-    """
-    raise NotImplementedError
-
-
-def store(memory: Memory, txn: Transaction, frozen: FrozenOutput, decision: Decision,
-          review: Review, config: Config) -> Episode | None:
-    """TODO(A): write one reviewed row to memory, per config.storage (Experiment 1).
-
-    Returns the new Episode, or None if the policy skips it (e.g. corrections_only on an
-    accepted row). Handles one-off exceptions and superseding older episodes it contradicts.
-    """
-    raise NotImplementedError
-
-
-def evict(memory: Memory, config: Config, month: int) -> list[int]:
-    """TODO(A): if config.capacity is set and memory is over it, remove episodes per
-    config.eviction (Experiment 3). Returns the removed episode_ids."""
-    raise NotImplementedError
-
-
-# ---------------------------------------------------------------- run log (Person A, read by both)
-
-# One row per transaction per run. Every metric is computed from this table.
-LOG_COLUMNS = [
-    "run_id", "seed", "txn_id", "month", "channel", "scenario", "true_label",
-    "frozen_label", "frozen_confidence",
-    "label", "flagged", "path",                # the Decision
-    "final_label", "source",                   # the Review and how it was stored
-    "stored", "memory_size",
-]
-
-
-def run_year(transactions: list[Transaction], frozen: dict[int, FrozenOutput], config: Config) -> pd.DataFrame:
-    """TODO(A): month by month, decide -> review -> store, then evict. Returns a LOG_COLUMNS frame."""
-    raise NotImplementedError
+def should_store(source: str, config: Config) -> bool:
+    return source in STORED_SOURCES[config.storage]

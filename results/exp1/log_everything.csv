@@ -1,0 +1,631 @@
+config,txn_id,date,month,description,note,true_label,frozen_label,frozen_conf,label,flagged,path,share,neighbours,final_label,source,stored,memory_size
+Everything,1,2026-01-01,1,UC BERKELEY PAYROLL PPD ID: 1946000123,,Income,Income,1.0,Income,False,frozen,0.0,0,Income,accepted,True,51
+Everything,2,2026-01-01,1,Zelle payment to Bayview Property Mgmt JPM99ESS4DIV,,Housing,Housing,0.989,Housing,False,frozen,0.0,0,Housing,accepted,True,51
+Everything,3,2026-01-02,1,Zelle payment to Ashley Kim JPM99U2T011V,,Housing,Subscription,0.948,Subscription,False,frozen,0.0,0,Housing,corrected,True,51
+Everything,4,2026-01-02,1,CAFFE STRADA BERKELEY CA,,Restaurants,Restaurants,0.998,Restaurants,False,frozen,0.0,0,Restaurants,accepted,True,51
+Everything,5,2026-01-03,1,PHILZ COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,frozen,0.0,0,Restaurants,accepted,True,51
+Everything,6,2026-01-03,1,MINT MOBILE 800-683-7392,,Utilities,Utilities,0.999,Utilities,False,frozen,0.0,0,Utilities,accepted,True,51
+Everything,7,2026-01-03,1,SPOTIFY USA,,Subscription,Subscription,0.999,Subscription,False,frozen,0.0,0,Subscription,accepted,True,51
+Everything,8,2026-01-03,1,NETFLIX.COM 866-579-7172,,Subscription,Subscription,0.967,Subscription,False,frozen,0.0,0,Subscription,accepted,True,51
+Everything,9,2026-01-03,1,APPLE.COM/BILL 866-712-7753,,Subscription,Subscription,0.999,Subscription,False,frozen,0.0,0,Subscription,accepted,True,51
+Everything,10,2026-01-04,1,BERKELEY BOWL MARKETPLACE,,Groceries,Restaurants,0.988,Restaurants,False,frozen,0.0,0,Groceries,corrected,True,51
+Everything,11,2026-01-04,1,SEPHORA #0412 BERKELEY,,Personal Care,Personal Care,0.999,Personal Care,False,frozen,0.0,0,Personal Care,accepted,True,51
+Everything,12,2026-01-05,1,IPPUDO BERKELEY,,Social,Restaurants,0.602,Restaurants,True,frozen,0.0,0,Social,asked,True,51
+Everything,13,2026-01-05,1,CLIPPER SVC BART,,Transportation,Groceries,0.666,Groceries,True,frozen,0.0,0,Transportation,asked,True,51
+Everything,14,2026-01-07,1,BLUE BOTTLE COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,frozen,0.0,0,Restaurants,accepted,True,51
+Everything,15,2026-01-08,1,DOORDASH*TACOS EL GORDO,,Restaurants,Restaurants,1.0,Restaurants,False,frozen,0.0,0,Restaurants,accepted,True,51
+Everything,16,2026-01-11,1,TRADER JOE'S #186 BERKELEY CA,,Groceries,Groceries,1.0,Groceries,False,frozen,0.0,0,Groceries,accepted,True,51
+Everything,17,2026-01-11,1,BERKELEY BOWL MARKETPLACE,,Groceries,Restaurants,0.988,Restaurants,False,frozen,0.0,0,Groceries,corrected,True,51
+Everything,18,2026-01-12,1,CHEESE BOARD COLLECTIVE,,Restaurants,Restaurants,0.74,Restaurants,True,frozen,0.0,0,Restaurants,asked,True,51
+Everything,19,2026-01-12,1,VENMO PAYMENT 4659632643 WEB ID: 3264681992,drinks at rare barrel,Social,Insurance,0.979,Insurance,False,frozen,0.0,0,Social,corrected,True,51
+Everything,20,2026-01-13,1,BLUE BOTTLE COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,frozen,0.0,0,Restaurants,accepted,True,51
+Everything,21,2026-01-15,1,UC BERKELEY PAYROLL PPD ID: 1946000123,,Income,Income,1.0,Income,False,frozen,0.0,0,Income,accepted,True,51
+Everything,22,2026-01-15,1,PEETS COFFEE #0731 BERKELEY CA,,Restaurants,Restaurants,0.999,Restaurants,False,frozen,0.0,0,Restaurants,accepted,True,51
+Everything,23,2026-01-16,1,BLUE BOTTLE COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,frozen,0.0,0,Restaurants,accepted,True,51
+Everything,24,2026-01-17,1,DOORDASH*TACOS EL GORDO,,Restaurants,Restaurants,1.0,Restaurants,False,frozen,0.0,0,Restaurants,accepted,True,51
+Everything,25,2026-01-18,1,TRADER JOE'S #186 BERKELEY CA,,Groceries,Groceries,1.0,Groceries,False,frozen,0.0,0,Groceries,accepted,True,51
+Everything,26,2026-01-19,1,CHIPOTLE 2297 BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,frozen,0.0,0,Restaurants,accepted,True,51
+Everything,27,2026-01-19,1,SWEETGREEN BERKELEY,,Restaurants,Healthcare,0.936,Healthcare,False,frozen,0.0,0,Restaurants,corrected,True,51
+Everything,28,2026-01-19,1,CLIPPER SVC BART,,Transportation,Groceries,0.666,Groceries,True,frozen,0.0,0,Transportation,asked,True,51
+Everything,29,2026-01-20,1,BLUE BOTTLE COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,frozen,0.0,0,Restaurants,accepted,True,51
+Everything,30,2026-01-20,1,SQ *FIELDWORK BREWING,,Social,Restaurants,1.0,Restaurants,False,frozen,0.0,0,Social,corrected,True,51
+Everything,31,2026-01-22,1,PEETS COFFEE #0731 BERKELEY CA,,Restaurants,Restaurants,0.999,Restaurants,False,frozen,0.0,0,Restaurants,accepted,True,51
+Everything,32,2026-01-22,1,FIELDWORK BREWING BERKELEY,,Social,Restaurants,1.0,Restaurants,False,frozen,0.0,0,Social,corrected,True,51
+Everything,33,2026-01-22,1,TRADER JOE'S #186 BERKELEY CA,,Groceries,Groceries,1.0,Groceries,False,frozen,0.0,0,Groceries,accepted,True,51
+Everything,34,2026-01-22,1,SAFEWAY #0975 BERKELEY CA,,Groceries,Groceries,0.999,Groceries,False,frozen,0.0,0,Groceries,accepted,True,51
+Everything,35,2026-01-23,1,THE RARE BARREL BERKELEY,,Social,Restaurants,0.983,Restaurants,False,frozen,0.0,0,Social,corrected,True,51
+Everything,36,2026-01-24,1,BLUE BOTTLE COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,frozen,0.0,0,Restaurants,accepted,True,51
+Everything,37,2026-01-24,1,THE RARE BARREL BERKELEY,,Social,Restaurants,0.983,Restaurants,False,frozen,0.0,0,Social,corrected,True,51
+Everything,38,2026-01-24,1,BERKELEY BOWL WEST,,Groceries,Restaurants,0.997,Restaurants,False,frozen,0.0,0,Groceries,corrected,True,51
+Everything,39,2026-01-24,1,TARGET T-2788 BERKELEY CA,,Shopping,Shopping,1.0,Shopping,False,frozen,0.0,0,Shopping,accepted,True,51
+Everything,40,2026-01-25,1,PEET'S COFFEE #8812,,Restaurants,Restaurants,0.998,Restaurants,False,frozen,0.0,0,Restaurants,accepted,True,51
+Everything,41,2026-01-27,1,PEET'S COFFEE #8812,,Restaurants,Restaurants,0.998,Restaurants,False,frozen,0.0,0,Restaurants,accepted,True,51
+Everything,42,2026-01-27,1,BLUE BOTTLE COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,frozen,0.0,0,Restaurants,accepted,True,51
+Everything,43,2026-01-27,1,PHILZ COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,frozen,0.0,0,Restaurants,accepted,True,51
+Everything,44,2026-01-27,1,VENMO PAYMENT 5020509536 WEB ID: 3264681992,uber home,Transportation,Insurance,0.594,Insurance,True,frozen,0.0,0,Transportation,asked,True,51
+Everything,45,2026-01-28,1,TRADER JOE'S #186 BERKELEY CA,,Groceries,Groceries,1.0,Groceries,False,frozen,0.0,0,Groceries,accepted,True,51
+Everything,46,2026-01-28,1,AMAZON.COM*LBS5DX,,Shopping,Shopping,1.0,Shopping,False,frozen,0.0,0,Shopping,accepted,True,51
+Everything,47,2026-01-30,1,TRADER JOE'S #186 BERKELEY CA,,Groceries,Groceries,1.0,Groceries,False,frozen,0.0,0,Groceries,accepted,True,51
+Everything,48,2026-01-30,1,AMZN MKTP US*KS5DYO,,Shopping,Shopping,1.0,Shopping,False,frozen,0.0,0,Shopping,accepted,True,51
+Everything,49,2026-01-31,1,SQ *CAFFE STRADA,,Restaurants,Restaurants,0.999,Restaurants,False,frozen,0.0,0,Restaurants,accepted,True,51
+Everything,50,2026-01-31,1,THE RARE BARREL BERKELEY,,Social,Restaurants,0.983,Restaurants,False,frozen,0.0,0,Social,corrected,True,51
+Everything,51,2026-01-31,1,FIELDWORK BREWING BERKELEY,,Social,Restaurants,1.0,Restaurants,False,frozen,0.0,0,Social,corrected,True,51
+Everything,52,2026-02-01,2,UC BERKELEY PAYROLL PPD ID: 1946000123,,Income,Income,1.0,Income,False,memory,1.0,2,Income,accepted,True,102
+Everything,53,2026-02-01,2,Zelle payment to Bayview Property Mgmt JPM99QRA6EDD,,Housing,Housing,0.989,Housing,False,memory,1.0,1,Housing,accepted,True,102
+Everything,54,2026-02-01,2,BLUE BOTTLE COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,6,Restaurants,accepted,True,102
+Everything,55,2026-02-01,2,THE RARE BARREL BERKELEY,,Social,Restaurants,0.983,Social,False,memory,1.0,3,Social,accepted,True,102
+Everything,56,2026-02-02,2,Zelle payment to Ashley Kim JPM99TJ80CVE,,Housing,Subscription,0.948,Housing,False,memory,1.0,1,Housing,accepted,True,102
+Everything,57,2026-02-02,2,CVS/PHARMACY #89301,,Healthcare,Healthcare,0.999,Healthcare,False,frozen,0.0,0,Healthcare,accepted,True,102
+Everything,58,2026-02-02,2,VENMO PAYMENT 8029337984 WEB ID: 3264681992,ramen 🍜,Social,Transfer,0.739,Transfer,True,frozen,0.0,0,Social,asked,True,102
+Everything,59,2026-02-03,2,PEETS COFFEE #0731 BERKELEY CA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,4,Restaurants,accepted,True,102
+Everything,60,2026-02-03,2,PEET'S COFFEE #8812,,Restaurants,Restaurants,0.998,Restaurants,False,memory,1.0,4,Restaurants,accepted,True,102
+Everything,61,2026-02-03,2,THE RARE BARREL BERKELEY,,Social,Restaurants,0.983,Social,False,memory,1.0,3,Social,accepted,True,102
+Everything,62,2026-02-03,2,CHIPOTLE 2297 BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,1,Restaurants,accepted,True,102
+Everything,63,2026-02-03,2,MINT MOBILE 800-683-7392,,Utilities,Utilities,0.999,Utilities,False,memory,1.0,1,Utilities,accepted,True,102
+Everything,64,2026-02-03,2,SPOTIFY USA,,Subscription,Subscription,0.999,Subscription,False,memory,1.0,1,Subscription,accepted,True,102
+Everything,65,2026-02-03,2,NETFLIX.COM 866-579-7172,,Subscription,Subscription,0.967,Subscription,False,memory,1.0,1,Subscription,accepted,True,102
+Everything,66,2026-02-03,2,APPLE.COM/BILL 866-712-7753,,Subscription,Subscription,0.999,Subscription,False,memory,1.0,1,Subscription,accepted,True,102
+Everything,67,2026-02-03,2,AMAZON.COM*NNHTV1,,Shopping,Shopping,0.745,Shopping,True,frozen,0.0,0,Shopping,asked,True,102
+Everything,68,2026-02-03,2,TARGET T-2788 BERKELEY CA,,Shopping,Shopping,1.0,Shopping,False,memory,1.0,1,Shopping,accepted,True,102
+Everything,69,2026-02-04,2,THE RARE BARREL BERKELEY,,Social,Restaurants,0.983,Social,False,memory,1.0,3,Social,accepted,True,102
+Everything,70,2026-02-05,2,CLIPPER SVC BART,,Transportation,Groceries,0.666,Transportation,False,memory,1.0,2,Transportation,accepted,True,102
+Everything,71,2026-02-05,2,SEPHORA #0412 BERKELEY,,Personal Care,Personal Care,0.999,Personal Care,False,memory,1.0,1,Personal Care,accepted,True,102
+Everything,72,2026-02-06,2,VENMO PAYMENT 8208145016 WEB ID: 3264681992,brewery tab,Social,Insurance,0.622,Insurance,True,frozen,0.0,0,Social,asked,True,102
+Everything,73,2026-02-07,2,BLUE BOTTLE COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,6,Restaurants,accepted,True,102
+Everything,74,2026-02-09,2,PEETS COFFEE #0731 BERKELEY CA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,4,Restaurants,accepted,True,102
+Everything,75,2026-02-10,2,CAFFE STRADA BERKELEY CA,,Restaurants,Restaurants,0.998,Restaurants,False,memory,1.0,1,Restaurants,accepted,True,102
+Everything,76,2026-02-10,2,RAMEN SHOP OAKLAND CA,,Social,Restaurants,1.0,Restaurants,False,frozen,0.0,0,Social,corrected,True,102
+Everything,77,2026-02-11,2,THE RARE BARREL BERKELEY,,Social,Restaurants,0.983,Social,False,memory,1.0,3,Social,accepted,True,102
+Everything,78,2026-02-11,2,CVS/PHARMACY #18122,,Healthcare,Healthcare,0.999,Healthcare,False,frozen,0.0,0,Healthcare,accepted,True,102
+Everything,79,2026-02-12,2,PEETS COFFEE #0731 BERKELEY CA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,4,Restaurants,accepted,True,102
+Everything,80,2026-02-14,2,PEET'S COFFEE #8812,,Restaurants,Restaurants,0.998,Restaurants,False,memory,1.0,4,Restaurants,accepted,True,102
+Everything,81,2026-02-15,2,UC BERKELEY PAYROLL PPD ID: 1946000123,,Income,Income,1.0,Income,False,memory,1.0,2,Income,accepted,True,102
+Everything,82,2026-02-15,2,PEETS COFFEE #0731 BERKELEY CA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,4,Restaurants,accepted,True,102
+Everything,83,2026-02-15,2,PEETS COFFEE #0731 BERKELEY CA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,4,Restaurants,accepted,True,102
+Everything,84,2026-02-15,2,SQ *CAFFE STRADA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,1,Restaurants,accepted,True,102
+Everything,85,2026-02-15,2,FIELDWORK BREWING BERKELEY,,Social,Restaurants,1.0,Social,False,memory,1.0,3,Social,accepted,True,102
+Everything,86,2026-02-15,2,LYFT *RIDE 02-15,,Transportation,Transportation,0.99,Transportation,False,frozen,0.0,0,Transportation,accepted,True,102
+Everything,87,2026-02-17,2,BLUE BOTTLE COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,6,Restaurants,accepted,True,102
+Everything,88,2026-02-18,2,DOORDASH*TACOS EL GORDO,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,2,Restaurants,accepted,True,102
+Everything,89,2026-02-19,2,PEETS COFFEE #0731 BERKELEY CA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,4,Restaurants,accepted,True,102
+Everything,90,2026-02-19,2,CLIPPER SVC BART,,Transportation,Groceries,0.666,Transportation,False,memory,1.0,2,Transportation,accepted,True,102
+Everything,91,2026-02-20,2,SQ *CAFFE STRADA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,1,Restaurants,accepted,True,102
+Everything,92,2026-02-21,2,SWEETGREEN BERKELEY,,Restaurants,Healthcare,0.936,Restaurants,False,memory,1.0,1,Restaurants,accepted,True,102
+Everything,93,2026-02-21,2,LYFT *RIDE 02-21,,Transportation,Transportation,0.992,Transportation,False,frozen,0.0,0,Transportation,accepted,True,102
+Everything,94,2026-02-21,2,UNIQLO BERKELEY 0417,,Shopping,Shopping,0.978,Shopping,False,frozen,0.0,0,Shopping,accepted,True,102
+Everything,95,2026-02-22,2,SQ *FIELDWORK BREWING,,Social,Restaurants,1.0,Social,False,memory,1.0,3,Social,accepted,True,102
+Everything,96,2026-02-24,2,AMAZON.COM*MO2X3Z,,Shopping,Shopping,1.0,Shopping,False,memory,1.0,1,Shopping,accepted,True,102
+Everything,97,2026-02-24,2,SQ *SHATTUCK HAIR STUDIO,,Personal Care,Personal Care,0.999,Personal Care,False,frozen,0.0,0,Personal Care,accepted,True,102
+Everything,98,2026-02-25,2,SQ *FIELDWORK BREWING,,Social,Restaurants,1.0,Social,False,memory,1.0,3,Social,accepted,True,102
+Everything,99,2026-02-28,2,PEET'S COFFEE #8812,,Restaurants,Restaurants,0.998,Restaurants,False,memory,1.0,4,Restaurants,accepted,True,102
+Everything,100,2026-02-28,2,BLUE BOTTLE COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,6,Restaurants,accepted,True,102
+Everything,101,2026-02-28,2,SQ *CAFFE STRADA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,1,Restaurants,accepted,True,102
+Everything,102,2026-02-28,2,CAFFE STRADA BERKELEY CA,,Restaurants,Restaurants,0.998,Restaurants,False,memory,1.0,1,Restaurants,accepted,True,102
+Everything,103,2026-03-01,3,UC BERKELEY PAYROLL PPD ID: 1946000123,,Income,Income,1.0,Income,False,memory,1.0,4,Income,accepted,True,141
+Everything,104,2026-03-01,3,Zelle payment to Bayview Property Mgmt JPM99R52VGZG,,Housing,Housing,0.989,Housing,False,memory,1.0,2,Housing,accepted,True,141
+Everything,105,2026-03-02,3,Zelle payment to Ashley Kim JPM99VS06HCE,,Housing,Subscription,0.948,Housing,False,memory,1.0,2,Housing,accepted,True,141
+Everything,106,2026-03-03,3,MINT MOBILE 800-683-7392,,Utilities,Utilities,0.999,Utilities,False,memory,1.0,2,Utilities,accepted,True,141
+Everything,107,2026-03-03,3,SPOTIFY USA,,Subscription,Subscription,0.999,Subscription,False,memory,1.0,2,Subscription,accepted,True,141
+Everything,108,2026-03-03,3,NETFLIX.COM 866-579-7172,,Subscription,Subscription,0.967,Subscription,False,memory,1.0,2,Subscription,accepted,True,141
+Everything,109,2026-03-03,3,APPLE.COM/BILL 866-712-7753,,Subscription,Subscription,0.999,Subscription,False,memory,1.0,2,Subscription,accepted,True,141
+Everything,110,2026-03-04,3,PEET'S COFFEE #8812,,Restaurants,Restaurants,0.998,Restaurants,False,memory,1.0,13,Restaurants,accepted,True,141
+Everything,111,2026-03-04,3,SQ *CAFFE STRADA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,4,Restaurants,accepted,True,141
+Everything,112,2026-03-04,3,CHIPOTLE 2297 BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,2,Restaurants,accepted,True,141
+Everything,113,2026-03-05,3,CLIPPER SVC BART,,Transportation,Groceries,0.666,Transportation,False,memory,1.0,4,Transportation,accepted,True,141
+Everything,114,2026-03-05,3,VENMO PAYMENT 2395326033 WEB ID: 3264681992,brewery tab,Social,Insurance,0.622,Social,False,memory,1.0,1,Social,accepted,True,141
+Everything,115,2026-03-06,3,CHIPOTLE 2297 BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,2,Restaurants,accepted,True,141
+Everything,116,2026-03-08,3,RAMEN SHOP OAKLAND CA,,Social,Restaurants,1.0,Social,False,memory,1.0,1,Social,accepted,True,141
+Everything,117,2026-03-12,3,VENMO PAYMENT 3243471665 WEB ID: 3264681992,costco run,Groceries,Insurance,0.714,Insurance,True,frozen,0.0,0,Groceries,asked,True,141
+Everything,118,2026-03-15,3,UC BERKELEY PAYROLL PPD ID: 1946000123,,Income,Income,1.0,Income,False,memory,1.0,4,Income,accepted,True,141
+Everything,119,2026-03-15,3,TRADER JOE'S #186 BERKELEY CA,,Groceries,Groceries,1.0,Groceries,False,memory,1.0,5,Groceries,accepted,True,141
+Everything,120,2026-03-16,3,PHILZ COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,2,Restaurants,accepted,True,141
+Everything,121,2026-03-16,3,CHIPOTLE 2297 BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,2,Restaurants,accepted,True,141
+Everything,122,2026-03-17,3,PEETS COFFEE #0731 BERKELEY CA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,13,Restaurants,accepted,True,141
+Everything,123,2026-03-18,3,VENMO PAYMENT 5455376040 WEB ID: 3264681992,concert tix,Entertainment,Transfer,0.783,Transfer,True,frozen,0.0,0,Entertainment,asked,True,141
+Everything,124,2026-03-19,3,CLIPPER SVC BART,,Transportation,Groceries,0.666,Transportation,False,memory,1.0,4,Transportation,accepted,True,141
+Everything,125,2026-03-19,3,LYFT *RIDE 03-19,,Transportation,Transportation,0.992,Transportation,False,memory,1.0,2,Transportation,accepted,True,141
+Everything,126,2026-03-19,3,TARGET T-2788 BERKELEY CA,,Shopping,Shopping,1.0,Shopping,False,memory,1.0,2,Shopping,accepted,True,141
+Everything,127,2026-03-21,3,PEET'S COFFEE #8812,,Restaurants,Restaurants,0.998,Restaurants,False,memory,1.0,13,Restaurants,accepted,True,141
+Everything,128,2026-03-21,3,BLUE BOTTLE COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,10,Restaurants,accepted,True,141
+Everything,129,2026-03-22,3,PEETS COFFEE #0731 BERKELEY CA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,13,Restaurants,accepted,True,141
+Everything,130,2026-03-22,3,VENMO PAYMENT 2069920243 WEB ID: 3264681992,brewery tab,Social,Insurance,0.622,Social,False,memory,1.0,1,Social,accepted,True,141
+Everything,131,2026-03-23,3,FIELDWORK BREWING BERKELEY,,Social,Restaurants,1.0,Social,False,memory,1.0,6,Social,accepted,True,141
+Everything,132,2026-03-24,3,PHILZ COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,2,Restaurants,accepted,True,141
+Everything,133,2026-03-24,3,DOORDASH*TACOS EL GORDO,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,3,Restaurants,accepted,True,141
+Everything,134,2026-03-24,3,VENMO PAYMENT 8135370597 WEB ID: 3264681992,pizza night,Restaurants,Transfer,0.661,Transfer,True,frozen,0.0,0,Restaurants,asked,True,141
+Everything,135,2026-03-26,3,RAMEN SHOP OAKLAND CA,,Social,Restaurants,1.0,Social,False,memory,1.0,1,Social,accepted,True,141
+Everything,136,2026-03-27,3,PEETS COFFEE #0731 BERKELEY CA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,13,Restaurants,accepted,True,141
+Everything,137,2026-03-27,3,SWEETGREEN BERKELEY,,Restaurants,Healthcare,0.936,Restaurants,False,memory,1.0,2,Restaurants,accepted,True,141
+Everything,138,2026-03-27,3,TRADER JOE'S #186 BERKELEY CA,,Groceries,Groceries,1.0,Groceries,False,memory,1.0,5,Groceries,accepted,True,141
+Everything,139,2026-03-28,3,THE RARE BARREL BERKELEY,,Social,Restaurants,0.983,Social,False,memory,1.0,7,Social,accepted,True,141
+Everything,140,2026-03-31,3,DOORDASH*TACOS EL GORDO,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,3,Restaurants,accepted,True,141
+Everything,141,2026-03-31,3,CHIPOTLE 2297 BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,2,Restaurants,accepted,True,141
+Everything,142,2026-04-01,4,UC BERKELEY PAYROLL PPD ID: 1946000123,,Income,Income,1.0,Income,False,memory,1.0,6,Income,accepted,True,195
+Everything,143,2026-04-01,4,Zelle payment to Bayview Property Mgmt JPM99XXB6PWP,,Housing,Housing,0.989,Housing,False,memory,1.0,3,Housing,accepted,True,195
+Everything,144,2026-04-02,4,Zelle payment to Ashley Kim JPM99I9GV4NJ,,Housing,Subscription,0.948,Housing,False,memory,1.0,3,Housing,accepted,True,195
+Everything,145,2026-04-03,4,PEET'S COFFEE #8812,,Restaurants,Restaurants,0.998,Restaurants,False,memory,1.0,18,Restaurants,accepted,True,195
+Everything,146,2026-04-03,4,MINT MOBILE 800-683-7392,,Utilities,Utilities,0.999,Utilities,False,memory,1.0,3,Utilities,accepted,True,195
+Everything,147,2026-04-03,4,SPOTIFY USA,,Subscription,Subscription,0.999,Subscription,False,memory,1.0,3,Subscription,accepted,True,195
+Everything,148,2026-04-03,4,NETFLIX.COM 866-579-7172,,Subscription,Subscription,0.967,Subscription,False,memory,1.0,3,Subscription,accepted,True,195
+Everything,149,2026-04-03,4,APPLE.COM/BILL 866-712-7753,,Subscription,Subscription,0.999,Subscription,False,memory,1.0,3,Subscription,accepted,True,195
+Everything,150,2026-04-03,4,TARGET T-2788 BERKELEY CA,,Shopping,Shopping,1.0,Shopping,False,memory,1.0,3,Shopping,accepted,True,195
+Everything,151,2026-04-04,4,TRADER JOE'S #186 BERKELEY CA,,Groceries,Groceries,1.0,Groceries,False,memory,1.0,7,Groceries,accepted,True,195
+Everything,152,2026-04-05,4,BLUE BOTTLE COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,11,Restaurants,accepted,True,195
+Everything,153,2026-04-05,4,CLIPPER SVC BART,,Transportation,Groceries,0.666,Transportation,False,memory,1.0,6,Transportation,accepted,True,195
+Everything,154,2026-04-06,4,BERKELEY BOWL MARKETPLACE,,Groceries,Restaurants,0.988,Groceries,False,memory,1.0,2,Groceries,accepted,True,195
+Everything,155,2026-04-06,4,AMAZON.COM*UEQXQ6,,Shopping,Shopping,1.0,Shopping,False,memory,1.0,2,Shopping,accepted,True,195
+Everything,156,2026-04-07,4,BERKELEY BOWL WEST,,Groceries,Restaurants,0.997,Groceries,False,memory,1.0,1,Groceries,accepted,True,195
+Everything,157,2026-04-07,4,TARGET T-2788 BERKELEY CA,,Shopping,Shopping,1.0,Shopping,False,memory,1.0,3,Shopping,accepted,True,195
+Everything,158,2026-04-09,4,CHEESE BOARD COLLECTIVE,,Restaurants,Restaurants,0.74,Restaurants,False,memory,1.0,1,Restaurants,accepted,True,195
+Everything,159,2026-04-10,4,PEET'S COFFEE #8812,,Restaurants,Restaurants,0.998,Restaurants,False,memory,1.0,18,Restaurants,accepted,True,195
+Everything,160,2026-04-11,4,PEETS COFFEE #0731 BERKELEY CA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,18,Restaurants,accepted,True,195
+Everything,161,2026-04-11,4,BLUE BOTTLE COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,11,Restaurants,accepted,True,195
+Everything,162,2026-04-11,4,BLUE BOTTLE COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,11,Restaurants,accepted,True,195
+Everything,163,2026-04-11,4,SQ *CAFFE STRADA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,5,Restaurants,accepted,True,195
+Everything,164,2026-04-11,4,TARGET T-2788 BERKELEY CA,,Shopping,Shopping,1.0,Shopping,False,memory,1.0,3,Shopping,accepted,True,195
+Everything,165,2026-04-11,4,VENMO PAYMENT 9710792737 WEB ID: 3264681992,drinks at rare barrel,Social,Insurance,0.979,Social,False,memory,1.0,1,Social,accepted,True,195
+Everything,166,2026-04-12,4,PHILZ COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,4,Restaurants,accepted,True,195
+Everything,167,2026-04-14,4,CHIPOTLE 2297 BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,6,Restaurants,accepted,True,195
+Everything,168,2026-04-14,4,AMZN MKTP US*0RB8VU,,Shopping,Shopping,1.0,Shopping,False,memory,1.0,1,Shopping,accepted,True,195
+Everything,169,2026-04-14,4,UNIQLO BERKELEY 0417,,Shopping,Shopping,0.978,Shopping,False,memory,1.0,1,Shopping,accepted,True,195
+Everything,170,2026-04-15,4,UC BERKELEY PAYROLL PPD ID: 1946000123,,Income,Income,1.0,Income,False,memory,1.0,6,Income,accepted,True,195
+Everything,171,2026-04-15,4,SQ *CAFFE STRADA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,5,Restaurants,accepted,True,195
+Everything,172,2026-04-15,4,BERKELEY BOWL MARKETPLACE,,Groceries,Restaurants,0.988,Groceries,False,memory,1.0,2,Groceries,accepted,True,195
+Everything,173,2026-04-16,4,PEETS COFFEE #0731 BERKELEY CA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,18,Restaurants,accepted,True,195
+Everything,174,2026-04-17,4,PEETS COFFEE #0731 BERKELEY CA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,18,Restaurants,accepted,True,195
+Everything,175,2026-04-17,4,CAFFE STRADA BERKELEY CA,,Restaurants,Restaurants,0.998,Restaurants,False,memory,1.0,3,Restaurants,accepted,True,195
+Everything,176,2026-04-18,4,VENMO PAYMENT 3005712112 WEB ID: 3264681992,drinks at rare barrel,Social,Insurance,0.979,Social,False,memory,1.0,1,Social,accepted,True,195
+Everything,177,2026-04-19,4,PEET'S COFFEE #8812,,Restaurants,Restaurants,0.998,Restaurants,False,memory,1.0,18,Restaurants,accepted,True,195
+Everything,178,2026-04-19,4,SQ *CAFFE STRADA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,5,Restaurants,accepted,True,195
+Everything,179,2026-04-19,4,CLIPPER SVC BART,,Transportation,Groceries,0.666,Transportation,False,memory,1.0,6,Transportation,accepted,True,195
+Everything,180,2026-04-19,4,VENMO PAYMENT 9398308398 WEB ID: 3264681992,uber home,Transportation,Insurance,0.594,Transportation,False,memory,1.0,1,Transportation,accepted,True,195
+Everything,181,2026-04-20,4,PHILZ COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,4,Restaurants,accepted,True,195
+Everything,182,2026-04-20,4,TRADER JOE'S #186 BERKELEY CA,,Groceries,Groceries,1.0,Groceries,False,memory,1.0,7,Groceries,accepted,True,195
+Everything,183,2026-04-21,4,CVS/PHARMACY #35721,,Healthcare,Healthcare,0.999,Healthcare,False,memory,1.0,2,Healthcare,accepted,True,195
+Everything,184,2026-04-22,4,PHILZ COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,4,Restaurants,accepted,True,195
+Everything,185,2026-04-22,4,SWEETGREEN BERKELEY,,Restaurants,Healthcare,0.936,Restaurants,False,memory,1.0,3,Restaurants,accepted,True,195
+Everything,186,2026-04-22,4,BERKELEY BOWL WEST,,Groceries,Restaurants,0.997,Groceries,False,memory,1.0,1,Groceries,accepted,True,195
+Everything,187,2026-04-23,4,SEPHORA #0412 BERKELEY,,Personal Care,Personal Care,0.999,Personal Care,False,memory,1.0,2,Personal Care,accepted,True,195
+Everything,188,2026-04-25,4,VENMO PAYMENT 1565307841 WEB ID: 3264681992,ramen 🍜,Social,Transfer,0.739,Social,False,memory,1.0,1,Social,accepted,True,195
+Everything,189,2026-04-26,4,BLUE BOTTLE COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,11,Restaurants,accepted,True,195
+Everything,190,2026-04-26,4,VENMO PAYMENT 9797210971 WEB ID: 3264681992,drinks at rare barrel,Social,Insurance,0.979,Social,False,memory,1.0,1,Social,accepted,True,195
+Everything,191,2026-04-27,4,CVS/PHARMACY #18315,,Healthcare,Healthcare,0.999,Healthcare,False,memory,1.0,2,Healthcare,accepted,True,195
+Everything,192,2026-04-28,4,BLUE BOTTLE COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,11,Restaurants,accepted,True,195
+Everything,193,2026-04-29,4,PEETS COFFEE #0731 BERKELEY CA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,18,Restaurants,accepted,True,195
+Everything,194,2026-04-29,4,SQ *CAFFE STRADA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,5,Restaurants,accepted,True,195
+Everything,195,2026-04-30,4,UNIQLO BERKELEY 0417,,Shopping,Shopping,0.978,Shopping,False,memory,1.0,1,Shopping,accepted,True,195
+Everything,196,2026-05-01,5,UC BERKELEY PAYROLL PPD ID: 1946000123,,Income,Income,1.0,Income,False,memory,1.0,8,Income,accepted,True,243
+Everything,197,2026-05-01,5,Zelle payment to Bayview Property Mgmt JPM999CGD2E7,,Housing,Housing,0.989,Housing,False,memory,1.0,4,Housing,accepted,True,243
+Everything,198,2026-05-01,5,PEETS COFFEE #0731 BERKELEY CA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,25,Restaurants,accepted,True,243
+Everything,199,2026-05-02,5,Zelle payment to Ashley Kim JPM99OJMT75W,,Housing,Subscription,0.948,Housing,False,memory,1.0,4,Housing,accepted,True,243
+Everything,200,2026-05-02,5,BLUE BOTTLE COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,16,Restaurants,accepted,True,243
+Everything,201,2026-05-02,5,CAFFE STRADA BERKELEY CA,,Restaurants,Restaurants,0.998,Restaurants,False,memory,1.0,4,Restaurants,accepted,True,243
+Everything,202,2026-05-03,5,PEETS COFFEE #0731 BERKELEY CA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,25,Restaurants,accepted,True,243
+Everything,203,2026-05-03,5,SQ *FIELDWORK BREWING,,Social,Restaurants,1.0,Social,False,memory,1.0,7,Social,accepted,True,243
+Everything,204,2026-05-03,5,MINT MOBILE 800-683-7392,,Utilities,Utilities,0.999,Utilities,False,memory,1.0,4,Utilities,accepted,True,243
+Everything,205,2026-05-03,5,SPOTIFY USA,,Subscription,Subscription,0.999,Subscription,False,memory,1.0,4,Subscription,accepted,True,243
+Everything,206,2026-05-03,5,NETFLIX.COM 866-579-7172,,Subscription,Subscription,0.967,Subscription,False,memory,1.0,4,Subscription,accepted,True,243
+Everything,207,2026-05-03,5,APPLE.COM/BILL 866-712-7753,,Subscription,Subscription,0.999,Subscription,False,memory,1.0,4,Subscription,accepted,True,243
+Everything,208,2026-05-04,5,PEET'S COFFEE #8812,,Restaurants,Restaurants,0.998,Restaurants,False,memory,1.0,25,Restaurants,accepted,True,243
+Everything,209,2026-05-04,5,TRADER JOE'S #186 BERKELEY CA,,Groceries,Groceries,1.0,Groceries,False,memory,1.0,9,Groceries,accepted,True,243
+Everything,210,2026-05-04,5,BERKELEY BOWL WEST,,Groceries,Restaurants,0.997,Groceries,False,memory,1.0,3,Groceries,accepted,True,243
+Everything,211,2026-05-04,5,LYFT *RIDE 05-04,,Transportation,Transportation,0.996,Transportation,False,memory,1.0,3,Transportation,accepted,True,243
+Everything,212,2026-05-04,5,VENMO PAYMENT 1840907498 WEB ID: 3264681992,uber home,Transportation,Insurance,0.594,Transportation,False,memory,1.0,2,Transportation,accepted,True,243
+Everything,213,2026-05-05,5,CLIPPER SVC BART,,Transportation,Groceries,0.666,Transportation,False,memory,1.0,8,Transportation,accepted,True,243
+Everything,214,2026-05-05,5,VENMO PAYMENT 4754404687 WEB ID: 3264681992,concert tix,Entertainment,Transfer,0.783,Entertainment,False,memory,1.0,1,Entertainment,accepted,True,243
+Everything,215,2026-05-07,5,BLUE BOTTLE COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,16,Restaurants,accepted,True,243
+Everything,216,2026-05-07,5,SQ *CAFFE STRADA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,9,Restaurants,accepted,True,243
+Everything,217,2026-05-09,5,AMZN MKTP US*4G9WSW,,Shopping,Shopping,1.0,Shopping,False,memory,1.0,2,Shopping,accepted,True,243
+Everything,218,2026-05-09,5,TRADER JOE'S #186 BERKELEY CA,,Gifts,Groceries,1.0,Groceries,False,memory,1.0,9,Gifts,corrected,True,243
+Everything,219,2026-05-10,5,VENMO PAYMENT 0304731922 WEB ID: 3264681992,ramen 🍜,Social,Transfer,0.739,Social,False,memory,1.0,2,Social,accepted,True,243
+Everything,220,2026-05-10,5,VENMO PAYMENT 1271193912 WEB ID: 3264681992,brewery tab,Social,Insurance,0.622,Social,False,memory,1.0,3,Social,accepted,True,243
+Everything,221,2026-05-12,5,TRADER JOE'S #186 BERKELEY CA,,Groceries,Groceries,1.0,Groceries,False,memory,1.0,9,Groceries,accepted,True,243
+Everything,222,2026-05-12,5,VENMO PAYMENT 1763400230 WEB ID: 3264681992,concert tix,Entertainment,Transfer,0.783,Entertainment,False,memory,1.0,1,Entertainment,accepted,True,243
+Everything,223,2026-05-14,5,SQ *CAFFE STRADA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,9,Restaurants,accepted,True,243
+Everything,224,2026-05-14,5,BERKELEY BOWL MARKETPLACE,,Groceries,Restaurants,0.988,Groceries,False,memory,1.0,4,Groceries,accepted,True,243
+Everything,225,2026-05-15,5,UC BERKELEY PAYROLL PPD ID: 1946000123,,Income,Income,1.0,Income,False,memory,1.0,8,Income,accepted,True,243
+Everything,226,2026-05-16,5,IPPUDO BERKELEY,,Social,Restaurants,0.602,Social,False,memory,1.0,1,Social,accepted,True,243
+Everything,227,2026-05-18,5,PEET'S COFFEE #8812,,Restaurants,Restaurants,0.998,Restaurants,False,memory,1.0,25,Restaurants,accepted,True,243
+Everything,228,2026-05-18,5,SAFEWAY #0975 BERKELEY CA,,Groceries,Groceries,0.999,Groceries,False,memory,1.0,1,Groceries,accepted,True,243
+Everything,229,2026-05-19,5,PEETS COFFEE #0731 BERKELEY CA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,25,Restaurants,accepted,True,243
+Everything,230,2026-05-19,5,DOORDASH*TACOS EL GORDO,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,5,Restaurants,accepted,True,243
+Everything,231,2026-05-19,5,CLIPPER SVC BART,,Transportation,Groceries,0.666,Transportation,False,memory,1.0,8,Transportation,accepted,True,243
+Everything,232,2026-05-19,5,VENMO PAYMENT 4412650926 WEB ID: 3264681992,ramen 🍜,Social,Transfer,0.739,Social,False,memory,1.0,2,Social,accepted,True,243
+Everything,233,2026-05-20,5,CHEESE BOARD COLLECTIVE,,Restaurants,Restaurants,0.74,Restaurants,False,memory,1.0,2,Restaurants,accepted,True,243
+Everything,234,2026-05-24,5,AMZN MKTP US*9G11N9,,Shopping,Shopping,1.0,Shopping,False,memory,1.0,2,Shopping,accepted,True,243
+Everything,235,2026-05-24,5,VENMO PAYMENT 1991163493 WEB ID: 3264681992,drinks at rare barrel,Social,Insurance,0.979,Social,False,memory,1.0,4,Social,accepted,True,243
+Everything,236,2026-05-25,5,SWEETGREEN BERKELEY,,Restaurants,Healthcare,0.936,Restaurants,False,memory,1.0,4,Restaurants,accepted,True,243
+Everything,237,2026-05-27,5,AMAZON.COM*BWI2WI,,Shopping,Shopping,1.0,Shopping,False,memory,1.0,3,Shopping,accepted,True,243
+Everything,238,2026-05-28,5,IPPUDO BERKELEY,,Social,Restaurants,0.602,Social,False,memory,1.0,1,Social,accepted,True,243
+Everything,239,2026-05-29,5,THE RARE BARREL BERKELEY,,Social,Restaurants,0.983,Social,False,memory,1.0,8,Social,accepted,True,243
+Everything,240,2026-05-29,5,CHEESE BOARD COLLECTIVE,,Restaurants,Restaurants,0.74,Restaurants,False,memory,1.0,2,Restaurants,accepted,True,243
+Everything,241,2026-05-29,5,VENMO PAYMENT 7939264709 WEB ID: 3264681992,ramen 🍜,Social,Transfer,0.739,Social,False,memory,1.0,2,Social,accepted,True,243
+Everything,242,2026-05-30,5,PEET'S COFFEE #8812,,Restaurants,Restaurants,0.998,Restaurants,False,memory,1.0,25,Restaurants,accepted,True,243
+Everything,243,2026-05-31,5,SQ *FIELDWORK BREWING,,Social,Restaurants,1.0,Social,False,memory,1.0,7,Social,accepted,True,243
+Everything,244,2026-06-01,6,UC BERKELEY PAYROLL PPD ID: 1946000123,,Income,Income,1.0,Income,False,memory,1.0,10,Income,accepted,True,296
+Everything,245,2026-06-01,6,Zelle payment to Bayview Property Mgmt JPM99DKLOGX8,,Housing,Housing,0.989,Housing,False,memory,1.0,5,Housing,accepted,True,296
+Everything,246,2026-06-01,6,PEET'S COFFEE #8812,,Restaurants,Restaurants,0.998,Restaurants,False,memory,1.0,31,Restaurants,accepted,True,296
+Everything,247,2026-06-01,6,BLUE BOTTLE COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,18,Restaurants,accepted,True,296
+Everything,248,2026-06-01,6,CHIPOTLE 2297 BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,7,Restaurants,accepted,True,296
+Everything,249,2026-06-01,6,SQ *SHATTUCK HAIR STUDIO,,Personal Care,Personal Care,0.999,Personal Care,False,memory,1.0,1,Personal Care,accepted,True,296
+Everything,250,2026-06-01,6,VENMO PAYMENT 7941882474 WEB ID: 3264681992,brewery tab,Social,Insurance,0.622,Social,False,memory,1.0,4,Social,accepted,True,296
+Everything,251,2026-06-02,6,Zelle payment to Ashley Kim JPM99TFW0S6H,,Housing,Subscription,0.948,Housing,False,memory,1.0,5,Housing,accepted,True,296
+Everything,252,2026-06-02,6,VENMO PAYMENT 6411310472 WEB ID: 3264681992,pizza night,Restaurants,Transfer,0.661,Restaurants,False,memory,1.0,1,Restaurants,accepted,True,296
+Everything,253,2026-06-03,6,BLUE BOTTLE COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,18,Restaurants,accepted,True,296
+Everything,254,2026-06-03,6,SQ *CAFFE STRADA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,11,Restaurants,accepted,True,296
+Everything,255,2026-06-03,6,MINT MOBILE 800-683-7392,,Utilities,Utilities,0.999,Utilities,False,memory,1.0,5,Utilities,accepted,True,296
+Everything,256,2026-06-03,6,SPOTIFY USA,,Subscription,Subscription,0.999,Subscription,False,memory,1.0,5,Subscription,accepted,True,296
+Everything,257,2026-06-03,6,NETFLIX.COM 866-579-7172,,Subscription,Subscription,0.967,Subscription,False,memory,1.0,5,Subscription,accepted,True,296
+Everything,258,2026-06-03,6,APPLE.COM/BILL 866-712-7753,,Subscription,Subscription,0.999,Subscription,False,memory,1.0,5,Subscription,accepted,True,296
+Everything,259,2026-06-03,6,AMZN MKTP US*QVDMDE,,Shopping,Shopping,1.0,Shopping,False,memory,1.0,4,Shopping,accepted,True,296
+Everything,260,2026-06-03,6,SQ *SHATTUCK HAIR STUDIO,,Personal Care,Personal Care,0.999,Personal Care,False,memory,1.0,1,Personal Care,accepted,True,296
+Everything,261,2026-06-04,6,CAFFE STRADA BERKELEY CA,,Restaurants,Restaurants,0.998,Restaurants,False,memory,1.0,5,Restaurants,accepted,True,296
+Everything,262,2026-06-05,6,CLIPPER SVC BART,,Transportation,Groceries,0.666,Transportation,False,memory,1.0,10,Transportation,accepted,True,296
+Everything,263,2026-06-06,6,PEETS COFFEE #0731 BERKELEY CA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,31,Restaurants,accepted,True,296
+Everything,264,2026-06-06,6,CAFFE STRADA BERKELEY CA,,Restaurants,Restaurants,0.998,Restaurants,False,memory,1.0,5,Restaurants,accepted,True,296
+Everything,265,2026-06-07,6,PEET'S COFFEE #8812,,Restaurants,Restaurants,0.998,Restaurants,False,memory,1.0,31,Restaurants,accepted,True,296
+Everything,266,2026-06-07,6,SQ *CAFFE STRADA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,11,Restaurants,accepted,True,296
+Everything,267,2026-06-07,6,TRADER JOE'S #186 BERKELEY CA,,Groceries,Groceries,1.0,Groceries,False,memory,0.917,12,Groceries,accepted,True,296
+Everything,268,2026-06-07,6,TRADER JOE'S #186 BERKELEY CA,,Groceries,Groceries,1.0,Groceries,False,memory,0.917,12,Groceries,accepted,True,296
+Everything,269,2026-06-07,6,VENMO PAYMENT 3844674513 WEB ID: 3264681992,ramen 🍜,Social,Transfer,0.739,Social,False,memory,1.0,5,Social,accepted,True,296
+Everything,270,2026-06-08,6,SWEETGREEN BERKELEY,,Restaurants,Healthcare,0.936,Restaurants,False,memory,1.0,5,Restaurants,accepted,True,296
+Everything,271,2026-06-10,6,PEET'S COFFEE #8812,,Restaurants,Restaurants,0.998,Restaurants,False,memory,1.0,31,Restaurants,accepted,True,296
+Everything,272,2026-06-10,6,CHIPOTLE 2297 BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,7,Restaurants,accepted,True,296
+Everything,273,2026-06-11,6,FIELDWORK BREWING BERKELEY,,Social,Restaurants,1.0,Social,False,memory,1.0,9,Social,accepted,True,296
+Everything,274,2026-06-11,6,SWEETGREEN BERKELEY,,Restaurants,Healthcare,0.936,Restaurants,False,memory,1.0,5,Restaurants,accepted,True,296
+Everything,275,2026-06-15,6,UC BERKELEY PAYROLL PPD ID: 1946000123,,Income,Income,1.0,Income,False,memory,1.0,10,Income,accepted,True,296
+Everything,276,2026-06-16,6,PHILZ COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,7,Restaurants,accepted,True,296
+Everything,277,2026-06-16,6,THE RARE BARREL BERKELEY,,Social,Restaurants,0.983,Social,False,memory,1.0,9,Social,accepted,True,296
+Everything,278,2026-06-16,6,TRADER JOE'S #186 BERKELEY CA,,Groceries,Groceries,1.0,Groceries,False,memory,0.917,12,Groceries,accepted,True,296
+Everything,279,2026-06-18,6,THE RARE BARREL BERKELEY,,Social,Restaurants,0.983,Social,False,memory,1.0,9,Social,accepted,True,296
+Everything,280,2026-06-18,6,TRADER JOE'S #186 BERKELEY CA,,Groceries,Groceries,1.0,Groceries,False,memory,0.917,12,Groceries,accepted,True,296
+Everything,281,2026-06-19,6,BERKELEY BOWL MARKETPLACE,,Groceries,Restaurants,0.988,Groceries,False,memory,1.0,5,Groceries,accepted,True,296
+Everything,282,2026-06-19,6,BERKELEY BOWL MARKETPLACE,,Groceries,Restaurants,0.988,Groceries,False,memory,1.0,5,Groceries,accepted,True,296
+Everything,283,2026-06-19,6,CLIPPER SVC BART,,Transportation,Groceries,0.666,Transportation,False,memory,1.0,10,Transportation,accepted,True,296
+Everything,284,2026-06-20,6,RAMEN SHOP OAKLAND CA,,Social,Restaurants,1.0,Social,False,memory,1.0,3,Social,accepted,True,296
+Everything,285,2026-06-22,6,SQ *CAFFE STRADA,,Restaurants,Restaurants,0.999,Restaurants,False,memory,1.0,11,Restaurants,accepted,True,296
+Everything,286,2026-06-23,6,AMAZON.COM*LWADMU,,Shopping,Shopping,0.999,Shopping,False,frozen,0.0,0,Shopping,accepted,True,296
+Everything,287,2026-06-25,6,PHILZ COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,7,Restaurants,accepted,True,296
+Everything,288,2026-06-26,6,BLUE BOTTLE COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,18,Restaurants,accepted,True,296
+Everything,289,2026-06-26,6,PHILZ COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,7,Restaurants,accepted,True,296
+Everything,290,2026-06-26,6,PHILZ COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,7,Restaurants,accepted,True,296
+Everything,291,2026-06-27,6,PHILZ COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,7,Restaurants,accepted,True,296
+Everything,292,2026-06-28,6,PHILZ COFFEE BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,7,Restaurants,accepted,True,296
+Everything,293,2026-06-28,6,THE RARE BARREL BERKELEY,,Social,Restaurants,0.983,Social,False,memory,1.0,9,Social,accepted,True,296
+Everything,294,2026-06-29,6,RAMEN SHOP OAKLAND CA,,Social,Restaurants,1.0,Social,False,memory,1.0,3,Social,accepted,True,296
+Everything,295,2026-06-30,6,BERKELEY BOWL MARKETPLACE,,Groceries,Restaurants,0.988,Groceries,False,memory,1.0,5,Groceries,accepted,True,296
+Everything,296,2026-06-30,6,SEPHORA #0412 BERKELEY,,Personal Care,Personal Care,0.999,Personal Care,False,memory,1.0,3,Personal Care,accepted,True,296
+Everything,297,2026-07-01,7,UC BERKELEY PAYROLL PPD ID: 1946000123,,Income,Income,1.0,Income,False,memory,1.0,12,Income,accepted,True,348
+Everything,298,2026-07-01,7,Zelle payment to Bayview Property Mgmt JPM99V8FWNQP,,Housing,Housing,0.989,Housing,False,memory,1.0,6,Housing,accepted,True,348
+Everything,299,2026-07-01,7,CVS/PHARMACY #47058,,Healthcare,Healthcare,0.999,Healthcare,False,memory,1.0,4,Healthcare,accepted,True,348
+Everything,300,2026-07-02,7,Zelle payment to Ashley Kim JPM99RP8X5HJ,,Housing,Subscription,0.948,Housing,False,memory,1.0,6,Housing,accepted,True,348
+Everything,301,2026-07-02,7,SWEETGREEN BERKELEY,,Restaurants,Healthcare,0.936,Restaurants,False,memory,1.0,7,Restaurants,accepted,True,348
+Everything,302,2026-07-03,7,PHILZ COFFEE BERKELEY,,Coffee,Restaurants,1.0,Restaurants,False,memory,1.0,13,Coffee,corrected,True,348
+Everything,303,2026-07-03,7,MINT MOBILE 800-683-7392,,Utilities,Utilities,0.999,Utilities,False,memory,1.0,6,Utilities,accepted,True,348
+Everything,304,2026-07-03,7,SPOTIFY USA,,Subscription,Subscription,0.999,Subscription,False,memory,1.0,6,Subscription,accepted,True,348
+Everything,305,2026-07-03,7,NETFLIX.COM 866-579-7172,,Subscription,Subscription,0.967,Subscription,False,memory,1.0,6,Subscription,accepted,True,348
+Everything,306,2026-07-03,7,APPLE.COM/BILL 866-712-7753,,Subscription,Subscription,0.999,Subscription,False,memory,1.0,6,Subscription,accepted,True,348
+Everything,307,2026-07-04,7,BLUE BOTTLE COFFEE BERKELEY,,Coffee,Restaurants,1.0,Restaurants,False,memory,1.0,21,Coffee,corrected,True,348
+Everything,308,2026-07-05,7,CLIPPER SVC BART,,Transportation,Groceries,0.666,Transportation,False,memory,1.0,12,Transportation,accepted,True,348
+Everything,309,2026-07-08,7,CAFFE STRADA BERKELEY CA,,Coffee,Restaurants,0.998,Restaurants,False,memory,1.0,7,Coffee,corrected,True,348
+Everything,310,2026-07-08,7,TRADER JOE'S #186 BERKELEY CA,,Groceries,Groceries,1.0,Groceries,False,memory,0.938,16,Groceries,accepted,True,348
+Everything,311,2026-07-08,7,AMZN MKTP US*Z0EMPO,,Shopping,Shopping,1.0,Shopping,False,memory,1.0,5,Shopping,accepted,True,348
+Everything,312,2026-07-09,7,PHILZ COFFEE BERKELEY,,Coffee,Restaurants,1.0,Restaurants,False,memory,1.0,13,Coffee,corrected,True,348
+Everything,313,2026-07-09,7,DOORDASH*TACOS EL GORDO,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,6,Restaurants,accepted,True,348
+Everything,314,2026-07-09,7,VENMO PAYMENT 6778099559 WEB ID: 3264681992,costco run,Groceries,Insurance,0.714,Groceries,False,memory,1.0,1,Groceries,accepted,True,348
+Everything,315,2026-07-10,7,PHILZ COFFEE BERKELEY,,Coffee,Restaurants,1.0,Restaurants,False,memory,1.0,13,Coffee,corrected,True,348
+Everything,316,2026-07-10,7,AMAZON.COM*CH0JQ2,,Shopping,Shopping,1.0,Shopping,False,memory,1.0,4,Shopping,accepted,True,348
+Everything,317,2026-07-11,7,PHILZ COFFEE BERKELEY,,Coffee,Restaurants,1.0,Restaurants,False,memory,1.0,13,Coffee,corrected,True,348
+Everything,318,2026-07-13,7,CAFFE STRADA BERKELEY CA,,Coffee,Restaurants,0.998,Restaurants,False,memory,1.0,7,Coffee,corrected,True,348
+Everything,319,2026-07-13,7,BERKELEY BOWL MARKETPLACE,,Groceries,Restaurants,0.988,Groceries,False,memory,1.0,8,Groceries,accepted,True,348
+Everything,320,2026-07-13,7,VENMO PAYMENT 9449071134 WEB ID: 3264681992,concert tix,Entertainment,Transfer,0.783,Entertainment,False,memory,1.0,3,Entertainment,accepted,True,348
+Everything,321,2026-07-14,7,RAMEN SHOP OAKLAND CA,,Social,Restaurants,1.0,Social,False,memory,1.0,5,Social,accepted,True,348
+Everything,322,2026-07-14,7,DOORDASH*TACOS EL GORDO,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,6,Restaurants,accepted,True,348
+Everything,323,2026-07-14,7,LYFT *RIDE 07-14,,Transportation,Transportation,0.989,Transportation,False,memory,1.0,4,Transportation,accepted,True,348
+Everything,324,2026-07-15,7,UC BERKELEY PAYROLL PPD ID: 1946000123,,Income,Income,1.0,Income,False,memory,1.0,12,Income,accepted,True,348
+Everything,325,2026-07-15,7,SEPHORA #0412 BERKELEY,,Personal Care,Personal Care,0.999,Personal Care,False,memory,1.0,4,Personal Care,accepted,True,348
+Everything,326,2026-07-15,7,VENMO PAYMENT 3567549021 WEB ID: 3264681992,ramen 🍜,Social,Transfer,0.739,Social,False,memory,1.0,6,Social,accepted,True,348
+Everything,327,2026-07-17,7,SQ *CAFFE STRADA,,Coffee,Restaurants,0.999,Restaurants,False,memory,1.0,14,Coffee,corrected,True,348
+Everything,328,2026-07-17,7,FIELDWORK BREWING BERKELEY,,Social,Restaurants,1.0,Social,False,memory,1.0,10,Social,accepted,True,348
+Everything,329,2026-07-19,7,SQ *FIELDWORK BREWING,,Social,Restaurants,1.0,Social,False,memory,1.0,10,Social,accepted,True,348
+Everything,330,2026-07-19,7,CLIPPER SVC BART,,Transportation,Groceries,0.666,Transportation,False,memory,1.0,12,Transportation,accepted,True,348
+Everything,331,2026-07-20,7,VENMO PAYMENT 3217053138 WEB ID: 3264681992,pizza night,Restaurants,Transfer,0.661,Restaurants,False,memory,1.0,2,Restaurants,accepted,True,348
+Everything,332,2026-07-21,7,PEETS COFFEE #0731 BERKELEY CA,,Coffee,Restaurants,0.999,Restaurants,False,memory,1.0,35,Coffee,corrected,True,348
+Everything,333,2026-07-21,7,TRADER JOE'S #186 BERKELEY CA,,Groceries,Groceries,1.0,Groceries,False,memory,0.938,16,Groceries,accepted,True,348
+Everything,334,2026-07-22,7,BLUE BOTTLE COFFEE BERKELEY,,Coffee,Restaurants,1.0,Restaurants,False,memory,1.0,21,Coffee,corrected,True,348
+Everything,335,2026-07-22,7,VENMO PAYMENT 6992193793 WEB ID: 3264681992,uber home,Transportation,Insurance,0.594,Transportation,False,memory,1.0,3,Transportation,accepted,True,348
+Everything,336,2026-07-23,7,BLUE BOTTLE COFFEE BERKELEY,,Coffee,Restaurants,1.0,Restaurants,False,memory,1.0,21,Coffee,corrected,True,348
+Everything,337,2026-07-23,7,BERKELEY BOWL WEST,,Groceries,Restaurants,0.997,Groceries,False,memory,1.0,4,Groceries,accepted,True,348
+Everything,338,2026-07-24,7,SQ *FIELDWORK BREWING,,Social,Restaurants,1.0,Social,False,memory,1.0,10,Social,accepted,True,348
+Everything,339,2026-07-25,7,SWEETGREEN BERKELEY,,Restaurants,Healthcare,0.936,Restaurants,False,memory,1.0,7,Restaurants,accepted,True,348
+Everything,340,2026-07-25,7,SQ *SHATTUCK HAIR STUDIO,,Personal Care,Personal Care,0.999,Personal Care,False,memory,1.0,3,Personal Care,accepted,True,348
+Everything,341,2026-07-25,7,VENMO PAYMENT 2136722969 WEB ID: 3264681992,uber home,Transportation,Insurance,0.594,Transportation,False,memory,1.0,3,Transportation,accepted,True,348
+Everything,342,2026-07-26,7,DOORDASH*TACOS EL GORDO,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,6,Restaurants,accepted,True,348
+Everything,343,2026-07-27,7,AMC BAY STREET 16,,Entertainment,Transportation,0.817,Transportation,True,frozen,0.0,0,Entertainment,asked,True,348
+Everything,344,2026-07-29,7,CAFFE STRADA BERKELEY CA,,Coffee,Restaurants,0.998,Restaurants,False,memory,1.0,7,Coffee,corrected,True,348
+Everything,345,2026-07-29,7,DOORDASH*TACOS EL GORDO,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,6,Restaurants,accepted,True,348
+Everything,346,2026-07-30,7,PEETS COFFEE #0731 BERKELEY CA,,Coffee,Restaurants,0.999,Restaurants,False,memory,1.0,35,Coffee,corrected,True,348
+Everything,347,2026-07-31,7,BLUE BOTTLE COFFEE BERKELEY,,Coffee,Restaurants,1.0,Restaurants,False,memory,1.0,21,Coffee,corrected,True,348
+Everything,348,2026-07-31,7,TARGET T-2788 BERKELEY CA,,Shopping,Shopping,1.0,Shopping,False,memory,1.0,6,Shopping,accepted,True,348
+Everything,349,2026-08-01,8,UC BERKELEY PAYROLL PPD ID: 1946000123,,Income,Income,1.0,Income,False,memory,1.0,14,Income,accepted,True,397
+Everything,350,2026-08-01,8,Zelle payment to Bayview Property Mgmt JPM993JHQJIW,,Housing,Housing,0.989,Housing,False,memory,1.0,7,Housing,accepted,True,397
+Everything,351,2026-08-02,8,Zelle payment to Ashley Kim JPM995TK139X,,Housing,Subscription,0.948,Housing,False,memory,1.0,7,Housing,accepted,True,397
+Everything,352,2026-08-03,8,MINT MOBILE 800-683-7392,,Utilities,Utilities,0.999,Utilities,False,memory,1.0,7,Utilities,accepted,True,397
+Everything,353,2026-08-03,8,SPOTIFY USA,,Subscription,Subscription,0.999,Subscription,False,memory,1.0,7,Subscription,accepted,True,397
+Everything,354,2026-08-03,8,NETFLIX.COM 866-579-7172,,Subscription,Subscription,0.967,Subscription,False,memory,1.0,7,Subscription,accepted,True,397
+Everything,355,2026-08-03,8,APPLE.COM/BILL 866-712-7753,,Subscription,Subscription,0.999,Subscription,False,memory,1.0,7,Subscription,accepted,True,397
+Everything,356,2026-08-03,8,VENMO PAYMENT 1479255081 WEB ID: 3264681992,costco run,Groceries,Insurance,0.714,Groceries,False,memory,1.0,2,Groceries,accepted,True,397
+Everything,357,2026-08-04,8,SAFEWAY #0975 BERKELEY CA,,Groceries,Groceries,0.999,Groceries,False,memory,1.0,2,Groceries,accepted,True,397
+Everything,358,2026-08-05,8,BLUE BOTTLE COFFEE BERKELEY,,Coffee,Restaurants,1.0,Restaurants,False,memory,0.84,25,Coffee,corrected,True,397
+Everything,359,2026-08-05,8,CLIPPER SVC BART,,Transportation,Groceries,0.666,Transportation,False,memory,1.0,14,Transportation,accepted,True,397
+Everything,360,2026-08-06,8,PHILZ COFFEE BERKELEY,,Coffee,Restaurants,1.0,Restaurants,False,memory,0.765,17,Coffee,corrected,True,397
+Everything,361,2026-08-06,8,SWEETGREEN BERKELEY,,Restaurants,Healthcare,0.936,Restaurants,False,memory,1.0,9,Restaurants,accepted,True,397
+Everything,362,2026-08-07,8,SQ *CAFFE STRADA,,Coffee,Restaurants,0.999,Restaurants,False,memory,0.933,15,Coffee,corrected,True,397
+Everything,363,2026-08-07,8,BERKELEY BOWL MARKETPLACE,,Groceries,Restaurants,0.988,Groceries,False,memory,1.0,9,Groceries,accepted,True,397
+Everything,364,2026-08-08,8,PEET'S COFFEE #8812,,Coffee,Restaurants,0.998,Restaurants,False,memory,0.948,37,Coffee,corrected,True,397
+Everything,365,2026-08-08,8,TRADER JOE'S #186 BERKELEY CA,,Groceries,Groceries,1.0,Groceries,False,memory,0.944,18,Groceries,accepted,True,397
+Everything,366,2026-08-08,8,SEPHORA #0412 BERKELEY,,Personal Care,Personal Care,0.999,Personal Care,False,memory,1.0,5,Personal Care,accepted,True,397
+Everything,367,2026-08-08,8,VENMO PAYMENT 4460518088 WEB ID: 3264681992,brewery tab,Social,Insurance,0.622,Social,False,memory,1.0,5,Social,accepted,True,397
+Everything,368,2026-08-08,8,VENMO PAYMENT 2616805708 WEB ID: 3264681992,uber home,Transportation,Insurance,0.594,Transportation,False,memory,1.0,5,Transportation,accepted,True,397
+Everything,369,2026-08-09,8,VENMO PAYMENT 8090999173 WEB ID: 3264681992,pizza night,Restaurants,Transfer,0.661,Restaurants,False,memory,1.0,3,Restaurants,accepted,True,397
+Everything,370,2026-08-11,8,BLUE BOTTLE COFFEE BERKELEY,,Coffee,Restaurants,1.0,Restaurants,False,memory,0.84,25,Coffee,corrected,True,397
+Everything,371,2026-08-11,8,THE RARE BARREL BERKELEY,,Social,Restaurants,0.983,Social,False,memory,1.0,12,Social,accepted,True,397
+Everything,372,2026-08-11,8,FIELDWORK BREWING BERKELEY,,Social,Restaurants,1.0,Social,False,memory,1.0,13,Social,accepted,True,397
+Everything,373,2026-08-11,8,SWEETGREEN BERKELEY,,Restaurants,Healthcare,0.936,Restaurants,False,memory,1.0,9,Restaurants,accepted,True,397
+Everything,374,2026-08-12,8,BERKELEY BOWL WEST,,Groceries,Restaurants,0.997,Groceries,False,memory,1.0,5,Groceries,accepted,True,397
+Everything,375,2026-08-15,8,UC BERKELEY PAYROLL PPD ID: 1946000123,,Income,Income,1.0,Income,False,memory,1.0,14,Income,accepted,True,397
+Everything,376,2026-08-15,8,PHILZ COFFEE BERKELEY,,Coffee,Restaurants,1.0,Restaurants,False,memory,0.765,17,Coffee,corrected,True,397
+Everything,377,2026-08-15,8,CHEESE BOARD COLLECTIVE,,Restaurants,Restaurants,0.74,Restaurants,False,memory,1.0,4,Restaurants,accepted,True,397
+Everything,378,2026-08-15,8,VENMO PAYMENT 1675449518 WEB ID: 3264681992,uber home,Transportation,Insurance,0.594,Transportation,False,memory,1.0,5,Transportation,accepted,True,397
+Everything,379,2026-08-16,8,PEETS COFFEE #0731 BERKELEY CA,,Coffee,Restaurants,0.999,Restaurants,False,memory,0.944,37,Coffee,corrected,True,397
+Everything,380,2026-08-17,8,SWEETGREEN BERKELEY,,Restaurants,Healthcare,0.936,Restaurants,False,memory,1.0,9,Restaurants,accepted,True,397
+Everything,381,2026-08-18,8,VENMO PAYMENT 7203268809 WEB ID: 3264681992,brewery tab,Social,Insurance,0.622,Social,False,memory,1.0,5,Social,accepted,True,397
+Everything,382,2026-08-19,8,RAMEN SHOP OAKLAND CA,,Social,Restaurants,1.0,Social,False,memory,1.0,6,Social,accepted,True,397
+Everything,383,2026-08-19,8,SWEETGREEN BERKELEY,,Restaurants,Healthcare,0.936,Restaurants,False,memory,1.0,9,Restaurants,accepted,True,397
+Everything,384,2026-08-19,8,CLIPPER SVC BART,,Transportation,Groceries,0.666,Transportation,False,memory,1.0,14,Transportation,accepted,True,397
+Everything,385,2026-08-20,8,CHIPOTLE 2297 BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,9,Restaurants,accepted,True,397
+Everything,386,2026-08-21,8,TRADER JOE'S #186 BERKELEY CA,,Groceries,Groceries,1.0,Groceries,False,memory,0.944,18,Groceries,accepted,True,397
+Everything,387,2026-08-22,8,CAFFE STRADA BERKELEY CA,,Coffee,Restaurants,0.998,Restaurants,False,memory,0.7,10,Coffee,corrected,True,397
+Everything,388,2026-08-22,8,PHILZ COFFEE BERKELEY,,Coffee,Restaurants,1.0,Restaurants,False,memory,0.765,17,Coffee,corrected,True,397
+Everything,389,2026-08-22,8,AMC BAY STREET 16,,Entertainment,Transportation,0.817,Entertainment,False,memory,1.0,1,Entertainment,accepted,True,397
+Everything,390,2026-08-24,8,PEET'S COFFEE #8812,,Coffee,Restaurants,0.998,Restaurants,False,memory,0.948,37,Coffee,corrected,True,397
+Everything,391,2026-08-24,8,SQ *CAFFE STRADA,,Coffee,Restaurants,0.999,Restaurants,False,memory,0.933,15,Coffee,corrected,True,397
+Everything,392,2026-08-24,8,SQ *FIELDWORK BREWING,,Social,Restaurants,1.0,Social,False,memory,1.0,13,Social,accepted,True,397
+Everything,393,2026-08-25,8,LYFT *RIDE 08-25,,Transportation,Transportation,0.987,Transportation,False,memory,1.0,5,Transportation,accepted,True,397
+Everything,394,2026-08-26,8,IPPUDO BERKELEY,,Social,Restaurants,0.602,Social,False,memory,1.0,3,Social,accepted,True,397
+Everything,395,2026-08-26,8,VENMO PAYMENT 4737140367 WEB ID: 3264681992,ramen 🍜,Social,Transfer,0.739,Social,False,memory,1.0,7,Social,accepted,True,397
+Everything,396,2026-08-29,8,PEET'S COFFEE #8812,,Coffee,Restaurants,0.998,Restaurants,False,memory,0.948,37,Coffee,corrected,True,397
+Everything,397,2026-08-30,8,CAFFE STRADA BERKELEY CA,,Coffee,Restaurants,0.998,Restaurants,False,memory,0.7,10,Coffee,corrected,True,397
+Everything,398,2026-09-01,9,UC BERKELEY PAYROLL PPD ID: 1946000123,,Income,Income,1.0,Income,False,memory,1.0,16,Income,accepted,True,457
+Everything,399,2026-09-01,9,Zelle payment to Bayview Property Mgmt JPM999XFPSVF,,Housing,Housing,0.989,Housing,False,memory,1.0,8,Housing,accepted,True,457
+Everything,400,2026-09-01,9,CHEESE BOARD COLLECTIVE,,Restaurants,Restaurants,0.74,Restaurants,False,memory,1.0,5,Restaurants,accepted,True,457
+Everything,401,2026-09-01,9,AMAZON.COM*Z40TDD,,Shopping,Shopping,1.0,Shopping,False,memory,1.0,5,Shopping,accepted,True,457
+Everything,402,2026-09-01,9,AMC BAY STREET 16,,Entertainment,Transportation,0.817,Entertainment,False,memory,1.0,2,Entertainment,accepted,True,457
+Everything,403,2026-09-02,9,Zelle payment to Ashley Kim JPM9964VHIEJ,,Housing,Subscription,0.948,Housing,False,memory,1.0,8,Housing,accepted,True,457
+Everything,404,2026-09-02,9,TST* ALE INDUSTRIES OAKLAND,,Social,Restaurants,1.0,Restaurants,False,frozen,0.0,0,Social,corrected,True,457
+Everything,405,2026-09-03,9,TST* ALE INDUSTRIES OAKLAND,,Social,Restaurants,1.0,Restaurants,False,frozen,0.0,0,Social,corrected,True,457
+Everything,406,2026-09-03,9,MINT MOBILE 800-683-7392,,Utilities,Utilities,0.999,Utilities,False,memory,1.0,8,Utilities,accepted,True,457
+Everything,407,2026-09-03,9,SPOTIFY USA,,Subscription,Subscription,0.999,Subscription,False,memory,1.0,8,Subscription,accepted,True,457
+Everything,408,2026-09-03,9,NETFLIX.COM 866-579-7172,,Subscription,Subscription,0.967,Subscription,False,memory,1.0,8,Subscription,accepted,True,457
+Everything,409,2026-09-03,9,APPLE.COM/BILL 866-712-7753,,Subscription,Subscription,0.999,Subscription,False,memory,1.0,8,Subscription,accepted,True,457
+Everything,410,2026-09-03,9,VENMO PAYMENT 0951505543 WEB ID: 3264681992,uber home,Transportation,Insurance,0.594,Transportation,False,memory,1.0,7,Transportation,accepted,True,457
+Everything,411,2026-09-05,9,SQ *CAFFE STRADA,,Coffee,Restaurants,0.999,Restaurants,False,memory,0.824,17,Coffee,corrected,True,457
+Everything,412,2026-09-05,9,SQ *CAFFE STRADA,,Coffee,Restaurants,0.999,Restaurants,False,memory,0.824,17,Coffee,corrected,True,457
+Everything,413,2026-09-05,9,CAFFE STRADA BERKELEY CA,,Coffee,Restaurants,0.998,Restaurants,False,frozen,0.583,12,Coffee,corrected,True,457
+Everything,414,2026-09-05,9,CHIPOTLE 2297 BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,10,Restaurants,accepted,True,457
+Everything,415,2026-09-05,9,CLIPPER SVC BART,,Transportation,Groceries,0.666,Transportation,False,memory,1.0,16,Transportation,accepted,True,457
+Everything,416,2026-09-06,9,VENMO PAYMENT 9109622110 WEB ID: 3264681992,concert tix,Entertainment,Transfer,0.783,Entertainment,False,memory,1.0,4,Entertainment,accepted,True,457
+Everything,417,2026-09-07,9,AMZN MKTP US*N78S8W,,Shopping,Shopping,1.0,Shopping,False,memory,1.0,6,Shopping,accepted,True,457
+Everything,418,2026-09-08,9,BLUE BOTTLE COFFEE BERKELEY,,Coffee,Restaurants,1.0,Restaurants,False,memory,0.778,27,Coffee,corrected,True,457
+Everything,419,2026-09-09,9,CHEESE BOARD COLLECTIVE,,Restaurants,Restaurants,0.74,Restaurants,False,memory,1.0,5,Restaurants,accepted,True,457
+Everything,420,2026-09-09,9,CHEESE BOARD COLLECTIVE,,Restaurants,Restaurants,0.74,Restaurants,False,memory,1.0,5,Restaurants,accepted,True,457
+Everything,421,2026-09-12,9,FIELDWORK BREWING BERKELEY,,Social,Restaurants,1.0,Social,False,memory,1.0,15,Social,accepted,True,457
+Everything,422,2026-09-14,9,CAFFE STRADA BERKELEY CA,,Coffee,Restaurants,0.998,Restaurants,False,frozen,0.583,12,Coffee,corrected,True,457
+Everything,423,2026-09-14,9,CHIPOTLE 2297 BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,10,Restaurants,accepted,True,457
+Everything,424,2026-09-14,9,DOORDASH*TACOS EL GORDO,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,10,Restaurants,accepted,True,457
+Everything,425,2026-09-14,9,LYFT *RIDE 09-14,,Transportation,Transportation,0.987,Transportation,False,memory,1.0,6,Transportation,accepted,True,457
+Everything,426,2026-09-14,9,TARGET T-2788 BERKELEY CA,,Shopping,Shopping,1.0,Shopping,False,memory,1.0,7,Shopping,accepted,True,457
+Everything,427,2026-09-15,9,UC BERKELEY PAYROLL PPD ID: 1946000123,,Income,Income,1.0,Income,False,memory,1.0,16,Income,accepted,True,457
+Everything,428,2026-09-15,9,LYFT *RIDE 09-15,,Transportation,Transportation,0.986,Transportation,False,memory,1.0,6,Transportation,accepted,True,457
+Everything,429,2026-09-15,9,VENMO PAYMENT 0263857092 WEB ID: 3264681992,brewery tab,Social,Insurance,0.622,Social,False,memory,1.0,7,Social,accepted,True,457
+Everything,430,2026-09-16,9,BLUE BOTTLE COFFEE BERKELEY,,Coffee,Restaurants,1.0,Restaurants,False,memory,0.778,27,Coffee,corrected,True,457
+Everything,431,2026-09-16,9,PHILZ COFFEE BERKELEY,,Coffee,Restaurants,1.0,Restaurants,False,memory,0.65,20,Coffee,corrected,True,457
+Everything,432,2026-09-16,9,VENMO PAYMENT 8514593583 WEB ID: 3264681992,uber home,Transportation,Insurance,0.594,Transportation,False,memory,1.0,7,Transportation,accepted,True,457
+Everything,433,2026-09-17,9,SQ *FIELDWORK BREWING,,Social,Restaurants,1.0,Social,False,memory,1.0,15,Social,accepted,True,457
+Everything,434,2026-09-19,9,PEETS COFFEE #0731 BERKELEY CA,,Coffee,Restaurants,0.999,Restaurants,False,memory,0.854,41,Coffee,corrected,True,457
+Everything,435,2026-09-19,9,CLIPPER SVC BART,,Transportation,Groceries,0.666,Transportation,False,memory,1.0,16,Transportation,accepted,True,457
+Everything,436,2026-09-20,9,DOORDASH*TACOS EL GORDO,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,10,Restaurants,accepted,True,457
+Everything,437,2026-09-21,9,BERKELEY BOWL WEST,,Groceries,Restaurants,0.997,Groceries,False,memory,1.0,6,Groceries,accepted,True,457
+Everything,438,2026-09-23,9,SQ *CAFFE STRADA,,Coffee,Restaurants,0.999,Restaurants,False,memory,0.824,17,Coffee,corrected,True,457
+Everything,439,2026-09-23,9,PHILZ COFFEE BERKELEY,,Coffee,Restaurants,1.0,Restaurants,False,memory,0.65,20,Coffee,corrected,True,457
+Everything,440,2026-09-23,9,CHIPOTLE 2297 BERKELEY,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,10,Restaurants,accepted,True,457
+Everything,441,2026-09-24,9,CAFFE STRADA BERKELEY CA,,Coffee,Restaurants,0.998,Restaurants,False,frozen,0.583,12,Coffee,corrected,True,457
+Everything,442,2026-09-24,9,LYFT *RIDE 09-24,,Transportation,Transportation,0.988,Transportation,False,memory,1.0,6,Transportation,accepted,True,457
+Everything,443,2026-09-24,9,VENMO PAYMENT 2033333096 WEB ID: 3264681992,concert tix,Entertainment,Transfer,0.783,Entertainment,False,memory,1.0,4,Entertainment,accepted,True,457
+Everything,444,2026-09-25,9,SQ *FIELDWORK BREWING,,Social,Restaurants,1.0,Social,False,memory,1.0,15,Social,accepted,True,457
+Everything,445,2026-09-25,9,FIELDWORK BREWING BERKELEY,,Social,Restaurants,1.0,Social,False,memory,1.0,15,Social,accepted,True,457
+Everything,446,2026-09-27,9,CAFFE STRADA BERKELEY CA,,Coffee,Restaurants,0.998,Restaurants,False,frozen,0.583,12,Coffee,corrected,True,457
+Everything,447,2026-09-27,9,PHILZ COFFEE BERKELEY,,Coffee,Restaurants,1.0,Restaurants,False,memory,0.65,20,Coffee,corrected,True,457
+Everything,448,2026-09-27,9,TRADER JOE'S #186 BERKELEY CA,,Groceries,Groceries,1.0,Groceries,False,memory,0.95,20,Groceries,accepted,True,457
+Everything,449,2026-09-27,9,SAFEWAY #0975 BERKELEY CA,,Groceries,Groceries,0.999,Groceries,False,memory,1.0,3,Groceries,accepted,True,457
+Everything,450,2026-09-28,9,CAFFE STRADA BERKELEY CA,,Coffee,Restaurants,0.998,Restaurants,False,frozen,0.583,12,Coffee,corrected,True,457
+Everything,451,2026-09-28,9,TRADER JOE'S #186 BERKELEY CA,,Groceries,Groceries,1.0,Groceries,False,memory,0.95,20,Groceries,accepted,True,457
+Everything,452,2026-09-29,9,BLUE BOTTLE COFFEE BERKELEY,,Coffee,Restaurants,1.0,Restaurants,False,memory,0.778,27,Coffee,corrected,True,457
+Everything,453,2026-09-29,9,CAFFE STRADA BERKELEY CA,,Coffee,Restaurants,0.998,Restaurants,False,frozen,0.583,12,Coffee,corrected,True,457
+Everything,454,2026-09-29,9,VENMO PAYMENT 5623818859 WEB ID: 3264681992,pizza night,Restaurants,Transfer,0.661,Restaurants,False,memory,1.0,4,Restaurants,accepted,True,457
+Everything,455,2026-09-29,9,VENMO PAYMENT 4580502362 WEB ID: 3264681992,costco run,Groceries,Insurance,0.714,Groceries,False,memory,1.0,3,Groceries,accepted,True,457
+Everything,456,2026-09-30,9,PEETS COFFEE #0731 BERKELEY CA,,Coffee,Restaurants,0.999,Restaurants,False,memory,0.854,41,Coffee,corrected,True,457
+Everything,457,2026-09-30,9,CAFFE STRADA BERKELEY CA,,Coffee,Restaurants,0.998,Restaurants,False,frozen,0.583,12,Coffee,corrected,True,457
+Everything,458,2026-10-01,10,UC BERKELEY DES:PAYROLL ID:246115247 CO ID:1946000123 PPD,,Income,Income,1.0,Income,False,memory,1.0,18,Income,accepted,True,513
+Everything,459,2026-10-01,10,ZELLE TO BAYVIEW PROPERTY MGMT CONF# ezgxkzzmg,,Housing,Housing,0.989,Housing,False,memory,1.0,9,Housing,accepted,True,513
+Everything,460,2026-10-01,10,CHECKCARD 1001 SQ *CAFFE STRADA 46839242248,,Coffee,Restaurants,0.999,Restaurants,False,memory,0.7,20,Coffee,corrected,True,513
+Everything,461,2026-10-01,10,CHECKCARD 1001 SQ *CAFFE STRADA 67965189405,,Coffee,Restaurants,0.999,Restaurants,False,memory,0.7,20,Coffee,corrected,True,513
+Everything,462,2026-10-01,10,CHECKCARD 1001 TRADER JOE'S #186 BERKELEY CA 53384076088,,Groceries,Groceries,1.0,Groceries,False,memory,0.955,22,Groceries,accepted,True,513
+Everything,463,2026-10-01,10,CHECKCARD 1001 AMAZON.COM*M01ZRE 56674459164,,Shopping,Shopping,1.0,Shopping,False,memory,1.0,6,Shopping,accepted,True,513
+Everything,464,2026-10-02,10,ZELLE TO KIM ASHLEY CONF# ur9oqx1kb,,Housing,Subscription,0.948,Housing,False,memory,1.0,9,Housing,accepted,True,513
+Everything,465,2026-10-02,10,CHECKCARD 1002 BLUE BOTTLE COFFEE BERKELEY 79871944649,,Coffee,Restaurants,1.0,Restaurants,False,memory,0.7,30,Coffee,corrected,True,513
+Everything,466,2026-10-02,10,CHECKCARD 1002 PHILZ COFFEE BERKELEY 59416954936,,Coffee,Restaurants,1.0,Restaurants,False,frozen,0.565,23,Coffee,corrected,True,513
+Everything,467,2026-10-03,10,CHECKCARD 1003 PEETS COFFEE #0731 BERKELEY CA 20944521170,,Coffee,Restaurants,0.999,Restaurants,False,memory,0.813,43,Coffee,corrected,True,513
+Everything,468,2026-10-03,10,CHECKCARD 1003 MINT MOBILE 800-683-7392 56503518932,,Utilities,Utilities,0.999,Utilities,False,memory,1.0,9,Utilities,accepted,True,513
+Everything,469,2026-10-03,10,CHECKCARD 1003 SPOTIFY USA 62625762089,,Subscription,Subscription,0.999,Subscription,False,memory,1.0,9,Subscription,accepted,True,513
+Everything,470,2026-10-03,10,CHECKCARD 1003 NETFLIX.COM 866-579-7172 14614573778,,Subscription,Subscription,0.967,Subscription,False,memory,1.0,9,Subscription,accepted,True,513
+Everything,471,2026-10-03,10,CHECKCARD 1003 APPLE.COM/BILL 866-712-7753 69698446028,,Subscription,Subscription,0.999,Subscription,False,memory,1.0,9,Subscription,accepted,True,513
+Everything,472,2026-10-03,10,CHECKCARD 1003 AMZN MKTP US*TPZHWU 44351669418,,Shopping,Shopping,0.999,Shopping,False,memory,1.0,7,Shopping,accepted,True,513
+Everything,473,2026-10-04,10,CHECKCARD 1004 TST* ALE INDUSTRIES OAKLAND 31681800992,,Social,Restaurants,1.0,Social,False,memory,1.0,2,Social,accepted,True,513
+Everything,474,2026-10-04,10,CHECKCARD 1004 TRADER JOE'S #186 BERKELEY CA 81690792134,,Groceries,Groceries,1.0,Groceries,False,memory,0.955,22,Groceries,accepted,True,513
+Everything,475,2026-10-05,10,CHECKCARD 1005 CLIPPER SVC BART 00371441933,,Transportation,Groceries,0.666,Transportation,False,memory,1.0,18,Transportation,accepted,True,513
+Everything,476,2026-10-06,10,CHECKCARD 1006 PEETS COFFEE #0731 BERKELEY CA 27051167115,,Coffee,Restaurants,0.999,Restaurants,False,memory,0.813,43,Coffee,corrected,True,513
+Everything,477,2026-10-07,10,CHECKCARD 1007 BLUE BOTTLE COFFEE BERKELEY 28853673541,,Coffee,Restaurants,1.0,Restaurants,False,memory,0.7,30,Coffee,corrected,True,513
+Everything,478,2026-10-07,10,CHECKCARD 1007 TARGET T-2788 BERKELEY CA 00417916920,,Shopping,Shopping,1.0,Shopping,False,memory,1.0,8,Shopping,accepted,True,513
+Everything,479,2026-10-08,10,CHECKCARD 1008 CAFFE STRADA BERKELEY CA 14501145249,,Coffee,Restaurants,0.998,Coffee,False,memory,0.632,19,Coffee,accepted,True,513
+Everything,480,2026-10-08,10,CHECKCARD 1008 CAFFE STRADA BERKELEY CA 64158610439,,Coffee,Restaurants,0.998,Coffee,False,memory,0.632,19,Coffee,accepted,True,513
+Everything,481,2026-10-09,10,CHECKCARD 1009 BLUE BOTTLE COFFEE BERKELEY 86485105550,,Coffee,Restaurants,1.0,Restaurants,False,memory,0.7,30,Coffee,corrected,True,513
+Everything,482,2026-10-09,10,CHECKCARD 1009 FIELDWORK BREWING BERKELEY 98355190406,,Social,Restaurants,1.0,Social,False,memory,1.0,19,Social,accepted,True,513
+Everything,483,2026-10-11,10,CHECKCARD 1011 PEETS COFFEE #0731 BERKELEY CA 55072256652,,Coffee,Restaurants,0.999,Restaurants,False,memory,0.813,43,Coffee,corrected,True,513
+Everything,484,2026-10-11,10,VENMO DES:PAYMENT ID:5143065726 CO ID:3264681992 WEB,ramen 🍜,Social,Transfer,0.739,Social,False,memory,1.0,8,Social,accepted,True,513
+Everything,485,2026-10-13,10,CHECKCARD 1013 PEETS COFFEE #0731 BERKELEY CA 35430560656,,Coffee,Restaurants,0.999,Restaurants,False,memory,0.813,43,Coffee,corrected,True,513
+Everything,486,2026-10-13,10,CHECKCARD 1013 CHIPOTLE 2297 BERKELEY 28257902475,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,13,Restaurants,accepted,True,513
+Everything,487,2026-10-15,10,UC BERKELEY DES:PAYROLL ID:720351127 CO ID:1946000123 PPD,,Income,Income,1.0,Income,False,memory,1.0,18,Income,accepted,True,513
+Everything,488,2026-10-15,10,CHECKCARD 1015 SQ *CAFFE STRADA 80557817718,,Coffee,Restaurants,0.999,Restaurants,False,memory,0.7,20,Coffee,corrected,True,513
+Everything,489,2026-10-15,10,CHECKCARD 1015 SQ *FIELDWORK BREWING 91471158566,,Social,Restaurants,1.0,Social,False,memory,1.0,19,Social,accepted,True,513
+Everything,490,2026-10-17,10,CHECKCARD 1017 PEET'S COFFEE #8812 26947777332,,Coffee,Restaurants,0.998,Restaurants,False,memory,0.815,43,Coffee,corrected,True,513
+Everything,491,2026-10-18,10,CHECKCARD 1018 PHILZ COFFEE BERKELEY 25618676945,,Coffee,Restaurants,1.0,Restaurants,False,frozen,0.565,23,Coffee,corrected,True,513
+Everything,492,2026-10-18,10,VENMO DES:PAYMENT ID:7459341960 CO ID:3264681992 WEB,ramen 🍜,Social,Transfer,0.739,Social,False,memory,1.0,8,Social,accepted,True,513
+Everything,493,2026-10-19,10,CHECKCARD 1019 CLIPPER SVC BART 84837962958,,Transportation,Groceries,0.666,Transportation,False,memory,1.0,18,Transportation,accepted,True,513
+Everything,494,2026-10-20,10,CHECKCARD 1020 CAFFE STRADA BERKELEY CA 46624487276,,Coffee,Restaurants,0.998,Coffee,False,memory,0.632,19,Coffee,accepted,True,513
+Everything,495,2026-10-20,10,CHECKCARD 1020 FIELDWORK BREWING BERKELEY 23351097978,,Social,Restaurants,1.0,Social,False,memory,1.0,19,Social,accepted,True,513
+Everything,496,2026-10-21,10,CHECKCARD 1021 RAMEN SHOP OAKLAND CA 10818903388,,Social,Restaurants,1.0,Social,False,memory,1.0,7,Social,accepted,True,513
+Everything,497,2026-10-21,10,CHECKCARD 1021 SWEETGREEN BERKELEY 97398480221,,Restaurants,Healthcare,0.936,Restaurants,False,memory,1.0,13,Restaurants,accepted,True,513
+Everything,498,2026-10-21,10,CHECKCARD 1021 TRADER JOE'S #186 BERKELEY CA 67346325160,,Groceries,Groceries,1.0,Groceries,False,memory,0.955,22,Groceries,accepted,True,513
+Everything,499,2026-10-22,10,CHECKCARD 1022 SQ *CAFFE STRADA 56689170088,,Coffee,Restaurants,0.999,Restaurants,False,memory,0.7,20,Coffee,corrected,True,513
+Everything,500,2026-10-22,10,CHECKCARD 1022 AMAZON.COM*XZWGIL 15730855592,,Shopping,Shopping,1.0,Shopping,False,memory,1.0,6,Shopping,accepted,True,513
+Everything,501,2026-10-24,10,CHECKCARD 1024 THE RARE BARREL BERKELEY 84572350470,,Social,Restaurants,0.983,Social,False,memory,1.0,13,Social,accepted,True,513
+Everything,502,2026-10-25,10,CHECKCARD 1025 CAFFE STRADA BERKELEY CA 71696836946,,Coffee,Restaurants,0.998,Coffee,False,memory,0.632,19,Coffee,accepted,True,513
+Everything,503,2026-10-25,10,VENMO DES:PAYMENT ID:1574228503 CO ID:3264681992 WEB,drinks at rare barrel,Social,Insurance,0.979,Social,False,memory,1.0,5,Social,accepted,True,513
+Everything,504,2026-10-26,10,CHECKCARD 1026 PEETS COFFEE #0731 BERKELEY CA 90656041201,,Coffee,Restaurants,0.999,Restaurants,False,memory,0.813,43,Coffee,corrected,True,513
+Everything,505,2026-10-26,10,CHECKCARD 1026 CHEESE BOARD COLLECTIVE 03525143396,,Restaurants,Restaurants,0.74,Restaurants,False,memory,1.0,8,Restaurants,accepted,True,513
+Everything,506,2026-10-27,10,CHECKCARD 1027 CHEESE BOARD COLLECTIVE 21149261633,,Restaurants,Restaurants,0.74,Restaurants,False,memory,1.0,8,Restaurants,accepted,True,513
+Everything,507,2026-10-28,10,CHECKCARD 1028 PHILZ COFFEE BERKELEY 76004100932,,Coffee,Restaurants,1.0,Restaurants,False,frozen,0.565,23,Coffee,corrected,True,513
+Everything,508,2026-10-28,10,CHECKCARD 1028 TARGET T-2788 BERKELEY CA 97043922029,,Shopping,Shopping,1.0,Shopping,False,memory,1.0,8,Shopping,accepted,True,513
+Everything,509,2026-10-29,10,CHECKCARD 1029 PEET'S COFFEE #8812 53847581527,,Coffee,Restaurants,0.998,Restaurants,False,memory,0.815,43,Coffee,corrected,True,513
+Everything,510,2026-10-29,10,CHECKCARD 1029 RAMEN SHOP OAKLAND CA 71698768768,,Social,Restaurants,1.0,Social,False,memory,1.0,7,Social,accepted,True,513
+Everything,511,2026-10-30,10,CHECKCARD 1030 AMC BAY STREET 16 49296292185,,Entertainment,Transportation,0.817,Entertainment,False,memory,1.0,3,Entertainment,accepted,True,513
+Everything,512,2026-10-30,10,VENMO DES:PAYMENT ID:6682789868 CO ID:3264681992 WEB,concert tix,Entertainment,Transfer,0.783,Entertainment,False,memory,1.0,6,Entertainment,accepted,True,513
+Everything,513,2026-10-31,10,CHECKCARD 1031 CAFFE STRADA BERKELEY CA 24210785242,,Coffee,Restaurants,0.998,Coffee,False,memory,0.632,19,Coffee,accepted,True,513
+Everything,514,2026-11-01,11,UC BERKELEY DES:PAYROLL ID:490871276 CO ID:1946000123 PPD,,Income,Income,1.0,Income,False,memory,1.0,20,Income,accepted,True,565
+Everything,515,2026-11-01,11,ZELLE TO BAYVIEW PROPERTY MGMT CONF# 6cp0gity7,,Housing,Housing,0.989,Housing,False,memory,1.0,10,Housing,accepted,True,565
+Everything,516,2026-11-01,11,ZELLE TO KIM ASHLEY CONF# 9jd1vtrjx,,Social,Subscription,0.948,Housing,False,memory,1.0,10,Social,corrected,True,565
+Everything,517,2026-11-01,11,CHECKCARD 1101 TST* ALE INDUSTRIES OAKLAND 50973321667,,Social,Restaurants,1.0,Social,False,memory,1.0,3,Social,accepted,True,565
+Everything,518,2026-11-01,11,CHECKCARD 1101 IPPUDO BERKELEY 98092549748,,Social,Restaurants,0.602,Social,False,memory,1.0,4,Social,accepted,True,565
+Everything,519,2026-11-03,11,CHECKCARD 1103 MINT MOBILE 800-683-7392 50198922341,,Utilities,Utilities,0.999,Utilities,False,memory,1.0,10,Utilities,accepted,True,565
+Everything,520,2026-11-03,11,CHECKCARD 1103 SPOTIFY USA 33355805874,,Subscription,Subscription,0.999,Subscription,False,memory,1.0,10,Subscription,accepted,True,565
+Everything,521,2026-11-03,11,CHECKCARD 1103 NETFLIX.COM 866-579-7172 20459397396,,Subscription,Subscription,0.967,Subscription,False,memory,1.0,10,Subscription,accepted,True,565
+Everything,522,2026-11-03,11,CHECKCARD 1103 APPLE.COM/BILL 866-712-7753 02264229736,,Subscription,Subscription,0.999,Subscription,False,memory,1.0,10,Subscription,accepted,True,565
+Everything,523,2026-11-04,11,CHECKCARD 1104 IPPUDO BERKELEY 36689328385,,Social,Restaurants,0.602,Social,False,memory,1.0,4,Social,accepted,True,565
+Everything,524,2026-11-04,11,CHECKCARD 1104 TRADER JOE'S #186 BERKELEY CA 16820991556,,Groceries,Groceries,1.0,Groceries,False,memory,0.96,25,Groceries,accepted,True,565
+Everything,525,2026-11-05,11,CHECKCARD 1105 CLIPPER SVC BART 39708593405,,Transportation,Groceries,0.666,Transportation,False,memory,1.0,20,Transportation,accepted,True,565
+Everything,526,2026-11-07,11,CHECKCARD 1107 PEETS COFFEE #0731 BERKELEY CA 03208200415,,Coffee,Restaurants,0.999,Restaurants,False,memory,0.698,50,Coffee,corrected,True,565
+Everything,527,2026-11-10,11,VENMO DES:PAYMENT ID:7776091012 CO ID:3264681992 WEB,costco run,Groceries,Insurance,0.714,Groceries,False,memory,1.0,4,Groceries,accepted,True,565
+Everything,528,2026-11-11,11,CHECKCARD 1111 CAFFE STRADA BERKELEY CA 23710403191,,Coffee,Restaurants,0.998,Coffee,False,memory,0.708,24,Coffee,accepted,True,565
+Everything,529,2026-11-12,11,CHECKCARD 1112 PEETS COFFEE #0731 BERKELEY CA 70212101385,,Coffee,Restaurants,0.999,Restaurants,False,memory,0.698,50,Coffee,corrected,True,565
+Everything,530,2026-11-12,11,CHECKCARD 1112 CHEESE BOARD COLLECTIVE 91891123625,,Restaurants,Restaurants,0.74,Restaurants,False,memory,1.0,10,Restaurants,accepted,True,565
+Everything,531,2026-11-12,11,CHECKCARD 1112 SAFEWAY #0975 BERKELEY CA 82129584323,,Groceries,Groceries,0.999,Groceries,False,memory,1.0,4,Groceries,accepted,True,565
+Everything,532,2026-11-15,11,UC BERKELEY DES:PAYROLL ID:736977557 CO ID:1946000123 PPD,,Income,Income,1.0,Income,False,memory,1.0,20,Income,accepted,True,565
+Everything,533,2026-11-15,11,CHECKCARD 1115 PEET'S COFFEE #8812 24901607621,,Coffee,Restaurants,0.998,Restaurants,False,memory,0.702,50,Coffee,corrected,True,565
+Everything,534,2026-11-16,11,CHECKCARD 1116 SWEETGREEN BERKELEY 78508808686,,Restaurants,Healthcare,0.936,Restaurants,False,memory,1.0,14,Restaurants,accepted,True,565
+Everything,535,2026-11-17,11,CHECKCARD 1117 CHIPOTLE 2297 BERKELEY 81338030709,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,14,Restaurants,accepted,True,565
+Everything,536,2026-11-17,11,CHECKCARD 1117 TRADER JOE'S #186 BERKELEY CA 32829134871,,Groceries,Groceries,1.0,Groceries,False,memory,0.96,25,Groceries,accepted,True,565
+Everything,537,2026-11-18,11,CHECKCARD 1118 CAFFE STRADA BERKELEY CA 66645125213,,Coffee,Restaurants,0.998,Coffee,False,memory,0.708,24,Coffee,accepted,True,565
+Everything,538,2026-11-18,11,CHECKCARD 1118 SWEETGREEN BERKELEY 91245389189,,Restaurants,Healthcare,0.936,Restaurants,False,memory,1.0,14,Restaurants,accepted,True,565
+Everything,539,2026-11-18,11,VENMO DES:PAYMENT ID:7778698249 CO ID:3264681992 WEB,concert tix,Entertainment,Transfer,0.783,Entertainment,False,memory,1.0,7,Entertainment,accepted,True,565
+Everything,540,2026-11-19,11,CHECKCARD 1119 SQ *CAFFE STRADA 21727939425,,Coffee,Restaurants,0.999,Restaurants,False,frozen,0.583,24,Coffee,corrected,True,565
+Everything,541,2026-11-19,11,CHECKCARD 1119 CAFFE STRADA BERKELEY CA 77325910350,,Coffee,Restaurants,0.998,Coffee,False,memory,0.708,24,Coffee,accepted,True,565
+Everything,542,2026-11-19,11,CHECKCARD 1119 IPPUDO BERKELEY 39472713955,,Social,Restaurants,0.602,Social,False,memory,1.0,4,Social,accepted,True,565
+Everything,543,2026-11-19,11,CHECKCARD 1119 RAMEN SHOP OAKLAND CA 31500969165,,Social,Restaurants,1.0,Social,False,memory,1.0,9,Social,accepted,True,565
+Everything,544,2026-11-19,11,CHECKCARD 1119 CHIPOTLE 2297 BERKELEY 63923378835,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,14,Restaurants,accepted,True,565
+Everything,545,2026-11-19,11,CHECKCARD 1119 CLIPPER SVC BART 51337664680,,Transportation,Groceries,0.666,Transportation,False,memory,1.0,20,Transportation,accepted,True,565
+Everything,546,2026-11-20,11,ZELLE TO KIM ASHLEY CONF# ru4j2jvuw,,Social,Subscription,0.948,Housing,False,memory,1.0,10,Social,corrected,True,565
+Everything,547,2026-11-20,11,CHECKCARD 1120 PEETS COFFEE #0731 BERKELEY CA 66680767853,,Coffee,Restaurants,0.999,Restaurants,False,memory,0.698,50,Coffee,corrected,True,565
+Everything,548,2026-11-20,11,CHECKCARD 1120 TST* ALE INDUSTRIES OAKLAND 91808229071,,Social,Restaurants,1.0,Social,False,memory,1.0,3,Social,accepted,True,565
+Everything,549,2026-11-21,11,CHECKCARD 1121 CAFFE STRADA BERKELEY CA 38125321262,,Coffee,Restaurants,0.998,Coffee,False,memory,0.708,24,Coffee,accepted,True,565
+Everything,550,2026-11-21,11,CHECKCARD 1121 CHEESE BOARD COLLECTIVE 06001037501,,Restaurants,Restaurants,0.74,Restaurants,False,memory,1.0,10,Restaurants,accepted,True,565
+Everything,551,2026-11-23,11,CHECKCARD 1123 PEET'S COFFEE #8812 04129904886,,Coffee,Restaurants,0.998,Restaurants,False,memory,0.702,50,Coffee,corrected,True,565
+Everything,552,2026-11-23,11,CHECKCARD 1123 BERKELEY BOWL WEST 10514615485,,Groceries,Restaurants,0.997,Groceries,False,memory,1.0,7,Groceries,accepted,True,565
+Everything,553,2026-11-24,11,CHECKCARD 1124 CAFFE STRADA BERKELEY CA 81761561554,,Coffee,Restaurants,0.998,Coffee,False,memory,0.708,24,Coffee,accepted,True,565
+Everything,554,2026-11-24,11,CHECKCARD 1124 THE RARE BARREL BERKELEY 51096388411,,Social,Restaurants,0.983,Social,False,memory,1.0,14,Social,accepted,True,565
+Everything,555,2026-11-24,11,CHECKCARD 1124 TARGET T-2788 BERKELEY CA 78564481033,,Shopping,Shopping,1.0,Shopping,False,memory,1.0,10,Shopping,accepted,True,565
+Everything,556,2026-11-25,11,CHECKCARD 1125 TST* ALE INDUSTRIES OAKLAND 80256433910,,Social,Restaurants,1.0,Social,False,memory,1.0,3,Social,accepted,True,565
+Everything,557,2026-11-25,11,CHECKCARD 1125 RAMEN SHOP OAKLAND CA 28332639957,,Social,Restaurants,1.0,Social,False,memory,1.0,9,Social,accepted,True,565
+Everything,558,2026-11-26,11,CHECKCARD 1126 SQ *CAFFE STRADA 80656098040,,Coffee,Restaurants,0.999,Restaurants,False,frozen,0.583,24,Coffee,corrected,True,565
+Everything,559,2026-11-26,11,CHECKCARD 1126 THE RARE BARREL BERKELEY 76358214949,,Social,Restaurants,0.983,Social,False,memory,1.0,14,Social,accepted,True,565
+Everything,560,2026-11-26,11,CHECKCARD 1126 TST* ALE INDUSTRIES OAKLAND 60086579127,,Social,Restaurants,1.0,Social,False,memory,1.0,3,Social,accepted,True,565
+Everything,561,2026-11-27,11,CHECKCARD 1127 PEET'S COFFEE #8812 69709413063,,Coffee,Restaurants,0.998,Restaurants,False,memory,0.702,50,Coffee,corrected,True,565
+Everything,562,2026-11-28,11,CHECKCARD 1128 SWEETGREEN BERKELEY 46558894892,,Restaurants,Healthcare,0.936,Restaurants,False,memory,1.0,14,Restaurants,accepted,True,565
+Everything,563,2026-11-29,11,CHECKCARD 1129 TST* ALE INDUSTRIES OAKLAND 85834421840,,Social,Restaurants,1.0,Social,False,memory,1.0,3,Social,accepted,True,565
+Everything,564,2026-11-29,11,CHECKCARD 1129 RAMEN SHOP OAKLAND CA 61939920819,,Social,Restaurants,1.0,Social,False,memory,1.0,9,Social,accepted,True,565
+Everything,565,2026-11-30,11,VENMO DES:PAYMENT ID:3226565515 CO ID:3264681992 WEB,uber home,Transportation,Insurance,0.594,Transportation,False,memory,1.0,9,Transportation,accepted,True,565
+Everything,566,2026-12-01,12,UC BERKELEY DES:PAYROLL ID:850933825 CO ID:1946000123 PPD,,Income,Income,1.0,Income,False,memory,1.0,22,Income,accepted,True,630
+Everything,567,2026-12-01,12,ZELLE TO BAYVIEW PROPERTY MGMT CONF# 6h8ua3hg1,,Housing,Housing,0.989,Housing,False,memory,1.0,11,Housing,accepted,True,630
+Everything,568,2026-12-01,12,CHECKCARD 1201 SWEETGREEN BERKELEY 65610041511,,Restaurants,Healthcare,0.936,Restaurants,False,memory,1.0,17,Restaurants,accepted,True,630
+Everything,569,2026-12-03,12,CHECKCARD 1203 BLUE BOTTLE COFFEE BERKELEY 10010156682,,Coffee,Restaurants,1.0,Restaurants,False,memory,0.636,33,Coffee,corrected,True,630
+Everything,570,2026-12-03,12,CHECKCARD 1203 RAMEN SHOP OAKLAND CA 21283393731,,Social,Restaurants,1.0,Social,False,memory,1.0,12,Social,accepted,True,630
+Everything,571,2026-12-03,12,CHECKCARD 1203 MINT MOBILE 800-683-7392 13674820066,,Utilities,Utilities,0.999,Utilities,False,memory,1.0,11,Utilities,accepted,True,630
+Everything,572,2026-12-03,12,CHECKCARD 1203 SPOTIFY USA 31632367079,,Subscription,Subscription,0.999,Subscription,False,memory,1.0,11,Subscription,accepted,True,630
+Everything,573,2026-12-03,12,CHECKCARD 1203 NETFLIX.COM 866-579-7172 16203712141,,Subscription,Subscription,0.967,Subscription,False,memory,1.0,11,Subscription,accepted,True,630
+Everything,574,2026-12-03,12,CHECKCARD 1203 APPLE.COM/BILL 866-712-7753 52679352779,,Subscription,Subscription,0.999,Subscription,False,memory,1.0,11,Subscription,accepted,True,630
+Everything,575,2026-12-04,12,CHECKCARD 1204 PEET'S COFFEE #8812 25814829876,,Coffee,Restaurants,0.998,Restaurants,False,memory,0.626,56,Coffee,corrected,True,630
+Everything,576,2026-12-04,12,CHECKCARD 1204 PEET'S COFFEE #8812 62111586927,,Coffee,Restaurants,0.998,Restaurants,False,memory,0.626,56,Coffee,corrected,True,630
+Everything,577,2026-12-04,12,VENMO DES:PAYMENT ID:4465491779 CO ID:3264681992 WEB,brewery tab,Social,Insurance,0.622,Social,False,memory,1.0,8,Social,accepted,True,630
+Everything,578,2026-12-05,12,CHECKCARD 1205 PEETS COFFEE #0731 BERKELEY CA 75905951678,,Coffee,Restaurants,0.999,Restaurants,False,memory,0.624,56,Coffee,corrected,True,630
+Everything,579,2026-12-05,12,CHECKCARD 1205 THE RARE BARREL BERKELEY 50918304704,,Social,Restaurants,0.983,Social,False,memory,1.0,16,Social,accepted,True,630
+Everything,580,2026-12-05,12,CHECKCARD 1205 CLIPPER SVC BART 31373463341,,Transportation,Groceries,0.666,Transportation,False,memory,1.0,22,Transportation,accepted,True,630
+Everything,581,2026-12-05,12,VENMO DES:PAYMENT ID:0143381286 CO ID:3264681992 WEB,concert tix,Entertainment,Transfer,0.783,Entertainment,False,memory,1.0,8,Entertainment,accepted,True,630
+Everything,582,2026-12-06,12,VENMO DES:PAYMENT ID:9412173412 CO ID:3264681992 WEB,uber home,Transportation,Insurance,0.594,Transportation,False,memory,1.0,10,Transportation,accepted,True,630
+Everything,583,2026-12-06,12,CHECKCARD 1206 UNITED AIRLINES 1871279393 72877699760,,Travel,Travel,1.0,Travel,False,frozen,0.0,0,Travel,accepted,True,630
+Everything,584,2026-12-07,12,ZELLE TO KIM ASHLEY CONF# ao9voa5fq,,Social,Subscription,0.948,Housing,False,memory,0.833,12,Social,corrected,True,630
+Everything,585,2026-12-07,12,CHECKCARD 1207 BLUE BOTTLE COFFEE BERKELEY 17796948273,,Coffee,Restaurants,1.0,Restaurants,False,memory,0.636,33,Coffee,corrected,True,630
+Everything,586,2026-12-07,12,CHECKCARD 1207 SQ *CAFFE STRADA 87685702269,,Coffee,Restaurants,0.999,Restaurants,False,frozen,0.538,26,Coffee,corrected,True,630
+Everything,587,2026-12-07,12,CHECKCARD 1207 SQ *CAFFE STRADA 73506595726,,Coffee,Restaurants,0.999,Restaurants,False,frozen,0.538,26,Coffee,corrected,True,630
+Everything,588,2026-12-07,12,CHECKCARD 1207 BERKELEY BOWL MARKETPLACE 62422622735,,Groceries,Restaurants,0.988,Groceries,False,memory,1.0,10,Groceries,accepted,True,630
+Everything,589,2026-12-08,12,CHECKCARD 1208 BLUE BOTTLE COFFEE BERKELEY 00178125422,,Coffee,Restaurants,1.0,Restaurants,False,memory,0.636,33,Coffee,corrected,True,630
+Everything,590,2026-12-08,12,CHECKCARD 1208 SQ *CAFFE STRADA 72751328879,,Coffee,Restaurants,0.999,Restaurants,False,frozen,0.538,26,Coffee,corrected,True,630
+Everything,591,2026-12-08,12,CHECKCARD 1208 TST* ALE INDUSTRIES OAKLAND 67598667207,,Social,Restaurants,1.0,Social,False,memory,1.0,8,Social,accepted,True,630
+Everything,592,2026-12-08,12,CHECKCARD 1208 SAFEWAY #0975 BERKELEY CA 03951411422,,Groceries,Groceries,0.999,Groceries,False,memory,1.0,5,Groceries,accepted,True,630
+Everything,593,2026-12-08,12,CHECKCARD 1208 LYFT *RIDE 12-08 20295665314,,Transportation,Transportation,0.991,Transportation,False,memory,1.0,9,Transportation,accepted,True,630
+Everything,594,2026-12-10,12,CHECKCARD 1210 BLUE BOTTLE COFFEE BERKELEY 73565106898,,Coffee,Restaurants,1.0,Restaurants,False,memory,0.636,33,Coffee,corrected,True,630
+Everything,595,2026-12-10,12,CHECKCARD 1210 CAFFE STRADA BERKELEY CA 59735436763,,Coffee,Restaurants,0.998,Coffee,False,memory,0.759,29,Coffee,accepted,True,630
+Everything,596,2026-12-10,12,CHECKCARD 1210 LYFT *RIDE 12-10 36763196652,,Transportation,Transportation,0.994,Transportation,False,memory,1.0,9,Transportation,accepted,True,630
+Everything,597,2026-12-11,12,CHECKCARD 1211 IPPUDO BERKELEY 74432517016,,Social,Restaurants,0.602,Social,False,memory,1.0,7,Social,accepted,True,630
+Everything,598,2026-12-11,12,CHECKCARD 1211 CHIPOTLE 2297 BERKELEY 66111914525,,Restaurants,Restaurants,1.0,Restaurants,False,memory,1.0,16,Restaurants,accepted,True,630
+Everything,599,2026-12-12,12,CHECKCARD 1212 CHEESE BOARD COLLECTIVE 71939682570,,Restaurants,Restaurants,0.74,Restaurants,False,memory,1.0,12,Restaurants,accepted,True,630
+Everything,600,2026-12-12,12,CHECKCARD 1212 AMC BAY STREET 16 32763318511,,Entertainment,Transportation,0.817,Entertainment,False,memory,1.0,4,Entertainment,accepted,True,630
+Everything,601,2026-12-13,12,CHECKCARD 1213 PEET'S COFFEE #8812 29210135830,,Coffee,Restaurants,0.998,Restaurants,False,memory,0.626,56,Coffee,corrected,True,630
+Everything,602,2026-12-13,12,VENMO DES:PAYMENT ID:4219175668 CO ID:3264681992 WEB,pizza night,Restaurants,Transfer,0.661,Restaurants,False,memory,1.0,5,Restaurants,accepted,True,630
+Everything,603,2026-12-15,12,UC BERKELEY DES:PAYROLL ID:205481889 CO ID:1946000123 PPD,,Income,Income,1.0,Income,False,memory,1.0,22,Income,accepted,True,630
+Everything,604,2026-12-15,12,CHECKCARD 1215 SQ *CAFFE STRADA 84224591113,,Coffee,Restaurants,0.999,Restaurants,False,frozen,0.538,26,Coffee,corrected,True,630
+Everything,605,2026-12-15,12,CHECKCARD 1215 TST* ALE INDUSTRIES OAKLAND 70724425307,,Social,Restaurants,1.0,Social,False,memory,1.0,8,Social,accepted,True,630
+Everything,606,2026-12-16,12,ZELLE TO KIM ASHLEY CONF# kvin4ac18,,Social,Subscription,0.948,Housing,False,memory,0.833,12,Social,corrected,True,630
+Everything,607,2026-12-16,12,CHECKCARD 1216 RAMEN SHOP OAKLAND CA 39364840161,,Social,Restaurants,1.0,Social,False,memory,1.0,12,Social,accepted,True,630
+Everything,608,2026-12-17,12,CHECKCARD 1217 PEET'S COFFEE #8812 50984645782,,Coffee,Restaurants,0.998,Restaurants,False,memory,0.626,56,Coffee,corrected,True,630
+Everything,609,2026-12-17,12,CHECKCARD 1217 CAFFE STRADA BERKELEY CA 28677885634,,Coffee,Restaurants,0.998,Coffee,False,memory,0.759,29,Coffee,accepted,True,630
+Everything,610,2026-12-17,12,CHECKCARD 1217 TARGET T-2788 BERKELEY CA 01158404673,,Shopping,Shopping,1.0,Shopping,False,memory,1.0,11,Shopping,accepted,True,630
+Everything,611,2026-12-18,12,CHECKCARD 1218 TST* ALE INDUSTRIES OAKLAND 84030165051,,Social,Restaurants,1.0,Social,False,memory,1.0,8,Social,accepted,True,630
+Everything,612,2026-12-19,12,CHECKCARD 1219 CAFFE STRADA BERKELEY CA 41484416174,,Coffee,Restaurants,0.998,Coffee,False,memory,0.759,29,Coffee,accepted,True,630
+Everything,613,2026-12-19,12,CHECKCARD 1219 CLIPPER SVC BART 19829580782,,Transportation,Groceries,0.666,Transportation,False,memory,1.0,22,Transportation,accepted,True,630
+Everything,614,2026-12-19,12,VENMO DES:PAYMENT ID:7336855692 CO ID:3264681992 WEB,concert tix,Entertainment,Transfer,0.783,Entertainment,False,memory,1.0,8,Entertainment,accepted,True,630
+Everything,615,2026-12-20,12,CHECKCARD 1220 SQ *CAFFE STRADA 04202674715,,Coffee,Restaurants,0.999,Restaurants,False,frozen,0.538,26,Coffee,corrected,True,630
+Everything,616,2026-12-21,12,CHECKCARD 1221 SQ *CAFFE STRADA 94979629753,,Coffee,Restaurants,0.999,Restaurants,False,frozen,0.538,26,Coffee,corrected,True,630
+Everything,617,2026-12-21,12,CHECKCARD 1221 TRADER JOE'S #186 BERKELEY CA 38212573471,,Groceries,Groceries,1.0,Groceries,False,memory,0.963,27,Groceries,accepted,True,630
+Everything,618,2026-12-23,12,CHECKCARD 1223 BLUE BOTTLE COFFEE BERKELEY 39669185126,,Coffee,Restaurants,1.0,Restaurants,False,memory,0.636,33,Coffee,corrected,True,630
+Everything,619,2026-12-23,12,CHECKCARD 1223 CAFFE STRADA BERKELEY CA 29848866124,,Coffee,Restaurants,0.998,Coffee,False,memory,0.759,29,Coffee,accepted,True,630
+Everything,620,2026-12-23,12,CHECKCARD 1223 PHILZ COFFEE BERKELEY 22828123873,,Coffee,Restaurants,1.0,Restaurants,False,frozen,0.5,26,Coffee,corrected,True,630
+Everything,621,2026-12-26,12,CHECKCARD 1226 THE RARE BARREL BERKELEY 09238286762,,Social,Restaurants,0.983,Social,False,memory,1.0,16,Social,accepted,True,630
+Everything,622,2026-12-26,12,CHECKCARD 1226 TARGET T-2788 BERKELEY CA 64676693692,,Shopping,Shopping,1.0,Shopping,False,memory,1.0,11,Shopping,accepted,True,630
+Everything,623,2026-12-28,12,CHECKCARD 1228 PEETS COFFEE #0731 BERKELEY CA 46011368815,,Coffee,Restaurants,0.999,Restaurants,False,memory,0.624,56,Coffee,corrected,True,630
+Everything,624,2026-12-28,12,CHECKCARD 1228 THE RARE BARREL BERKELEY 84548477962,,Social,Restaurants,0.983,Social,False,memory,1.0,16,Social,accepted,True,630
+Everything,625,2026-12-29,12,CHECKCARD 1229 BLUE BOTTLE COFFEE BERKELEY 49345857558,,Coffee,Restaurants,1.0,Restaurants,False,memory,0.636,33,Coffee,corrected,True,630
+Everything,626,2026-12-29,12,CHECKCARD 1229 CVS/PHARMACY #72860 90228448477,,Healthcare,Healthcare,0.999,Healthcare,False,memory,1.0,5,Healthcare,accepted,True,630
+Everything,627,2026-12-29,12,VENMO DES:PAYMENT ID:1214406726 CO ID:3264681992 WEB,brewery tab,Social,Insurance,0.622,Social,False,memory,1.0,8,Social,accepted,True,630
+Everything,628,2026-12-31,12,CHECKCARD 1231 PEET'S COFFEE #8812 24287723321,,Coffee,Restaurants,0.998,Restaurants,False,memory,0.626,56,Coffee,corrected,True,630
+Everything,629,2026-12-31,12,CHECKCARD 1231 PHILZ COFFEE BERKELEY 88596402668,,Coffee,Restaurants,1.0,Restaurants,False,frozen,0.5,26,Coffee,corrected,True,630
+Everything,630,2026-12-31,12,CHECKCARD 1231 SQ *FIELDWORK BREWING 37054059229,,Social,Restaurants,1.0,Social,False,memory,1.0,22,Social,accepted,True,630

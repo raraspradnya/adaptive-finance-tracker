@@ -95,7 +95,8 @@ h1, h2, h3, p { margin: 0; }
 .listhead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; padding: 12px 14px; border-bottom: 1px solid var(--line); }
 .listhead h2, .cardhead h2 { font-family: var(--font-display); font-size: 16px; }
 .listhead p { color: var(--ink-2); font-size: 13px; }
-.listfoot { display: flex; justify-content: flex-end; padding: 12px 14px; border-top: 1px solid var(--line); }
+.listfoot { display: flex; justify-content: flex-end; align-items: center; gap: 12px; padding: 12px 14px; border-top: 1px solid var(--line); }
+.savehint { font-size: 13px; color: var(--attn); font-weight: 600; }
 .notice { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; background: var(--accent-soft); border-radius: 10px; padding: 10px 14px; }
 
 /* dashboard */
@@ -163,6 +164,14 @@ button.chip:hover { background: color-mix(in srgb, var(--c) 24%, var(--surface))
   font-size: 12px; font-weight: 600; color: var(--attn); background: var(--surface); border: 1px solid var(--attn-line); }
 .flag svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
 .row.check { background: var(--attn-soft); box-shadow: inset 3px 0 0 var(--attn); }
+/* "Check this" pill + its own ✓ / ✗ buttons, kept together on one line */
+.checkline { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.yn { display: inline-flex; gap: 4px; }
+.yn button { width: 26px; height: 26px; border-radius: 50%; display: inline-grid; place-items: center; cursor: pointer;
+  padding: 0; background: var(--surface); border: 1px solid var(--line); color: var(--ink-2); }
+.yn svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.yn .yes:hover, .yn .yes:focus-visible { color: var(--pos); border-color: var(--pos); }
+.yn .no:hover, .yn .no:focus-visible { color: var(--attn); border-color: var(--attn); }
 .checkcount { color: var(--attn); font-weight: 600; }
 .tag.you { color: var(--ink-2); font-weight: 600; }
 .tag.new { color: var(--accent); font-weight: 600; }
@@ -188,6 +197,11 @@ button.chip:hover { background: color-mix(in srgb, var(--c) 24%, var(--surface))
 .amt.in .dir { background: var(--pos-soft); color: var(--pos); }
 .mrow { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: baseline; color: var(--ink-2); }
 .catcell { grid-area: cat; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-width: 0; }
+/* on wide screens: category chip, "Check this" and ✓ / ✗ all on one line */
+@media (min-width: 1100px) {
+  .row { grid-template-columns: minmax(0, 1fr) 140px 340px; }
+  .catcell { flex-wrap: nowrap; }
+}
 .fileline { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2px 12px; padding: 9px 14px; border-top: 1px solid var(--line); }
 .listhead + .fileline { border-top: 0; }
 .fileline b { font-family: var(--font-mono); font-weight: 500; font-size: 13px; overflow-wrap: anywhere; }
@@ -542,24 +556,25 @@ function viewReview() {
     const out = list.filter(t => !t.credit).reduce((a, t) => a + t.amt, 0);
     const inn = list.filter(t => t.credit).reduce((a, t) => a + t.amt, 0);
     const toCheck = list.filter(needsCheck).length;
-    const accept = `<button class="btn primary" data-act="accept-all">Accept all ${list.length}</button>`;
+    const save = `<div class="listfoot">${toCheck ? `<span class="savehint">Check ${plural(toCheck, "row")} above to save</span>` : ""}<button class="btn primary" data-act="save-review" ${toCheck ? "disabled" : ""}>Save review</button></div>`;
     const rows = list.map(t => {
       let tag = "";
       if (t.edited) tag = `<span class="tag you">Edited</span>`;
+      else if (t.confirmed) tag = `<span class="tag you">Confirmed</span>`;
       else if (t.changed) tag = `<span class="tag new">Updated</span>`;
-      else if (needsCheck(t)) tag = `<span class="flag"><svg viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="5"/><path d="M6 3.4v3.1M6 8.6v.01"/></svg>Check this</span>`;
-      return `<div class="row${t.changed ? " flash" : ""}${!t.edited && !t.changed && needsCheck(t) ? " check" : ""}">
+      else if (needsCheck(t)) tag = `<span class="checkline"><span class="flag"><svg viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="5"/><path d="M6 3.4v3.1M6 8.6v.01"/></svg>Check this</span><span class="yn"><button class="yes" data-act="confirm" data-id="${t.id}" title="Category is right" aria-label="Keep ${esc(CATS[t.cat])}"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.3l2.3 2.3 4.7-5"/></svg></button><button class="no" data-act="edit" data-id="${t.id}" title="Wrong, pick another category" aria-label="Wrong category, choose another"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 3l6 6M9 3l-6 6"/></svg></button></span></span>`;
+      return `<div class="row${t.changed ? " flash" : ""}${!t.changed && needsCheck(t) ? " check" : ""}">
         <div class="merch"><b>${esc(t.raw)}</b><span class="sub2">${t.date}${t.note ? ` · <span class="note">“${esc(t.note)}”</span>` : ""}</span></div>
         ${amtCell(t)}
         <div class="catcell"><button class="chip" style="--c:${cv(t.cat)}" data-act="edit" data-id="${t.id}" aria-label="Change category, currently ${esc(CATS[t.cat])}"><i></i>${esc(CATS[t.cat])} <span aria-hidden="true">▾</span></button>${tag}</div></div>`;
     }).join("");
     return `<div class="head"><h1>Upload &amp; review</h1></div>
-      <p class="sub">Click a category to change it, then accept the file to add it to your dashboard.</p>
+      <p class="sub">Click a category to change it. Rows marked “Check this” need your answer before you can save.</p>
       <section class="card">
         <div class="listhead"><div><h2 class="mono">${esc(f.file)}</h2>
-          <p>${plural(list.length, "transaction")} · <span class="outv">${money(out)} out</span> · <span class="inv">${money(inn)} in</span>${toCheck ? ` · <span class="checkcount">${toCheck} to check</span>` : ""}</p></div>${accept}</div>
+          <p>${plural(list.length, "transaction")} · <span class="outv">${money(out)} out</span> · <span class="inv">${money(inn)} in</span>${toCheck ? ` · <span class="checkcount">${toCheck} to check</span>` : ""}</p></div></div>
         ${rows}
-        <div class="listfoot">${accept}</div>
+        ${save}
       </section>`;
   }
   const next = FILES[state.uploaded];
@@ -582,7 +597,7 @@ const DIR_ICON = {
   out: '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 10 10 2M4.5 2H10v5.5"/></svg>'
 };
 const amtCell = t => `<div class="amt ${t.credit ? "in" : "out"}" aria-label="${t.credit ? "Money in" : "Money out"} ${money(t.amt)}"><span class="dir" title="${t.credit ? "Money in" : "Money out"}">${DIR_ICON[t.credit ? "in" : "out"]}</span><span>${t.credit ? "+" : "−"}${money(t.amt)}</span></div>`;
-const needsCheck = t => t.src === "auto" && !t.edited && t.conf < 0.6;
+const needsCheck = t => t.src === "auto" && !t.edited && !t.confirmed && t.conf < 0.6;
 
 function budgetMonth() { return state.budgetTab === "this" ? curMonth() : curMonth() + 1; }
 function setProg(m, k) {
@@ -711,8 +726,10 @@ document.addEventListener("click", e => {
   }
   else if (act === "adjust") { state.view = "budget"; state.budgetTab = "this"; }
   else if (act === "upload") { if (!state.loading) uploadNext(); return; }
-  else if (act === "accept-all") {
+  else if (act === "confirm") { txns.find(x => x.id === +el.dataset.id).confirmed = true; }
+  else if (act === "save-review") {
     const list = pending(), m = list[0].m;
+    if (list.some(needsCheck)) return;
     list.forEach(t => t.status = "reviewed");
     clearFlags();
     state.reviewed = m + 1; state.month = m; state.view = "dashboard"; state.budgetTab = "this";
