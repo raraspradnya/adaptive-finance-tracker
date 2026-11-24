@@ -10,7 +10,6 @@ change one part of that memory and keep everything else fixed:
 | 2 | **How to read**: how much does each stored row's vote count? | Vote weighting (trust, freshness) | Store everything · no size limit |
 | 3 | **What to forget**: when memory is full, what goes? | Memory size and eviction rule | Winners of 1 and 2 |
 
-Experiment 1 comes first and is the only one being built right now.
 
 ---
 
@@ -28,8 +27,7 @@ Experiment 1 comes first and is the only one being built right now.
 Each set is its own replay, starting with an empty memory.
 
 **Order:** every choice in Experiments 1–3 is made on tune only. Then val is generated and run once
-for all three experiments, then test once. An earlier val year (seed 2027) was looked at during
-Experiment 1, so it was deleted.
+for all three experiments, then test once. 
 
 ```
 tune ──► Exp 1, 2, 3 (choose everything) ──► val, once ──► test, once
